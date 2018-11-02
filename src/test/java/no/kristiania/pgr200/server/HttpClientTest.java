@@ -10,7 +10,7 @@ public class HttpClientTest {
 
     @Test
     public void shouldReadStatusCode() throws IOException {
-        HttpClientGETRequest request = new HttpClientGETRequest("urlecho.appspot.com", 80, "/echo?status=200");
+        HttpClientRequest request = new HttpClientRequest("urlecho.appspot.com", 80, "/echo?status=200", "GET");
         HttpClientResponse response = request.execute();
 
         assertThat(response.getStatusCode()).isEqualTo(200);
@@ -18,7 +18,7 @@ public class HttpClientTest {
 
     @Test
     public void shouldReadOtherStatusCodes() throws IOException {
-        HttpClientGETRequest request = new HttpClientGETRequest("urlecho.appspot.com", 80, "/echo?status=404");
+        HttpClientRequest request = new HttpClientRequest("urlecho.appspot.com", 80, "/echo?status=404", "GET");
         HttpClientResponse response = request.execute();
 
         assertThat(response.getStatusCode()).isEqualTo(404);
@@ -26,8 +26,8 @@ public class HttpClientTest {
 
     @Test
     public void shouldReadResponseHeaders() throws IOException {
-        HttpClientGETRequest request = new HttpClientGETRequest("urlecho.appspot.com",
-                80, "/echo?status=307&Location=http%3A%2F%2Fwww.google.com");
+        HttpClientRequest request = new HttpClientRequest("urlecho.appspot.com",
+                80, "/echo?status=307&Location=http%3A%2F%2Fwww.google.com", "GET");
         HttpClientResponse response = request.execute();
 
         assertThat(response.getStatusCode()).isEqualTo(307);
@@ -36,8 +36,8 @@ public class HttpClientTest {
 
     @Test
     public void shouldReadResponseBody() throws IOException {
-        HttpClientGETRequest request = new HttpClientGETRequest("urlecho.appspot.com",
-                80, "/echo?body=Hello+world!");
+        HttpClientRequest request = new HttpClientRequest("urlecho.appspot.com",
+                80, "/echo?body=Hello+world!", "GET");
         HttpClientResponse response = request.execute();
 
         assertThat(response.getStatusCode()).isEqualTo(200);

@@ -3,24 +3,25 @@ package no.kristiania.pgr200.server;
 import java.io.IOException;
 import java.net.Socket;
 
-public class HttpClientGETRequest {
+public class HttpClientRequest {
 
-    private String hostname;
-    private String path;
-    private String method = "GET";
+    private String hostname, path, method, body;
     private int port;
 
-    public HttpClientGETRequest(String hostname, int port, String path) {
-        this.hostname = hostname;
-        this.path = path;
-        this.port = port;
-    }
-
-    public HttpClientGETRequest(String hostname, int port, String path, String method) {
+    public HttpClientRequest(String hostname, int port, String path, String method) {
         this.hostname = hostname;
         this.path = path;
         this.port = port;
         this.method = method;
+        this.body = "";
+    }
+
+    public HttpClientRequest(String hostname, int port, String path, String method, String body) {
+        this.hostname = hostname;
+        this.path = path;
+        this.port = port;
+        this.method = method;
+        this.body = body;
     }
 
     public HttpClientResponse execute() throws IOException {
@@ -31,11 +32,16 @@ public class HttpClientGETRequest {
                     .write(("Host: " + hostname + "\r\n").getBytes());
             socket.getOutputStream()
                     .write("Connection: close\r\n".getBytes());
-            socket.getOutputStream().write("\r\n".getBytes());
-
-
+            if(!body.isEmpty()){
+                socket.getOutputStream().write(("Content-Length: " + body.length()).getBytes());
+                socket.getOutputStream().write("\r\n".getBytes());
+                socket.getOutputStream().write(body.getBytes());
+            } else{
+                socket.getOutputStream().write("\r\n".getBytes());
+            }
             return new HttpClientResponse(socket);
         }
-    }
 
+    }
 }
+
