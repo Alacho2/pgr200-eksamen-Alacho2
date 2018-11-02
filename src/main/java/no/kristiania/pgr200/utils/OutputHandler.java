@@ -26,7 +26,7 @@ public class OutputHandler {
         if(message == null && value == null) return;
         String formatedMessage = ConsoleColors.WHITE+message.trim();
         if(!message.trim().endsWith(":")) formatedMessage+=": ";
-        String formattedText = formatedMessage+ConsoleColors.GREEN+value+"\n"+ConsoleColors.RESET;
+        String formattedText = formatedMessage+ConsoleColors.GREEN+"\n"+value+"\n"+ConsoleColors.RESET;
         System.out.println(formattedText);
         log(formattedText);
     }

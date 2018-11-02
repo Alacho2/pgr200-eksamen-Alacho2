@@ -4,6 +4,7 @@ import no.kristiania.pgr200.db.*;
 import no.kristiania.pgr200.utils.*;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -19,13 +20,13 @@ public class DecodeArgs {
         this.sc = sc;
     }
 
-    public String decode(String[] args, DataSource dataSource) {
+    public String decode(String[] args, int port) {
         StringBuilder sb = new StringBuilder();
         switch(args[0].toUpperCase()){
             case "START":
                 OutputHandler.printWelcome();
                 CommandHandler ch = new InteractiveClient(sc).start();
-                sb.append(getResult(ch, dataSource));
+                sb.append(getResult(ch, port));
                 break;
             case "LIST":
                 ConferenceDao cd = new ConferenceDao();
@@ -43,18 +44,18 @@ public class DecodeArgs {
     }
 
 
-    String getResult(CommandHandler ch, DataSource dataSource){
+    String getResult(CommandHandler ch, int port){
         try {
             if (ch instanceof InteractiveInsert) {
-                return ((InteractiveInsert) ch).execute(dataSource);
+                return ((InteractiveInsert) ch).execute(port);
             } else if (ch instanceof InteractiveRetrieve) {
-                return ((InteractiveRetrieve) ch).execute(dataSource);
+                return ((InteractiveRetrieve) ch).execute(port);
             } else if (ch instanceof InteractiveUpdate) {
-                return ((InteractiveUpdate) ch).execute(dataSource);
+                return ((InteractiveUpdate) ch).execute(port);
             } else if (ch instanceof InteractiveDelete) {
-                return ((InteractiveDelete) ch).execute(dataSource);
+                return ((InteractiveDelete) ch).execute(port);
             }
-        }catch(SQLException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return "no result";

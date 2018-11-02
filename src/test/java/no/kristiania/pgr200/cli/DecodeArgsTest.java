@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DecodeArgsTest {
-
+/**
     private TestDataSource testDataSource = new TestDataSource();
 
     @Before
@@ -101,4 +101,5 @@ public class DecodeArgsTest {
         Scanner sc = writeToScanner(message);
         return new DecodeArgs(sc);
     }
+    */
 }
