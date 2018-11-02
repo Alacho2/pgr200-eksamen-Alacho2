@@ -71,7 +71,7 @@ public class HttpServerParserRequest {
         while(!line.isEmpty()) {
             int colonPos = line.indexOf(":");
             if(colonPos > -1) {
-                request.setHeader(line.substring(0, colonPos), line.substring(colonPos + 1));
+                request.setHeader(line.substring(0, colonPos), line.substring(colonPos + 1).trim());
                 line = HttpUtils.readNextLine(input);
             }
         }

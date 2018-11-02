@@ -13,7 +13,7 @@ public class Main {
             Arrays.asList(new HttpServerRequestHandlerBadHttpMethod(),
                     new HttpServerRequestHandlerEcho(),
                     new HttpServerRequestHandlerURL(),
-                    new HttpServerRequestHandlerTalk()),
+                    new HttpServerRequestHandlerCapi()),
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()
         );
