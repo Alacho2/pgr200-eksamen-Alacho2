@@ -18,18 +18,6 @@ public class InteractiveRetrieve<T> extends CommandHandler {
 
     public InteractiveRetrieve(Scanner sc) {
         super(sc);
-        start("retrieve");
-    }
-
-    public String execute(int port) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        String table = getCommandValue("table").toString();
-        OutputHandler.printInfo("Executing insert on "+table);
-        HttpClientRequest request = new HttpClientRequest("localhost", port, "/", "GET");
-        HttpClientResponse response = request.execute();
-        sb.append(response.getStatusCode());
-        sb.append(response.getBody());
-        return sb.toString();
     }
 
 }

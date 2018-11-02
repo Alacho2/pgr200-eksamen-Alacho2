@@ -20,45 +20,22 @@ public class DecodeArgs {
         this.sc = sc;
     }
 
-    public String decode(String[] args, int port) {
+    public String decode(String[] args, int port, String hostName) throws IOException {
         StringBuilder sb = new StringBuilder();
         switch(args[0].toUpperCase()){
             case "START":
                 OutputHandler.printWelcome();
-                CommandHandler ch = new InteractiveClient(sc).start();
-                sb.append(getResult(ch, port));
-                break;
-            case "LIST":
-                ConferenceDao cd = new ConferenceDao();
-                try {
-                    List<Conference> list =  cd.readAll();
-                    list.forEach(s->sb.append(s.toString()+"\n"));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
+                return new InteractiveClient(sc, port, hostName).start();
+            case "LIST CONFERENCS":
+                return new RequestHandler("CONFERENCE","GET").execute(port, hostName);
+            case "LIST TRACKS":
+                return new RequestHandler("TRACKS","GET").execute(port, hostName);
+            case "LIST TALKS":
+                return new RequestHandler("TALKS","GET").execute(port, hostName);
             default:
                 //do stuff
         }
         return sb.toString();
-    }
-
-
-    String getResult(CommandHandler ch, int port){
-        try {
-            if (ch instanceof InteractiveInsert) {
-                return ((InteractiveInsert) ch).execute(port);
-            } else if (ch instanceof InteractiveRetrieve) {
-                return ((InteractiveRetrieve) ch).execute(port);
-            } else if (ch instanceof InteractiveUpdate) {
-                return ((InteractiveUpdate) ch).execute(port);
-            } else if (ch instanceof InteractiveDelete) {
-                return ((InteractiveDelete) ch).execute(port);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "no result";
     }
 
 }

@@ -36,27 +36,22 @@ abstract class CommandHandler{
      * has any rules for subquestions that is depending on the current command(commandQuestion).
      * @param mode
      */
-    void start(String mode){
+    List<Command> start(String mode){
         this.mode = mode;
         ParseCommands.addNewCommand(commands,"table", "Please choose the table you want to operate on", "String", mode, "info", "none", new String[]{"none"});
-        chooseTable();
-        for(Command c : commands){
-            if(!c.getName().equals("table")&&!commandsDontAsk.contains(c.getName().toUpperCase())) {
-                OutputHandler.printQuestion(c.getDescription());
-                handleInput(c);
-                checkForSubQuestion(c);
+        Command table = chooseTable();
+        if(table != null) {
+            for (Command c : commands) {
+                if (!c.getName().toUpperCase().equals(table.getName().toUpperCase()) && !commandsDontAsk.contains(c.getName().toUpperCase())) {
+                    OutputHandler.printQuestion(c.getDescription());
+                    handleInput(c);
+                    checkForSubQuestion(c);
+                }
             }
         }
+        return commands;
     }
 
-    /**
-     * Start method that dosen't ask for user input for the commands. Used by the interactive help.
-     * @param mode
-     */
-    void startHelp(String mode){
-        this.mode = mode;
-        chooseTable();
-    }
 
     /**
      * Asks the user for the table it wants to "use" and adds the user input to the table command value.
@@ -66,9 +61,10 @@ abstract class CommandHandler{
      * If the table that the user typed in dosen't exist in the csv file will it throw and error and check for
      * probable tables the input can be and run the function again for a new table choosing.
      */
-    void chooseTable(){
+    Command chooseTable(){
+        Command table = null;
         try {
-            Command table = getCommand("table");
+            table = getCommand("table");
             OutputHandler.printQuestion(table.getDescription());
             handleInput(table);
             String tableValue = table != null ? table.getValue().toString() : null;
@@ -84,10 +80,11 @@ abstract class CommandHandler{
             if(commands != null) OutputHandler.printResult("Did you mean",commands+" ");
             chooseTable();
         }
+        return table;
     }
 
     void insertCommands(String table, String mode){
-        List<Command> inputListCommands = ParseCommands.parse(table, mode);
+        List<Command> inputListCommands = ParseCommands.parse(table.toUpperCase(), mode.toUpperCase());
         for(Command c : inputListCommands){
             addCommand(c);
         }
@@ -141,10 +138,6 @@ abstract class CommandHandler{
         return commands;
     }
 
-    public String getJson() {
-        Gson gson = new GsonBuilder().create();
-        return gson.toJson(getAllCommands());
-    }
 
     public Command getCommand(String name){
         for(Command c : commands){
@@ -178,6 +171,16 @@ abstract class CommandHandler{
                 }
             }
         }
+    }
+
+    public String readHelpCommands(String table, String mode) {
+        List<Command> commands = ParseCommands.parse(table, mode);
+        StringBuilder sb = new StringBuilder();
+        sb.append(OutputHandler.printCommandHelpHeader());
+        for(Command c : commands){
+            sb.append(OutputHandler.printCommandHelpLineWithSpaces(c.getName(),c.getDescription(), c.getType()));
+        }
+        return sb.toString();
     }
 
 

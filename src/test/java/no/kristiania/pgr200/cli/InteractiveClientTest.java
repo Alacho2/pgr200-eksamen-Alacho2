@@ -1,18 +1,18 @@
 package no.kristiania.pgr200.cli;
 
 import no.kristiania.pgr200.db.*;
-import no.kristiania.pgr200.utils.*;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InteractiveClientTest {
-
+/**
     @Before
     public void insertAllCommands(){
         ParseCommands.parseAllCommands();
@@ -88,9 +88,9 @@ public class InteractiveClientTest {
         return c;
     }
 
-    private CommandHandler exampleCommand(String message){
+    private String exampleCommand(String message) throws IOException {
         Scanner sc = writeToScanner(message);
-        return new InteractiveClient(sc).start();
-    }
+        return new InteractiveClient(sc, 0).start();
+    }*/
 
 }

@@ -20,7 +20,7 @@ public class ParseCommands {
     public static List<Command> parse(String table, String mode) throws IllegalArgumentException {
         List<Command> commandResults = new ArrayList<>();
         for(Command c : commands){
-            if(c.getTable().equals(table) && c.getMode().equals(mode)) commandResults.add(c);
+            if(c.getTable().toUpperCase().equals(table.toUpperCase()) && c.getMode().toUpperCase().equals(mode.toUpperCase())) commandResults.add(c);
         }
         return commandResults;
     }

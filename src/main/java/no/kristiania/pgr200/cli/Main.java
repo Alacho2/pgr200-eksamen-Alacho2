@@ -18,7 +18,7 @@ public class Main {
     startServer();
 
     if(args.length > 0){
-      String result = new DecodeArgs().decode(args, server.getPort());
+      String result = new DecodeArgs().decode(args, server.getPort(), "localhost");
       OutputHandler.printResult("RESULT", result); // The Database Response Printed out to the user
     } else {
       OutputHandler.printErrorLine("You must enter use the parameters START or LIST!");

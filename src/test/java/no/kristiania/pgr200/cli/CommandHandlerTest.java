@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CommandHandlerTest extends CommandHandler {
-
+/*
     @Before
     public void insertAllCommands(){
         ParseCommands.parseAllCommands();
@@ -182,5 +182,5 @@ public class CommandHandlerTest extends CommandHandler {
     private CommandHandler exampleCommandHelp(String message){
         Scanner sc = writeToScanner(message);
         return new InteractiveHelp(sc);
-    }
+    }*/
 }

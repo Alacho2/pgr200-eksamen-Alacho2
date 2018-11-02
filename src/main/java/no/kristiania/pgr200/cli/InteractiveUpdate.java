@@ -17,17 +17,5 @@ public class InteractiveUpdate extends CommandHandler {
 
     public InteractiveUpdate(Scanner sc) {
         super(sc);
-        start("update");
-    }
-
-    public String execute(int port) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        String table = getCommandValue("table").toString();
-        OutputHandler.printInfo("Executing insert on "+table);
-        HttpClientRequest request = new HttpClientRequest("localhost", port, "/", "POST", getJson());
-        HttpClientResponse response = request.execute();
-        sb.append(response.getStatusCode());
-        sb.append(response.getBody());
-        return sb.toString();
     }
 }

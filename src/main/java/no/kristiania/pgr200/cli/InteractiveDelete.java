@@ -17,18 +17,5 @@ public class InteractiveDelete extends CommandHandler {
 
     public InteractiveDelete(Scanner sc) {
         super(sc);
-        start("delete");
     }
-
-    public String execute(int port) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        String table = getCommandValue("table").toString();
-        OutputHandler.printInfo("Executing insert on "+table);
-        HttpClientRequest request = new HttpClientRequest("localhost", port, "/", "POST", getJson());
-        HttpClientResponse response = request.execute();
-        sb.append(response.getStatusCode());
-        sb.append(response.getBody());
-        return sb.toString();
-    }
-
 }

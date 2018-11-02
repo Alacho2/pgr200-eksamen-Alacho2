@@ -1,5 +1,6 @@
 package no.kristiania.pgr200.utils;
 
+import com.sun.corba.se.impl.activation.CommandHandler;
 import no.kristiania.pgr200.cli.InteractiveHelp;
 import no.kristiania.pgr200.cli.ParseCommands;
 
@@ -38,7 +39,7 @@ public class ScannerHandler {
         } else if (input.equals(BACK)) {
             return null;
         } else if (input.equals(HELP)) {
-            new InteractiveHelp();
+            System.out.println(new InteractiveHelp().readHelpCommands("help", "help"));
             return null;
         } else if (input.equals(INSERT)) {
             return INSERT;

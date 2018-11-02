@@ -4,25 +4,33 @@ import no.kristiania.pgr200.utils.ScannerHandler;
 import no.kristiania.pgr200.db.*;
 import no.kristiania.pgr200.utils.*;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class InteractiveClient {
     Scanner sc;
+    int port = -1;
+    String hostName = "";
 
 
-    public InteractiveClient(){
-        sc = new Scanner(System.in);
+    public InteractiveClient(int port, String hostName){
+        this.sc = new Scanner(System.in);
+        this.port = port;
+        this.hostName = hostName;
     }
 
-    public InteractiveClient(Scanner sc){
+    public InteractiveClient(Scanner sc, int port, String hostName){
         this.sc  = sc;
+        this.port = port;
+        this.hostName = hostName;
     }
 
-    CommandHandler start(){
+    String start() throws IOException {
         OutputHandler.printQuestion("Pleas enter the mode you want to enter...");
         Object mode = ScannerHandler.scanInput(sc.nextLine());
         if(mode instanceof String) {
-            return getMode((String)mode);
+            return new RequestHandler(parseCommands((String) mode)).execute(port, hostName);
         } else{
           return start();
         }
@@ -32,17 +40,17 @@ public class InteractiveClient {
      * Checks the input parameter value to choose the right mode. If invalid mode is passed then it throws exception.
      * @param mode
      */
-    CommandHandler getMode(String mode){
+    List<Command> parseCommands(String mode) throws IOException {
             try {
                 switch (mode) {
                     case "INSERT":
-                        return new InteractiveInsert(sc);
+                        return new InteractiveInsert(sc).start(mode);
                     case "RETRIEVE":
-                        return new InteractiveRetrieve(sc);
+                        return new InteractiveRetrieve(sc).start(mode);
                     case "UPDATE":
-                        return new InteractiveUpdate(sc);
+                        return new InteractiveUpdate(sc).start(mode);
                     case "DELETE":
-                        return new InteractiveDelete(sc);
+                        return new InteractiveDelete(sc).start(mode);
                     default:
                         throw new IllegalArgumentException("You must enter a valid mode! (-h) for help");
                 }
