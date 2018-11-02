@@ -1,0 +1,380 @@
+[
+  {
+    "name": "title",
+    "description": "please enter title",
+    "type": "String",
+    "mode": "insert",
+    "table": "conferences",
+    "subQuestionValue": "none",
+    "subQuestionName": ["none"]
+  }, {
+  "name": "description",
+  "description": "please enter description",
+  "type": "String",
+  "mode": "insert",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "time-start",
+  "description": "Insert a start-time (dd-mm-yyyy)",
+  "type": "Date",
+  "mode": "insert",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "time-end",
+  "description": "Insert a end-time (dd-mm-yyyy)",
+  "type": "Date",
+  "mode": "insert",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "all entries",
+  "description": "Do you want all entries in the table(Y/N)",
+  "type": "Boolean",
+  "mode": "retrieve",
+  "table": "conferences",
+  "subQuestionValue": "FALSE",
+  "subQuestionName": ["id"]
+}, {
+  "name": "id",
+  "description": "Please specify the id you want to retrieve",
+  "type": "number",
+  "mode": "retrieve",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "id",
+  "description": "please enter id of the object you want to update",
+  "type": "number",
+  "mode": "update",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "title",
+  "description": "please enter a new title if you want to change it",
+  "type": "String",
+  "mode": "update",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "description",
+  "description": "please enter a new description if you want to change it",
+  "type": "String",
+  "mode": "update",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "time-start",
+  "description": "Insert a new start-time (dd-mm-yyyy) if you want to change it",
+  "type": "Date",
+  "mode": "update",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "time-end",
+  "description": "Insert a new end-time (dd-mm-yyyy) if you want to change it",
+  "type": "Date",
+  "mode": "update",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "id",
+  "description": "please enter the id of the object you want to delete",
+  "type": "number",
+  "mode": "delete",
+  "table": "conferences",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "title",
+  "description": "please enter title",
+  "type": "String",
+  "mode": "insert",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "description",
+  "description": "please enter description",
+  "type": "String",
+  "mode": "insert",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "talk_location",
+  "description": "Insert a talk_location",
+  "type": "String",
+  "mode": "insert",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "talk_track_id",
+  "description": "Insert a talk_track id",
+  "type": "number",
+  "mode": "insert",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "timeslot",
+  "description": "Insert a timeslot (hh:mm)",
+  "type": "time",
+  "mode": "insert",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},  {
+  "name": "all entries",
+  "description": "Do you want all entries in the table(Y/N)",
+  "type": "Boolean",
+  "mode": "retrieve",
+  "table": "talks",
+  "subQuestionValue": "FALSE",
+  "subQuestionName": ["id"]
+}, {
+  "name": "id",
+  "description": "Please specify the id you want to retrieve",
+  "type": "number",
+  "mode": "retrieve",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "id",
+  "description": "please enter id of the object you want to update",
+  "type": "number",
+  "mode": "update",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "title",
+  "description": "please enter a new title if you want to change it",
+  "type": "String",
+  "mode": "update",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "description",
+  "description": "please enter a new description if you want to change it",
+  "type": "String",
+  "mode": "update",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "talk_location",
+  "description": "Insert a new talk_location if you want to change it",
+  "type": "String",
+  "mode": "update",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "talk_track_id",
+  "description": "Insert a new talk_track_id if you want to change it",
+  "type": "number",
+  "mode": "update",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "timeslot",
+  "description": "Insert a new timeslot if you want to change it",
+  "type": "time",
+  "mode": "update",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "id",
+  "description": "please enter the id of the object you want to delete",
+  "type": "number",
+  "mode": "delete",
+  "table": "talks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "title",
+  "description": "Insert a title",
+  "type": "string",
+  "mode": "insert",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "description",
+  "description": "Insert a description",
+  "type": "string",
+  "mode": "insert",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "track_conference_id",
+  "description": "Insert a track_conference_id",
+  "type": "number",
+  "mode": "insert",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "all entries",
+  "description": "Do you want all entries in the table(Y/N)",
+  "type": "Boolean",
+  "mode": "retrieve",
+  "table": "tracks",
+  "subQuestionValue": "FALSE",
+  "subQuestionName": ["id"]
+}, {
+  "name": "id",
+  "description": "Please specify the id you want to retrieve",
+  "type": "number",
+  "mode": "retrieve",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "id",
+  "description": "please enter id of the object you want to update",
+  "type": "number",
+  "mode": "update",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "title",
+  "description": "please enter a new title if you want to change it",
+  "type": "String",
+  "mode": "update",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "description",
+  "description": "please enter a new description if you want to change it",
+  "type": "String",
+  "mode": "update",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "track_conference_id",
+  "description": "Insert a new talk_location if you want to change it",
+  "type": "number",
+  "mode": "update",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "id",
+  "description": "please enter the id of the object you want to delete",
+  "type": "number",
+  "mode": "delete",
+  "table": "tracks",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+},{
+  "name": "modes",
+  "description": "ex: insert|retrieve|update|delete",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "table",
+  "description": "specify which table you want to modify/use",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-t)tables",
+  "description": "display all the tables",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-h) help",
+  "description": "displays the commands with description and type",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-i) insert",
+  "description": "insert a new object in the database",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-r) retrieve",
+  "description": "get a object from the database",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-u) update",
+  "description": "updates a object from the database",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-d) delete",
+  "description": "deletes a object from the database",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-b) back",
+  "description": "takes you back to start",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "(-e) exit",
+  "description": "exits the program",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}, {
+  "name": "Message",
+  "description": "Sometimes some modes cannot execute because you are inside a critical step",
+  "type": "help",
+  "mode": "help",
+  "table": "help",
+  "subQuestionValue": "none",
+  "subQuestionName": ["none"]
+}
+]
+
