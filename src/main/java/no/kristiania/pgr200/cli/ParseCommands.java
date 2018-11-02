@@ -91,7 +91,7 @@ public class ParseCommands {
         Gson gson = new Gson();
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("src/main/resources/config/commands.json"));
+            br = new BufferedReader(new FileReader("commands.json"));
             Command[] allReadCommands = gson.fromJson(br, Command[].class);
             for(Command c : allReadCommands){
                 addNewCommand(allCommands, c.getName(), c.getDescription(), c.getType(), c.getMode(), c.getTable(), c.getSubQuestionValue(), c.getSubQuestionName());

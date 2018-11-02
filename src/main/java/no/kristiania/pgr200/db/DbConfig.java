@@ -13,7 +13,7 @@ public class DbConfig {
 
     static {
         String line;
-        String configFile = "src/main/resources/config/db.properties";
+        String configFile = "db.properties";
         try {
             BufferedReader br = new BufferedReader(new FileReader(configFile));
             while ((line = br.readLine()) != null)
