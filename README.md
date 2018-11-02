@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2.svg?token=Jcye5ttDhAMRpUM3Ca28&branch=master)](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2)
 # PGR200 Hovedinnlevering
 
 Innleveringsfrist: 12. november kl 09:00. **Viktig:** WiseFlow *stenger* når fristen er ute - lever i tide.
