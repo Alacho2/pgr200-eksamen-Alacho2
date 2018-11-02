@@ -33,9 +33,9 @@ public class HttpClientRequest {
             socket.getOutputStream()
                     .write("Connection: close\r\n".getBytes());
             if(!body.isEmpty()){
-                socket.getOutputStream().write(("Content-Length: " + body.length()).getBytes());
+                socket.getOutputStream().write(("Content-Length: " + body.length() + "\r\n").getBytes());
                 socket.getOutputStream().write("\r\n".getBytes());
-                socket.getOutputStream().write(body.getBytes());
+                socket.getOutputStream().write((body + "\r\n").getBytes());
             } else{
                 socket.getOutputStream().write("\r\n".getBytes());
             }

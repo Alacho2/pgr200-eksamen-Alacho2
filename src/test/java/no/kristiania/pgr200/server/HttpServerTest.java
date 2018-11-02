@@ -27,6 +27,7 @@ public class HttpServerTest {
     }
 
     @Test
+
     public void shouldReturnResource() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/", "GET");
         HttpClientResponse response = request.execute();
@@ -35,7 +36,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldWriteStatusCode() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/echo?status=200", "GET");
         HttpClientResponse response = request.execute();
@@ -44,7 +44,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldReadOtherStatusCodes() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/echo?status=404", "GET");
         HttpClientResponse response = request.execute();
@@ -52,7 +51,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldReadResponseHeaders() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/echo?status=307&Location=http%3A%2F%2Fwww.kristiania.no", "GET");
@@ -63,7 +61,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
      public void shouldReadResponseBody() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/echo?body=Hello+world!", "GET");
@@ -74,7 +71,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldEchoResponseBody() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/echo?body=Hello+Kristiania!", "GET");
@@ -85,7 +81,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldHandleEchoEmptyParam() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/echo?", "GET");
@@ -96,7 +91,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldHandleEchoNoParams() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/echo", "GET");
@@ -107,7 +101,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldWriteStatusCodePOST() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/echo","POST",
                 "status=200&body=hello+idiot");
@@ -117,17 +110,15 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldHandleNoBodyPOST() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/echo",
-                "");
+                "POST", "");
         HttpClientResponse response = request.execute();
         assertThat(response.getStatusCode()).isEqualTo(200);
         assertThat(response.getBody()).isEqualTo("");
     }
 
     @Test
-    @Ignore
     public void shouldRejectGETRequestWithInvalidPath() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/bogus", "GET");
@@ -137,7 +128,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldRejectPOSTRequestWithGarbageBody() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/bogus","POST", "I+AM+A+BOGUS+POST+REQUEST");
@@ -147,7 +137,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldRejectInvalidMethodwithValidPath() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/echo?body=hello+idiot", "PUT");
@@ -157,7 +146,6 @@ public class HttpServerTest {
     }
 
     @Test
-    @Ignore
     public void shouldRejectDeleteMethod() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(),
                 "/", "DELETE");
