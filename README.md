@@ -1,6 +1,15 @@
 [![Build Status](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2.svg?token=Jcye5ttDhAMRpUM3Ca28&branch=master)](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2)
 # PGR200 Hovedinnlevering
 
+### Group
+* Alexander Bredesen - breale17
+* Håvard Nordlie Mathisen - mathav14
+* Jason Nilsen - wiljas17
+
+
+
+
+
 Innleveringsfrist: 12. november kl 09:00. **Viktig:** WiseFlow *stenger* når fristen er ute - lever i tide.
 
 Tag koden med `innlevering` i GitHub og last opp en ZIP-fil til WiseFlow. Dersom du ikke fikk godkjent innlevering #1 eller #2 i første runde, last opp zip-fil av disse i tillegg.
