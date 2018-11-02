@@ -141,7 +141,7 @@ abstract class CommandHandler{
         return commands;
     }
 
-    public String getJson() throws SQLException {
+    public String getJson() {
         Gson gson = new GsonBuilder().create();
         return gson.toJson(getAllCommands());
     }
