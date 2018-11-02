@@ -32,7 +32,8 @@ public class RequestHandler {
     public String execute(int port, String hostName) throws IOException {
         StringBuilder sb = new StringBuilder();
         HttpClientRequest request = checkRequestMethod(mapToRequest(port, hostName, getJson()));
-        Response response = new Response(request.execute());
+        HttpClientResponse httpClientResponse = request.execute();
+        Response response = new Response(httpClientResponse.getStatusCode(), httpClientResponse.getBody());
         sb.append("StatusCode:\n"+response.getStatusCode()+"\n");
         sb.append("Body:\n"+response.getBody());
         return sb.toString();

@@ -10,9 +10,9 @@ public class Response {
     int statusCode;
     String body;
 
-    public Response(HttpClientResponse httpClientResponse) {
-        setStatusCode(httpClientResponse.getStatusCode());
-        setBody(httpClientResponse.getBody());
+    public Response(int statusCode, String body) {
+        setStatusCode(statusCode);
+        setBody(body);
     }
 
     public int getStatusCode() {
