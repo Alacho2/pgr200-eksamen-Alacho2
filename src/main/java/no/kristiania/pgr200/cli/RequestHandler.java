@@ -32,6 +32,8 @@ public class RequestHandler {
 
     private HttpClientRequest checkRequestMethod(Request r){
         HttpClientRequest httpClientRequest = null;
+        System.out.println("path: \n"+r.getPath());
+        System.out.println("body: \n"+r.getBody());
         switch (r.getMethod()){
             case "GET":
                 httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod());

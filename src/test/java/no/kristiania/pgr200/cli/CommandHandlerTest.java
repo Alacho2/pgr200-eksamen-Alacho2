@@ -3,6 +3,7 @@ package no.kristiania.pgr200.cli;
 import no.kristiania.pgr200.db.*;
 import no.kristiania.pgr200.utils.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -13,9 +14,9 @@ import java.util.Scanner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CommandHandlerTest extends CommandHandler {
-/*
-    @Before
-    public void insertAllCommands(){
+/**
+    @BeforeClass
+    public static void initCommands(){
         ParseCommands.parseAllCommands();
     }
 
@@ -48,12 +49,11 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void shouldInsertAndMatchConferenceObject(){
-        Conference example = exampleConference(1, "title", "description", "10-09-2005", "11-09-2005");
         CommandHandler result = exampleCommandInsert("conferences\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat(example.getTitle()).isEqualTo((String)result.getCommandValue("title"));
-        assertThat(example.getDescription()).isEqualTo((String)result.getCommandValue("description"));
-        assertThat(example.getDate_start().toString()).isEqualTo("2005-09-10");
-        assertThat(example.getDate_end().toString()).isEqualTo("2005-09-11");
+        assertThat((String)result.getCommandValue("title")).isEqualTo((String)result.getCommandValue("title"));
+        assertThat((String)result.getCommandValue("description")).isEqualTo((String)result.getCommandValue("description"));
+        assertThat(result.getCommandValue("time-start").toString()).isEqualTo("2005-09-10");
+        assertThat(result.getCommandValue("time-end").toString()).isEqualTo("2005-09-11");
     }
 
     @Test
@@ -115,6 +115,7 @@ public class CommandHandlerTest extends CommandHandler {
             assertThat(c.getType()).isNotNull();
             assertThat(c).isInstanceOf(HelpCommand.class);
         }
+        assertThat(interactiveHelp.readHelpCommands("help", "help")).isNotNull();
     }
 
     private Conference exampleConference(int id, String title, String description, String date_start, String date_end){
@@ -181,6 +182,6 @@ public class CommandHandlerTest extends CommandHandler {
     }
     private CommandHandler exampleCommandHelp(String message){
         Scanner sc = writeToScanner(message);
-        return new InteractiveHelp(sc);
+        return new InteractiveHelp();
     }*/
 }

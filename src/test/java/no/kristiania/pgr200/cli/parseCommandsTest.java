@@ -1,5 +1,6 @@
 package no.kristiania.pgr200.cli;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -8,10 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class parseCommandsTest {
 
+    @BeforeClass
+    public static void initCommands(){
+        ParseCommands.parseAllCommands();
+    }
+
 
     @Test
     public void insertAllCommands(){
-       ParseCommands.parseAllCommands();
         List<Command> commands = ParseCommands.parse("conferences", "insert");
         for(Command c : commands){
             assertThat(c.getTable()).isEqualTo("conferences");

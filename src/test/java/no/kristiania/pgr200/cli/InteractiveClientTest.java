@@ -1,96 +1,81 @@
 package no.kristiania.pgr200.cli;
 
 import no.kristiania.pgr200.db.*;
+import no.kristiania.pgr200.server.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InteractiveClientTest {
-/**
+
+    private static HttpServerListener server;
+    private int port;
+    private String host;
+
+    @BeforeClass
+    public static void startServer() throws IOException {
+        ParseCommands.parseAllCommands();
+        server = new HttpServerListener(
+                Arrays.asList(new HttpServerRequestHandlerBadHttpMethod(),
+                        new HttpServerRequestHandlerEcho(),
+                        new HttpServerRequestHandlerEcho(),
+                        new HttpServerRequestHandlerURL()),
+                new HttpServerParserRequest(),
+                new HttpServerWriterResponse()
+        );
+        server.start(0);
+    }
+
     @Before
     public void insertAllCommands(){
-        ParseCommands.parseAllCommands();
+        port = server.getPort();
+        host = "localhost";
     }
 
     @Test
-    public void testInsertCommands(){
-        CommandHandler interactiveInsert = exampleCommand("-i\r\nconferences\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
-        assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
-        assertThat((String)interactiveInsert.getCommandValue("time-start")).isEqualTo("10-09-2005");
-        assertThat((String)interactiveInsert.getCommandValue("time-end")).isEqualTo("11-09-2005");
+    public void testInsertCommands() throws IOException {
+        String result = exampleCommand("-i\r\nconferences\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        assertThat(result).isNotNull();
+    }
+
+
+    @Test
+    public void testRetrieveCommands() throws IOException {
+        String result = exampleCommand("-r\r\nconferences\r\ny\r\ny\r\n");
+        assertThat(result).isNotNull();
     }
 
     @Test
-    public void shouldInsertAndMatchConferenceObject(){
-        Conference example = exampleConference(1, "title", "description", "10-09-2005", "11-09-2005");
-        Conference result = insertCommandToConference("-i\r\nconferences\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-
-        assertThat(example).isEqualToComparingOnlyGivenFields(result,"id", "title", "description");
-
+    public void testUpdateCommands() throws IOException {
+        String result = exampleCommand("-u\r\nconferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        assertThat(result).isNotNull();
     }
 
     @Test
-    public void testRetrieveCommands(){
-        CommandHandler interactiveInsert = exampleCommand("-r\r\nconferences\r\ny\r\ny\r\n");
-        assertThat((String)interactiveInsert.getCommandValue("title")).isNull();
-        assertThat((String)interactiveInsert.getCommandValue("description")).isNull();
-        assertThat((String)interactiveInsert.getCommandValue("time-start")).isNull();
-        assertThat((String)interactiveInsert.getCommandValue("time-end")).isNull();
+    public void testDeleteCommands() throws IOException {
+        String result = exampleCommand("-d\r\nconferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        assertThat(result).isNotNull();
     }
 
-    @Test
-    public void testUpdateCommands(){
-        CommandHandler interactiveInsert = exampleCommand("-u\r\nconferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat((long)interactiveInsert.getCommandValue("id")).isEqualTo(1);
-        assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
-        assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
-        assertThat((String)interactiveInsert.getCommandValue("time-start")).isEqualTo("10-09-2005");
-        assertThat((String)interactiveInsert.getCommandValue("time-end")).isEqualTo("11-09-2005");
-    }
-
-    @Test
-    public void testDeleteCommands(){
-        CommandHandler interactiveInsert = exampleCommand("-d\r\nconferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat((long)interactiveInsert.getCommandValue("id")).isEqualTo(1);
-    }
-
-
-    private Conference exampleConference(int id, String title, String description, String date_start, String date_end){
-        Conference c = new Conference();
-        c.setId(id);
-        c.setTitle(title);
-        c.setDescription(description);
-        c.setDate_start(date_start);
-        c.setDate_end(date_end);
-        return c;
-    }
 
     private Scanner writeToScanner(String message){
         InputStream in = new ByteArrayInputStream(message.getBytes());
         return new Scanner(in);
     }
 
-    private Conference insertCommandToConference(String message){
-        CommandHandler interactiveInsert = exampleCommand(message);
-        Conference c = new Conference();
-        c.setId(1);
-        c.setTitle((String)interactiveInsert.getCommandValue("title"));
-        c.setDescription((String)interactiveInsert.getCommandValue("description"));
-        c.setDate_start((String)interactiveInsert.getCommandValue("time-start"));
-        c.setDate_end((String)interactiveInsert.getCommandValue("time-end"));
-        return c;
-    }
 
     private String exampleCommand(String message) throws IOException {
         Scanner sc = writeToScanner(message);
-        return new InteractiveClient(sc, 0).start();
-    }*/
+        return new InteractiveClient(sc, port, host).start();
+    }
+
 
 }
