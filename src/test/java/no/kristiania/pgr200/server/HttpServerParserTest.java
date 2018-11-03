@@ -2,11 +2,13 @@ package no.kristiania.pgr200.server;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.google.gson.Gson;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class HttpServerParserTest {
 
@@ -22,9 +24,13 @@ public class HttpServerParserTest {
         assertThat(request.getHeader("Content-Type")).isEqualTo("application/json");
         assertThat(request.getHeader("Host")).isEqualTo("localhost");
         assertThat(request.getHeader("Connection")).isEqualTo("close");
-
-
     }
+
+    @Test
+    public void testGsonParse() throws IOException{
+        Gson gson = new Gson();
+        StringBuilder sb;
+     }
 
     private String buildTestPostRequest(StringBuilder sb) {
         String body = "[{\"command\":\"insert\",\"table\":\"conference\",\"fields\":{\"title\":\"Mobile Era\",\"description\":\"A conference about stuff.\",\"start_date\":\"02/11/2018\",\t\t\t\"end_date\":\"02/11/2018\"}}]\r\n";
