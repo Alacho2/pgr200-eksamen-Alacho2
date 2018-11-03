@@ -13,9 +13,10 @@ public class NumberCommand extends Command<Number> {
         return super.getValue();
     }
 
+
     @Override
-    public void setValue(Number value) throws IllegalArgumentException {
-        super.setValue(value);
+    public Command setValue(Number value) throws IllegalArgumentException {
+        return super.setValue(value);
     }
 
 

@@ -20,8 +20,8 @@ public class TimeCommand extends Command<String> {
     }
 
     @Override
-    public void setValue(String value) throws DateTimeParseException {
-        super.setValue(handleDate(value));
+    public Command setValue(String value) {
+        return super.setValue(handleDate(value));
     }
 
     String handleDate(String time) throws DateTimeParseException {

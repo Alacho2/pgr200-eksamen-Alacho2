@@ -14,8 +14,8 @@ public class HelpCommand extends Command<String> {
     }
 
     @Override
-    public void setValue(String value) {
-        super.setValue(value);
+    public Command setValue(String value) {
+        return super.setValue(value);
     }
 
     @Override

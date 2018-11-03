@@ -20,6 +20,12 @@ public class Command<T> {
         setSubQuestionName(subQuestionName);
     }
 
+    public Command(String name, String mode, String table) {
+        setName(name);
+        setMode(mode);
+        setTable(table);
+    }
+
     public Command() {
     }
 
@@ -59,8 +65,9 @@ public class Command<T> {
         return value;
     }
 
-    public void setValue(T value) throws IllegalArgumentException {
+    public Command setValue(T value) throws IllegalArgumentException {
         this.value = handleValue(value);
+        return this;
     }
 
     public String getTable() {

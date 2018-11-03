@@ -18,9 +18,10 @@ public class DateCommand extends Command<String> {
         return super.getValue();
     }
 
+
     @Override
-    public void setValue(String value) throws DateTimeParseException{
-        super.setValue(handleDate(value));
+    public Command setValue(String value) throws DateTimeParseException {
+        return super.setValue(handleDate(value));
     }
 
     String handleDate(String date) throws DateTimeParseException {

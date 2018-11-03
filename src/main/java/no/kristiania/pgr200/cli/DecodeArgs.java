@@ -11,31 +11,46 @@ import java.util.Scanner;
 
 public class DecodeArgs {
     Scanner sc;
+    StringBuilder sb;
 
     public DecodeArgs() {
         sc = new Scanner(System.in);
+        sb = new StringBuilder();
     }
 
     public DecodeArgs(Scanner sc) {
         this.sc = sc;
+        sb = new StringBuilder();
     }
 
     public String decode(String[] args, int port, String hostName) throws IOException {
-        StringBuilder sb = new StringBuilder();
         switch(args[0].toUpperCase()){
             case "START":
                 OutputHandler.printWelcome();
                 return new InteractiveClient(sc, port, hostName).start();
-            case "LIST CONFERENCS":
-                return new RequestHandler("CONFERENCE","GET").execute(port, hostName);
-            case "LIST TRACKS":
-                return new RequestHandler("TRACKS","GET").execute(port, hostName);
-            case "LIST TALKS":
-                return new RequestHandler("TALKS","GET").execute(port, hostName);
+            case "LIST":
+                if(args.length>1) return handleListCommand(args, port, hostName);
+                break;
             default:
                 //do stuff
         }
         return sb.toString();
+    }
+
+    private String handleListCommand(String[] args, int port, String hostName) throws IOException {
+        Number id = null;
+        if(args.length>2){
+            id = Integer.parseInt(args[2]);
+        }
+        switch (args[1].toUpperCase()) {
+            case "CONFERENCE":
+                return new RequestHandler("CONFERENCES", "RETRIEVE", id).execute(port, hostName);
+            case "TRACK":
+                return new RequestHandler("TRACKS", "RETRIEVE", id).execute(port, hostName);
+            case "TALK":
+                return new RequestHandler("TALK", "RETRIEVE", id).execute(port, hostName);
+        }
+        return null;
     }
 
 }

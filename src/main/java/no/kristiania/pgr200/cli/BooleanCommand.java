@@ -15,14 +15,14 @@ public class BooleanCommand extends Command<String> {
     }
 
     @Override
-    public void setValue(String value) {
+    public Command setValue(String value) {
         String result = "";
         if(value.toUpperCase().contains("Y")||value.toUpperCase().contains("T")){
             result = "TRUE";
         }else if(value.toUpperCase().contains("N")||value.toUpperCase().contains("F")){
             result = "FALSE";
         }
-        super.setValue(result);
+        return super.setValue(result);
     }
 
     @Override

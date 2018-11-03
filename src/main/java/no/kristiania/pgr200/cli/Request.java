@@ -1,26 +1,45 @@
 package no.kristiania.pgr200.cli;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Request {
-    String hostName, table, method, path, body;
+public class Request<T extends Command> {
+    String hostName, table, method, path, mode;
     int port;
     Number id;
+    List<T> body;
 
-    public Request(String hostName, String table, String method, int port, Number id, String body) {
+    public Request(String hostName, int port, List<T> body) {
         setHostName(hostName);
-        setTable(table);
-        setMethod(method);
         setPort(port);
-        setId(id);
         setBody(body);
+        setId((Number) getCommandValue("id"));
+        for(T t : this.body){
+            setMethod(t.getMode().toUpperCase().equals("RETRIEVE") ? "GET" : "POST");
+            setMode(t.getMode());
+            setTable(t.getTable());
+        }
+        setPath();
+    }
+
+    public Request(String hostName, int port, T body) {
+        setHostName(hostName);
+        setPort(port);
+        setBody(body);
+        setId((Number) getCommandValue("id"));
+        for(T t : this.body){
+            setMethod(t.getMode().toUpperCase().equals("RETRIEVE") ? "GET" : "POST");
+            setMode(t.getMode());
+            setTable(t.getTable());
+        }
     }
 
     public String getHostName() {
         return hostName;
     }
 
-    public void setHostName(String hostName) {
+    private void setHostName(String hostName) {
         this.hostName = hostName;
     }
 
@@ -28,7 +47,7 @@ public class Request {
         return table;
     }
 
-    public void setTable(String table) {
+    private void setTable(String table) {
         this.table = table;
     }
 
@@ -36,21 +55,33 @@ public class Request {
         return method;
     }
 
-    public void setMethod(String method) {
+    private void setMethod(String method) {
         this.method = method;
     }
 
     public String getPath() {
-        if(getId() != null) return "/api/"+this.method+"/"+id;
-        return "/api/"+this.method;
+        return path;
     }
 
+    public void setPath(){
+        String path = "/api/"+getTable();
+        if(getId() != null) path += "/"+id;
+        this.path = path;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    private void setMode(String mode) {
+        this.mode = mode;
+    }
 
     public int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    private void setPort(int port) {
         this.port = port;
     }
 
@@ -58,38 +89,53 @@ public class Request {
         return id;
     }
 
-    public void setId(Number id) {
+    private void setId(Number id) {
         this.id = id;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public String getBody(){
+        return new RequestBodyHandler<>(this.body, getTable(), getMode()).getRequestBody();
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
+    private void setBody(List<T> body) {
         this.body = body;
+    }
+
+    private void setBody(T body) {
+        List<T> list = new ArrayList<>();
+        list.add(body);
+        this.body = list;
+    }
+
+    /**
+     * @param name
+     * @return The command value of the command that has a name matching the parameter input, if no match return null.
+     */
+    private Object getCommandValue(String name){
+        for(T t : body){
+            if(t.getName().toUpperCase().equals(name.toUpperCase())) return t.getValue();
+        }
+        return null;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Request request = (Request) o;
+        Request<?> request = (Request<?>) o;
         return port == request.port &&
                 Objects.equals(hostName, request.hostName) &&
                 Objects.equals(table, request.table) &&
                 Objects.equals(method, request.method) &&
                 Objects.equals(path, request.path) &&
-                Objects.equals(id, request.id);
+                Objects.equals(mode, request.mode) &&
+                Objects.equals(id, request.id) &&
+                Objects.equals(body, request.body);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hostName, table, method, path, port, id);
+        return Objects.hash(hostName, table, method, path, mode, port, id, body);
     }
 
     @Override
@@ -99,8 +145,10 @@ public class Request {
                 ", table='" + table + '\'' +
                 ", method='" + method + '\'' +
                 ", path='" + path + '\'' +
+                ", mode='" + mode + '\'' +
                 ", port=" + port +
                 ", id=" + id +
+                ", body=" + body +
                 '}';
     }
 }
