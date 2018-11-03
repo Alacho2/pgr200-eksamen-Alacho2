@@ -11,9 +11,9 @@ import java.io.InputStream;
 public class HttpServerParserTest {
 
     @Test
-    public void shouldParseGetReqest() throws IOException {
+    public void shouldParsePostRequest() throws IOException {
         StringBuilder sb = new StringBuilder();
-        InputStream input = createInputStream(buildTestRequest(sb));
+        InputStream input = createInputStream(buildTestPostRequest(sb));
         HttpServerRequest request = new HttpServerParserRequest().parse(input);
 
         assertThat(request.getHttpMethod()).isEqualTo("POST");
@@ -26,7 +26,7 @@ public class HttpServerParserTest {
 
     }
 
-    private String buildTestRequest(StringBuilder sb) {
+    private String buildTestPostRequest(StringBuilder sb) {
         String body = "[{\"command\":\"insert\",\"table\":\"conference\",\"fields\":{\"title\":\"Mobile Era\",\"description\":\"A conference about stuff.\",\"start_date\":\"02/11/2018\",\t\t\t\"end_date\":\"02/11/2018\"}}]\r\n";
 
         sb.append("POST /capi HTTP/1.1\r\n");
