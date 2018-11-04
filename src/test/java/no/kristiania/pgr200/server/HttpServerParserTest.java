@@ -33,7 +33,7 @@ public class HttpServerParserTest {
      }
 
     private String buildTestPostRequest(StringBuilder sb) {
-        String body = "[{\"command\":\"insert\",\"table\":\"conference\",\"fields\":{\"title\":\"Mobile Era\",\"description\":\"A conference about stuff.\",\"start_date\":\"02/11/2018\",\t\t\t\"end_date\":\"02/11/2018\"}}]\r\n";
+        String body = "\"{\\\"mode\\\":\\\"retrieve\\\",\\\"table\\\":\\\"track\\\",\\\"fields\\\":[{\\\"name\\\":\\\"name\\\",\\\"value\\\":\\\"value\\\"},{\\\"name\\\":\\\"id\\\",\\\"value\\\":1}]}\"\r\n";
 
         sb.append("POST /capi HTTP/1.1\r\n");
         sb.append("Host: localhost\r\n");

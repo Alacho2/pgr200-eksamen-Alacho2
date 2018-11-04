@@ -12,8 +12,8 @@ public class Main {
         HttpServerListener listener = new HttpServerListener(
             Arrays.asList(new HttpServerRequestHandlerBadHttpMethod(),
                     new HttpServerRequestHandlerEcho(),
-                    new HttpServerRequestHandlerURL(),
-                    new HttpServerRequestHandlerCapi()),
+                    new HttpServerRequestHandlerCapi(),
+                    new HttpServerRequestHandlerURL()),
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()
         );

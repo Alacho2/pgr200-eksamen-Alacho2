@@ -18,7 +18,7 @@ public class HttpServerTest {
         server = new HttpServerListener(
                 Arrays.asList(new HttpServerRequestHandlerBadHttpMethod(),
                         new HttpServerRequestHandlerEcho(),
-                        new HttpServerRequestHandlerEcho(),
+                        new HttpServerRequestHandlerCapi(),
                         new HttpServerRequestHandlerURL()),
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()

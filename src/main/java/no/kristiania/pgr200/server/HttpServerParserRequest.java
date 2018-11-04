@@ -90,7 +90,11 @@ public class HttpServerParserRequest {
                     }
                 }
             }
-            parseParameters(body.toString());
+            if(request.getHeader("Content-Length") == "text/plain") {
+                parseParameters(body.toString());
+            } else {
+                request.setBody(body.toString());
+            }
         } catch(NullPointerException npe){
             System.out.println("Null pointer exception in parseBody.");
         }
