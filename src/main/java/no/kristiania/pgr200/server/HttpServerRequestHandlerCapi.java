@@ -1,8 +1,11 @@
 package no.kristiania.pgr200.server;
 
 import com.google.gson.Gson;
+import no.kristiania.pgr200.db.Conference;
+import no.kristiania.pgr200.db.ConferenceDao;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class HttpServerRequestHandlerCapi implements HttpServerRequestHandler {
@@ -17,10 +20,15 @@ public class HttpServerRequestHandlerCapi implements HttpServerRequestHandler {
             System.out.println("mode: " + jsonQuery.getMode());
             System.out.println("table: " + jsonQuery.getTable());
             ArrayList<HttpServerJsonWrapper.Field> jsonFields = (ArrayList<HttpServerJsonWrapper.Field>) jsonQuery.getFields();
-            for (HttpServerJsonWrapper.Field field:jsonFields) {
-                System.out.println("field name: " + field.getName());
-                System.out.println("field value: " + field.getValue());
+            jsonQuery.setFieldMap();
+            Conference conference = jsonQuery.createConferenceFromJson();
+            ConferenceDao conferenceDao = new ConferenceDao();
+            try {
+                conferenceDao.create(conference);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+
         }
 
         return false;
