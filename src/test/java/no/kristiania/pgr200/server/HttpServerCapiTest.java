@@ -32,6 +32,7 @@ public class HttpServerCapiTest {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST","application/json",
                 "{\"mode\":\"retrieve\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
         HttpClientResponse response = request.execute();
+        System.out.println(response.getBody());
 
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
@@ -73,7 +74,6 @@ public class HttpServerCapiTest {
     }
 
     @Test
-    @Ignore
     public void shouldParseJsonConferenceInsert() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
                 "{\"mode\":\"insert\",\"table\":\"conference\",\"fields\":[{\"name\":\"title\",\"value\":\"myTitle\"},{\"name\":\"description\",\"value\":\"myDescription\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");

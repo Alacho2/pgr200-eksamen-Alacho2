@@ -13,7 +13,7 @@ public class HttpServerJsonWrapper {
     private String mode;
     private String table;
     private List<Field> fields = null;
-    private Map<String, Object> fieldMap = new HashMap<String, Object>();
+    private Map<String, String> fieldMap = new HashMap<String, String>();
 
     public String getMode() {
         return mode;
@@ -39,7 +39,7 @@ public class HttpServerJsonWrapper {
         this.fields = fields;
     }
 
-    public Map<String, Object> getFieldMap() {
+    public Map<String, String> getFieldMap() {
         return this.fieldMap;
     }
 
@@ -49,23 +49,8 @@ public class HttpServerJsonWrapper {
         }
     }
 
-    public Conference createConferenceFromJson(){
-        Conference conference = new Conference();
-        conference.setTitle(fieldMap.get("title").toString());
-        conference.setDescription(fieldMap.get("description").toString());
-        conference.setDate_start(fieldMap.get("time-start").toString());
-        conference.setDate_end(fieldMap.get("time-end").toString());
-        return conference;
-    }
-
-    public Track createTrackFromJson(){
-        Track track = new Track();
-        return track;
-    }
-
-    public Talk createTalkFromJson(){
-        Talk talk = new Talk();
-        return talk;
+    public String getField(String param){
+        return fieldMap.get(param).toString();
     }
 
     public class Field {
