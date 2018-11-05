@@ -70,9 +70,10 @@ public class AbstractDao {
     }
   }
 
-
-  //TODO(Håvard): Ask Arnar and Geir about this approach
   protected <T> void updateOneById(String sql, T[] values) throws SQLException {
+    for(T val : values){
+      System.out.println(val);
+    }
     try(Connection conn = dataSource.getConnection()) {
       try (PreparedStatement statement = conn.prepareStatement(sql)) {
         for(int i = 0; i < values.length; i++){

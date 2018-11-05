@@ -3,8 +3,10 @@ package no.kristiania.pgr200.db;
 import no.kristiania.pgr200.db.AbstractDao;
 import no.kristiania.pgr200.db.DataAccessObject;
 import no.kristiania.pgr200.db.LocalDataSource;
+import no.kristiania.pgr200.utils.DateHandler;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,8 +27,8 @@ public class ConferenceDao extends AbstractDao implements DataAccessObject<Confe
     long id = executeInsertAndReturnPrimaryKey(createQuery, new Object[]{
             conference.getTitle(),
             conference.getDescription(),
-            conference.getDate_start(),
-            conference.getDate_end()});
+            new Date(DateHandler.convertDateToEpoch(conference.getDate_start())),
+            new Date(DateHandler.convertDateToEpoch(conference.getDate_end()))});
 
     conference.setId((int) id);
   }
@@ -54,8 +56,8 @@ public class ConferenceDao extends AbstractDao implements DataAccessObject<Confe
     updateOneById(updateQuery, new Object[]{
             conference.getTitle(),
             conference.getDescription(),
-            conference.getDate_start(),
-            conference.getDate_end(),
+            new Date(DateHandler.convertDateToEpoch(conference.getDate_start())),
+            new Date(DateHandler.convertDateToEpoch(conference.getDate_end())),
             conference.getId()
     });
   }
