@@ -2,12 +2,12 @@ package no.kristiania.pgr200.db;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.sql.DataSource;
+
 import java.sql.SQLException;
-import java.util.Random;
+import java.sql.Time;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,23 +17,16 @@ public class TalkDatabaseTest {
   private TalkDao talkDao;
   private DataSource dataSource;
   private TestDataSource testDatasource = new TestDataSource();
-  private static Random random;
   private TrackDao trackDao;
   private ConferenceDao conferenceDao;
   private Track track;
   private Conference conference;
 
-
-  @BeforeClass
-  public static void makeReady(){
-    random = new Random();
-  }
-
   @Before
   public void makeTalk(){
-    this.conference = sampleConference();
-    this.track = sampleTrack();
-    this.talk = sampleTalk();
+    this.conference = SampleData.sampleConference();
+    this.track = SampleData.sampleTrack();
+    this.talk = SampleData.sampleTalk();
     this.dataSource = testDatasource.createDataSource();
     this.conferenceDao = new ConferenceDao(dataSource);
     this.trackDao = new TrackDao(dataSource);
@@ -42,42 +35,23 @@ public class TalkDatabaseTest {
 
   @After
   public void resetTalk(){
-    track = null;
-    conference = null;
-    talk = null;
+    this.dataSource = null;
+    this.track = null;
+    this.conference = null;
+    this.talk = null;
+    this.conferenceDao = null;
+    this.trackDao = null;
+    this.talkDao = null;
+    testDatasource.dropTables();
   }
 
-  private String pickOne(String[] alternatives) {
-    return alternatives[random.nextInt(alternatives.length)];
-  }
+  @Test
+  public void shouldReturnCorrectTalkTitle() throws SQLException {
+    conferenceDao.create(conference);
+    trackDao.create(track);
+    talkDao.create(talk);
 
-  private Talk sampleTalk() {
-    talk = new Talk();
-    talk.setTitle(pickOne(new String[] {"Something", "Somewhere", "Someplace", "Location", "Bamalam"})+random.nextInt(200));
-    talk.setDescription(pickOne(new String[]{"The cool place", "Nowhere", "RocketMan", "Ladida"}));
-    talk.setTalk_location(pickOne(new String[]{"The cool place", "Nowhere", "RocketMan", "Ladida"}));
-    talk.setTimeslot(pickOne(new String[]{"10:10", "12:10", "04:04", "02:10"}));
-    talk.setTalk_track_id(1);
-    return talk;
-  }
-
-  private Track sampleTrack() {
-    track = new Track();
-    track.setTitle(pickOne(new String[] {"Something", "Somewhere", "Someplace", "Location", "Bamalam"})+random.nextInt(200));
-    track.setDescription(pickOne(new String[]{"The cool place", "Nowhere", "RocketMan", "Ladida"}));
-    track.setTrack_conference_id(1);
-
-    return track;
-  }
-
-  private Conference sampleConference() {
-    conference = new Conference();
-    conference.setTitle(pickOne(new String[] { "John", "Paul", "George", "Ringo" }) + random.nextInt(2000));
-    conference.setDescription(pickOne(new String[] { "Lennon", "McCartney", "Harrison", "Starr" }));
-    conference.setDate_start("09-12-2017");
-    conference.setDate_end("09-12-2017");
-
-    return conference;
+    assertThat(talkDao.readOne(track.getId()).getTitle()).isEqualTo(talk.getTitle());
   }
 
   @Test
@@ -88,4 +62,52 @@ public class TalkDatabaseTest {
     assertThat(talkDao.readAll()).contains(talk);
   }
 
+  @Test
+  public void shouldCompareTalkFieldByField() throws SQLException {
+    conferenceDao.create(conference);
+    trackDao.create(track);
+    talkDao.create(talk);
+
+    assertThat(talkDao.readOne(talk.getId()))
+            .isEqualToComparingOnlyGivenFields(talk);
+  }
+
+  @Test
+  public void shouldReturnTalkIdMatchTrackIdMatchConferenceId() throws SQLException {
+    conferenceDao.create(conference);
+    trackDao.create(track);
+    talkDao.create(talk);
+
+    assertThat(conferenceDao.readAll()).contains(conference);
+    assertThat(trackDao.readAll()).contains(track);
+    assertThat(talkDao.readAll()).contains(talk);
+    assertThat(conferenceDao.readOne(conference.getId()).getId()).isEqualTo(trackDao.readOne(track.getId()).getTrack_conference_id());
+    assertThat(trackDao.readOne(track.getId()).getId()).isEqualTo(talkDao.readOne(talk.getId()).getTalk_track_id());
+  }
+
+  //TODO(Alexander): Skrive update teste for talk
+  @Test
+  public void shouldUpdateTalkInTable() throws SQLException {
+    conferenceDao.create(conference);
+    trackDao.create(track);
+    talkDao.create(talk);
+
+    talkDao.updateOneById(new Talk("History of Java", "The long walk over how Java works", "Maven room", talk.getId(), track.getId(), new Time(System.currentTimeMillis())));
+    assertThat(talkDao.readOne(talk.getId()).getTitle()).isEqualTo("History of Java");
+    assertThat(talkDao.readOne(talk.getId()).getDescription()).isEqualTo("The long walk over how Java works");
+  }
+
+  @Test
+  public void shouldDeleteTalkInTable() throws SQLException {
+    conferenceDao.create(conference);
+    trackDao.create(track);
+    talkDao.create(talk);
+
+    assertThat(conferenceDao.readAll()).contains(conference);
+    assertThat(trackDao.readAll()).contains(track);
+    assertThat(talkDao.readAll()).contains(talk);
+    talkDao.deleteOneById(talk.getId());
+    assertThat(talkDao.readAll()).doesNotContain(talk);
+
+  }
 }

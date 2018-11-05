@@ -6,84 +6,64 @@ import org.junit.Test;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConferenceDatabaseTests {
 
   private Conference conference;
+  private ConferenceDao conferenceDao;
   private DataSource dataSource;
   private TestDataSource testDatasource = new TestDataSource();
-  private static Random random = new Random();
 
-    private Conference sampleConference() {
-        conference = new Conference();
-        conference.setTitle(pickOne(new String[] { "John", "Paul", "George", "Ringo" }) + random.nextInt(2000));
-        conference.setDescription(pickOne(new String[] { "Lennon", "McCartney", "Harrison", "Starr" }));
-        conference.setDate_start("09-12-2017");
-        conference.setDate_end("09-12-2017");
+  @Before
+  public void makeConference(){
+    this.conference = SampleData.sampleConference();
+    this.dataSource = testDatasource.createDataSource();
+    this.conferenceDao = new ConferenceDao(dataSource);
+  }
 
-        return conference;
-    }
+  @After
+  public void resetConference(){
+    this.conference = null;
+    testDatasource.dropTables();
+  }
 
-    @Before
-    public void makeConference(){
-      conference = sampleConference();
-      this.dataSource = testDatasource.createDataSource();
-    }
+  @Test
+  public void shouldReturnCorrectConferenceTitle() throws SQLException {
+    conferenceDao.create(conference);
 
-    @After
-    public void resetConference(){
-      conference = null;
-    }
+    assertThat(conferenceDao.readOne(conference.getId()).getTitle())
+            .isEqualTo(conference.getTitle());
+  }
 
-    private String pickOne(String[] alternatives) {
-        return alternatives[random.nextInt(alternatives.length)];
-    }
+  @Test
+  public void shouldFindSavedConference() throws SQLException {
+    conferenceDao.create(conference);
+    assertThat(conferenceDao.readAll())
+            .contains(conference);
+  }
 
+  @Test
+  public void shouldCompareConferenceFieldByField() throws SQLException {
+    conferenceDao.create(conference);
+    assertThat(conferenceDao.readOne(conference.getId()))
+            .isEqualToComparingOnlyGivenFields(conference, "title", "description", "id");
+  }
 
-    @Test
-    public void shouldReturnCorrectConferenceTitle() throws SQLException {
-      ConferenceDao conferenceDao = new ConferenceDao(dataSource);
-      Conference conference = sampleConference();
+  @Test
+  public void shouldUpdateConferenceInTable() throws SQLException {
+    conferenceDao.create(conference);
+    conferenceDao.updateOneById(new Conference( conference.getId(), "JavaZone", "Conference about Java", "04-12-2018", "06-12-2018"));
+    assertThat(conferenceDao.readOne(conference.getId()).getTitle()).isEqualTo("JavaZone");
+  }
 
-      conferenceDao.create(conference);
-      assertThat(conferenceDao.readOne(conference.getId()).getTitle()).isEqualTo(conference.getTitle());
-    }
+  @Test
+  public void shouldDeleteConferenceInTable() throws SQLException {
+    conferenceDao.create(conference);
 
-    @Test
-    public void shouldFindSavedConference() throws SQLException {
-        ConferenceDao conferenceDao = new ConferenceDao(dataSource);
-        conferenceDao.create(conference);
-        assertThat(conferenceDao.readAll())
-                .contains(conference);
-    }
-
-    @Test
-    public void shouldCompareConferenceFieldByField() throws SQLException {
-        ConferenceDao conferenceDao = new ConferenceDao(testDatasource.createDataSource());
-        conferenceDao.create(conference);
-        assertThat(conferenceDao.readAll())
-                .contains(conference);
-    }
-
-    @Test
-    public void shouldUpdateConferenceInTable() throws SQLException {
-      ConferenceDao conferenceDao = new ConferenceDao(dataSource);
-      conferenceDao.create(conference);
-      conferenceDao.updateOneById(new Conference( conference.getId(), "JavaZone", "Conference about Java", "04-12-2018", "06-12-2018"));
-      assertThat(conferenceDao.readOne(conference.getId()).getTitle()).isEqualTo("JavaZone");
-    }
-
-    @Test
-    public void shouldDeleteConferenceInTable() throws SQLException {
-      ConferenceDao conferenceDao = new ConferenceDao(dataSource);
-      conferenceDao.create(conference);
-
-      assertThat(conferenceDao.readAll()).contains(conference);
-      conferenceDao.deleteOneById(conference.getId());
-      assertThat(conferenceDao.readAll()).doesNotContain(conference);
-    }
-
+    assertThat(conferenceDao.readAll()).contains(conference);
+    conferenceDao.deleteOneById(conference.getId());
+    assertThat(conferenceDao.readAll()).doesNotContain(conference);
+  }
 }

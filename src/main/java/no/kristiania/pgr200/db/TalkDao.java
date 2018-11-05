@@ -54,13 +54,13 @@ public class TalkDao extends AbstractDao implements DataAccessObject<Talk> {
 
   @Override
   public void updateOneById(Talk talk) throws SQLException {
-    String updateQuery = "UPDATE track SET talk_title = ?, talk_description = ?, talk_track_id = ?, talk_location = ?, talk_timeslot = ? WHERE track_id = ?";
+    String updateQuery = "UPDATE talk SET talk_title = ?, talk_description = ?, talk_track_id = ?, talk_location = ?, talk_timeslot = ? WHERE talk_id = ?";
     updateOneById(updateQuery, new Object[]{
             talk.getTitle(),
             talk.getDescription(),
             talk.getTalk_track_id(),
             talk.getTalk_location(),
-            talk.getTalk_location(),
+            talk.getTimeslot(),
             talk.getId()
     });
   }
