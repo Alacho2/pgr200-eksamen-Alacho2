@@ -1,42 +1,25 @@
 package no.kristiania.pgr200.db;
 
 import no.kristiania.pgr200.utils.DateHandler;
+import sun.tools.jconsole.Tab;
 
 import java.sql.Time;
 import java.util.Objects;
 
-public class Talk {
+public class Talk extends TableObject {
 
-  private String title, description, talk_location;
-  private int id, talk_track_id;
+  private String talk_location;
+  private int talk_track_id;
   private Time timeslot;
 
   public Talk(String title, String description, String talk_location, int id, int talk_track_id, Time timeslot) {
-    this.title = title;
-    this.description = description;
+    super(title, description, id);
     this.talk_location = talk_location;
-    this.id = id;
     this.talk_track_id = talk_track_id;
     this.timeslot = timeslot;
   }
 
   public Talk() {
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
   }
 
   public String getTalk_location() {
@@ -49,14 +32,6 @@ public class Talk {
 
   public void setTimeslot(Time timeslot) {
     this.timeslot = timeslot;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public int getTalk_track_id() {

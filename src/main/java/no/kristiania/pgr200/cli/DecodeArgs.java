@@ -4,7 +4,10 @@ import no.kristiania.pgr200.db.*;
 import no.kristiania.pgr200.utils.*;
 
 import javax.sql.DataSource;
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -33,6 +36,15 @@ public class DecodeArgs {
                 break;
             case "RESET":
                 return new RequestHandler("RESET", "RESET").execute(port, hostName);
+            case "RICKROLL":
+                if(Desktop.isDesktopSupported()){
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
             default:
                 //do stuff
         }

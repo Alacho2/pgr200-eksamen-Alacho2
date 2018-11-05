@@ -2,14 +2,11 @@ package no.kristiania.pgr200.db;
 
 import java.util.Objects;
 
-public class Track {
-    private String title, description;
-    private int id, track_conference_id;
+public class Track extends TableObject {
+    private int track_conference_id;
 
     public Track(String title, String description, int id, int track_conference_id) {
-        this.title = title;
-        this.description = description;
-        this.id = id;
+        super(title, description, id);
         this.track_conference_id = track_conference_id;
     }
 

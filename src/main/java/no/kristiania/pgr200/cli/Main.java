@@ -6,13 +6,14 @@ import no.kristiania.pgr200.utils.*;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Main {
   private static HttpServerListener server;
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, URISyntaxException {
     new DbConfig();
     ParseCommands.parseAllCommands();
     startServer();
