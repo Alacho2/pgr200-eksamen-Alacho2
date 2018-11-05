@@ -28,30 +28,52 @@ public class HttpServerCapiTest {
     }
 
     @Test
-    @Ignore
-    public void shouldParseJsonConferenceRetrieve() throws IOException {
-        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
+    public void shouldParseCapiPathConferenceRetrieve() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST","application/json",
                 "{\"mode\":\"retrieve\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
         HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
     @Test
-    @Ignore
-    public void shouldParseTrackJsonRetrieve() throws IOException {
-        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
+    public void shouldParseCapiPathTrackRetrieve() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/track", "POST","application/json",
                 "{\"mode\":\"retrieve\",\"table\":\"track\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
         HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    public void shouldParseCapiPathTalkRetrieve() throws IOException {
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "POST","application/json",
+                "{\"mode\":\"retrieve\",\"table\":\"talk\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    public void shouldFailParseCapiPathTalkRetrieve() throws IOException {
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "POST", "application/json",
+                "");
+        HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(404);
+    }
+
+    @Test
+    public void shouldFailCapiInvalidTable() throws IOException {
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "POST","application/json",
+                "{\"mode\":\"retrieve\",\"table\":\"failtable\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(404);
     }
 
     @Test
     @Ignore
-    public void shouldParseTalkJsonRetrieve() throws IOException {
-        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
-                "{\"mode\":\"retrieve\",\"table\":\"talk\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
-        HttpClientResponse response = request.execute();
-    }
-
-    @Test
     public void shouldParseJsonConferenceInsert() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
                 "{\"mode\":\"insert\",\"table\":\"conference\",\"fields\":[{\"name\":\"title\",\"value\":\"myTitle\"},{\"name\":\"description\",\"value\":\"myDescription\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
@@ -75,6 +97,7 @@ public class HttpServerCapiTest {
     }
 
     @Test
+    @Ignore
     public void shouldParseJsonReset() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/reset", "POST", "application/json",
                 "{\"mode\":\"reset\"}");
