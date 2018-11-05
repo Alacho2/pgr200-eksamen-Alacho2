@@ -38,7 +38,7 @@ public class RequestHandler {
             case "GET":
                 httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod());
             case "POST":
-                httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod(), r.getBody());
+                httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod(), "application/json", r.getBody());
         }
         return httpClientRequest;
     }
