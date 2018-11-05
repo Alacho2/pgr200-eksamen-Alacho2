@@ -31,6 +31,8 @@ public class DecodeArgs {
             case "LIST":
                 if(args.length>1) return handleListCommand(args, port, hostName);
                 break;
+            case "RESET":
+                return new RequestHandler("RESET", "RESET").execute(port, hostName);
             default:
                 //do stuff
         }

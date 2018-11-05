@@ -33,6 +33,9 @@ public class RequestBodyHandler<T extends Command> {
 
 
     private <V> void addNewField(String name, V value){
+        if(name == null || value == null){
+            return;
+        }
         fields.add(new RequestBodyField(name, value));
     }
 

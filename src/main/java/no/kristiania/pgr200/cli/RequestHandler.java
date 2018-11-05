@@ -20,6 +20,11 @@ public class RequestHandler {
         commands.add(new BasicCommand<Number>("id",mode,table).setValue(id));
     }
 
+    public RequestHandler(String table, String mode) {
+        commands = new ArrayList<>();
+        commands.add(new BasicCommand<Number>("id",mode,table));
+    }
+
     public String execute(int port, String hostName) throws IOException {
         StringBuilder sb = new StringBuilder();
         HttpClientRequest request = checkRequestMethod(mapToRequest(port, hostName));
