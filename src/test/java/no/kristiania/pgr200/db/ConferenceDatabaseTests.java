@@ -25,14 +25,16 @@ public class ConferenceDatabaseTests {
 
   @After
   public void resetConference(){
+    this.dataSource = null;
     this.conference = null;
-    testDatasource.dropTables();
+    this.conferenceDao = null;
+    this.testDatasource.dropTables();
+    this.testDatasource = null;
   }
 
   @Test
   public void shouldReturnCorrectConferenceTitle() throws SQLException {
     conferenceDao.create(conference);
-
     assertThat(conferenceDao.readOne(conference.getId()).getTitle())
             .isEqualTo(conference.getTitle());
   }
@@ -61,7 +63,6 @@ public class ConferenceDatabaseTests {
   @Test
   public void shouldDeleteConferenceInTable() throws SQLException {
     conferenceDao.create(conference);
-
     assertThat(conferenceDao.readAll()).contains(conference);
     conferenceDao.deleteOneById(conference.getId());
     assertThat(conferenceDao.readAll()).doesNotContain(conference);
