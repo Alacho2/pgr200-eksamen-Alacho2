@@ -29,16 +29,55 @@ public class HttpServerCapiTest {
 
     @Test
     @Ignore
-    public void shouldParseJsonRetrieve() throws IOException {
+    public void shouldParseJsonConferenceRetrieve() throws IOException {
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
+                "{\"mode\":\"retrieve\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+    }
+
+    @Test
+    @Ignore
+    public void shouldParseTrackJsonRetrieve() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
                 "{\"mode\":\"retrieve\",\"table\":\"track\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
         HttpClientResponse response = request.execute();
     }
 
     @Test
-    public void shouldParseJsonInsert() throws IOException{
+    @Ignore
+    public void shouldParseTalkJsonRetrieve() throws IOException {
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
+                "{\"mode\":\"retrieve\",\"table\":\"talk\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+    }
+
+    @Test
+    public void shouldParseJsonConferenceInsert() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
-                "{\"mode\":\"insert\",\"table\":\"conferences\",\"fields\":[{\"name\":\"title\",\"value\":\"myTitle\"},{\"name\":\"description\",\"value\":\"myDescription\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
+                "{\"mode\":\"insert\",\"table\":\"conference\",\"fields\":[{\"name\":\"title\",\"value\":\"myTitle\"},{\"name\":\"description\",\"value\":\"myDescription\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
+        HttpClientResponse response = request.execute();
+    }
+
+    @Test
+    @Ignore
+    public void shouldParseJsonTrackInsert() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
+                "{\"mode\":\"insert\",\"table\":\"track\",\"fields\":[{\"name\":\"title\",\"value\":\"myTitle\"},{\"name\":\"description\",\"value\":\"myDescription\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
+        HttpClientResponse response = request.execute();
+    }
+
+    @Test
+    @Ignore
+    public void shouldParseJsonTalkInsert() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
+                "{\"mode\":\"insert\",\"table\":\"track\",\"fields\":[{\"name\":\"title\",\"value\":\"myTitle\"},{\"name\":\"description\",\"value\":\"myDescription\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
+        HttpClientResponse response = request.execute();
+    }
+
+    @Test
+    public void shouldParseJsonReset() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/reset", "POST", "application/json",
+                "{\"mode\":\"reset\"}");
         HttpClientResponse response = request.execute();
 
 
