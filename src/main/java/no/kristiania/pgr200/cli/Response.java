@@ -7,10 +7,17 @@ import no.kristiania.pgr200.server.HttpClientResponse;
 import java.util.Objects;
 
 public class Response {
-    int statusCode;
-    String body;
+    private int statusCode;
+    private String body, content_type;
 
-    public Response(int statusCode, String body) {
+    public Response(HttpClientResponse httpClientResponse) {
+        setContent_type(httpClientResponse.getHeader("Content-type"));
+        setStatusCode(httpClientResponse.getStatusCode());
+        setBody(httpClientResponse.getBody());
+    }
+
+    public Response(int statusCode, String body, String content_type) {
+        setContent_type(content_type);
         setStatusCode(statusCode);
         setBody(body);
     }
@@ -28,29 +35,19 @@ public class Response {
     }
 
     private void setBody(String body) {
-        Gson gson = new GsonBuilder().create();
-        this.body = gson.toJson(body);
+        if(getContent_type() != null && getContent_type().equals("application/json")) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            this.body = gson.toJson(body);
+        }else{
+            this.body = body;
+        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Response response = (Response) o;
-        return statusCode == response.statusCode &&
-                Objects.equals(body, response.body);
+    public String getContent_type() {
+        return content_type;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(statusCode, body);
-    }
-
-    @Override
-    public String toString() {
-        return "Response{" +
-                "statusCode=" + statusCode +
-                ", body='" + body + '\'' +
-                '}';
+    public void setContent_type(String content_type) {
+        this.content_type = content_type;
     }
 }

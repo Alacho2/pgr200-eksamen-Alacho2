@@ -33,6 +33,7 @@ public class Request<T extends Command> {
             setMode(t.getMode());
             setTable(t.getTable());
         }
+        setPath();
     }
 
     public String getHostName() {
@@ -64,8 +65,8 @@ public class Request<T extends Command> {
     }
 
     public void setPath(){
-        String path = "/api/"+getTable();
-        if(getId() != null) path += "/"+id;
+        String path = "/capi/"+getTable();
+        //if(getId() != null) path += "/"+id;
         this.path = path;
     }
 

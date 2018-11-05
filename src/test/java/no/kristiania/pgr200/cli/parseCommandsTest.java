@@ -1,11 +1,15 @@
 package no.kristiania.pgr200.cli;
 
+import no.kristiania.pgr200.utils.DateHandler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class parseCommandsTest {
 
@@ -38,10 +42,10 @@ public class parseCommandsTest {
 
     @Test
     public void shouldReturnStringAsAlternatives(){
-        assertThat(ParseCommands.checkForAlternativeTable("con")).isEqualTo("CONFERENCES?");
-        assertThat(ParseCommands.checkForAlternativeTable("tal")).isEqualTo("TALKS?");
-        assertThat(ParseCommands.checkForAlternativeTable("tra")).isEqualTo("TRACKS?");
-        assertThat(ParseCommands.checkForAlternativeTable("t")).contains("TALKS").contains("TRACKS");
+        assertThat(ParseCommands.checkForAlternativeTable("con")).isEqualTo("CONFERENCE?");
+        assertThat(ParseCommands.checkForAlternativeTable("tal")).isEqualTo("TALK?");
+        assertThat(ParseCommands.checkForAlternativeTable("tra")).isEqualTo("TRACK?");
+        assertThat(ParseCommands.checkForAlternativeTable("t")).contains("TALK").contains("TRACK");
     }
 
     @Test
@@ -53,16 +57,19 @@ public class parseCommandsTest {
 
     @Test
     public void shouldReturnTrueIfTableExists(){
-        assertThat(ParseCommands.checkForTable("conferences")).isTrue();
-        assertThat(ParseCommands.checkForTable("talks")).isTrue();
-        assertThat(ParseCommands.checkForTable("tracks")).isTrue();
+        assertThat(ParseCommands.checkForTable("conference")).isTrue();
+        assertThat(ParseCommands.checkForTable("talk")).isTrue();
+        assertThat(ParseCommands.checkForTable("track")).isTrue();
         assertThat(ParseCommands.checkForTable("help")).isTrue();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldThrowErrIfTableNotExists(){
-        ParseCommands.checkForTable("loremIpsum");
-        ParseCommands.checkForTable("randomTableThatIsNotDefined");
+        assertThatThrownBy(() -> {
+            ParseCommands.checkForTable("loremIpsum");
+            ParseCommands.checkForTable("randomTableThatIsNotDefined");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Please enter a valid table!");
     }
 
     @Test

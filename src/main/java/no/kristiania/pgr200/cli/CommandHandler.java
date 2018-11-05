@@ -83,13 +83,6 @@ abstract class CommandHandler{
         return table;
     }
 
-    void insertCommands(String table, String mode){
-        List<Command> inputListCommands = ParseCommands.parse(table.toUpperCase(), mode.toUpperCase());
-        for(Command c : inputListCommands){
-            addCommand(c);
-        }
-    }
-
 
     /**
      * Checks for the scanner input and adds the value to the right command instance.
@@ -125,6 +118,13 @@ abstract class CommandHandler{
         } catch (IllegalArgumentException e){
             OutputHandler.printCriticalQuestion(e.getMessage());
             handleInput(c);
+        }
+    }
+
+    void insertCommands(String table, String mode){
+        List<Command> inputListCommands = readAllCommandsByTable(table, mode);
+        for(Command c : inputListCommands){
+            addCommand(c);
         }
     }
 
@@ -182,6 +182,11 @@ abstract class CommandHandler{
         }
         return sb.toString();
     }
+
+    public List<Command> readAllCommandsByTable(String table, String mode){
+        return ParseCommands.parse(table.toUpperCase(), mode.toUpperCase());
+    }
+
 
 
     /**

@@ -14,7 +14,7 @@ import java.util.Scanner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CommandHandlerTest extends CommandHandler {
-/**
+
     @BeforeClass
     public static void initCommands(){
         ParseCommands.parseAllCommands();
@@ -22,7 +22,7 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void testInsertConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandInsert("conferences\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        CommandHandler interactiveInsert = exampleCommandInsert("conference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
         assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
         assertThat((String)interactiveInsert.getCommandValue("time-start")).isEqualTo("10-09-2005");
@@ -31,7 +31,7 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void testInsertTrackCommands(){
-        CommandHandler interactiveInsert = exampleCommandInsert("tracks\r\ntitle\r\ndescription\r\n1");
+        CommandHandler interactiveInsert = exampleCommandInsert("track\r\ntitle\r\ndescription\r\n1");
         assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
         assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
         assertThat((long)interactiveInsert.getCommandValue("track_conference_id")).isEqualTo(1);
@@ -39,7 +39,7 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void testInsertTalkCommands(){
-        CommandHandler interactiveInsert = exampleCommandInsert("talks\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
+        CommandHandler interactiveInsert = exampleCommandInsert("talk\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
         assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
         assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
         assertThat((String)interactiveInsert.getCommandValue("talk_location")).isEqualTo("location");
@@ -49,7 +49,7 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void shouldInsertAndMatchConferenceObject(){
-        CommandHandler result = exampleCommandInsert("conferences\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        CommandHandler result = exampleCommandInsert("conference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat((String)result.getCommandValue("title")).isEqualTo((String)result.getCommandValue("title"));
         assertThat((String)result.getCommandValue("description")).isEqualTo((String)result.getCommandValue("description"));
         assertThat(result.getCommandValue("time-start").toString()).isEqualTo("2005-09-10");
@@ -59,7 +59,7 @@ public class CommandHandlerTest extends CommandHandler {
     @Test
     public void shouldInsertAndMatchTrackObject(){
         Track example = exampleTrack(1, "title", "description", 1);
-        CommandHandler result = exampleCommandInsert("tracks\r\ntitle\r\ndescription\r\n1");
+        CommandHandler result = exampleCommandInsert("track\r\ntitle\r\ndescription\r\n1");
 
         assertThat(example.getTitle()).isEqualTo((String)result.getCommandValue("title"));
         assertThat(example.getDescription()).isEqualTo((String)result.getCommandValue("description"));
@@ -69,7 +69,7 @@ public class CommandHandlerTest extends CommandHandler {
     @Test
     public void shouldInsertAndMatchTalkObject(){
         Talk example = exampleTalk(1, "title", "description", "location", "10:10",1);
-        CommandHandler result = exampleCommandInsert("talks\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
+        CommandHandler result = exampleCommandInsert("talk\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
 
         assertThat(example.getTitle()).isEqualTo((String)result.getCommandValue("title"));
         assertThat(example.getDescription()).isEqualTo((String)result.getCommandValue("description"));
@@ -80,7 +80,7 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void testRetrieveConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandRetrieve("conferences\r\ny\r\ny\r\n");
+        CommandHandler interactiveInsert = exampleCommandRetrieve("conference\r\ny\r\ny\r\n");
         assertThat((String)interactiveInsert.getCommandValue("title")).isNull();
         assertThat((String)interactiveInsert.getCommandValue("description")).isNull();
         assertThat((String)interactiveInsert.getCommandValue("time-start")).isNull();
@@ -89,7 +89,7 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void testUpdateConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandUpdate("conferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        CommandHandler interactiveInsert = exampleCommandUpdate("conference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat((long)interactiveInsert.getCommandValue("id")).isEqualTo(1);
         assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
         assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
@@ -99,20 +99,24 @@ public class CommandHandlerTest extends CommandHandler {
 
     @Test
     public void testDeleteConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandDelete("conferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        CommandHandler interactiveInsert = exampleCommandDelete("conference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat((long)interactiveInsert.getCommandValue("id")).isEqualTo(1);
     }
 
     @Test
     public void testHelpCommands(){
         CommandHandler interactiveHelp = exampleCommandHelp("");
-        List<Command> commands = interactiveHelp.getAllCommands();
+        List<Command> commands = interactiveHelp.readAllCommandsByTable("help", "help");
+        assertThat(commands.size()>0);
         for(Command c :  commands){
             assertThat(c.getValue()).isNull();
-            assertThat(c.getTable()).isNotNull();
-            assertThat(c.getMode()).isNotNull();
+            assertThat(c.getTable()).isEqualTo("help");
+            assertThat(c.getMode()).isEqualTo("help");
             assertThat(c.getDescription()).isNotNull();
-            assertThat(c.getType()).isNotNull();
+            assertThat(c.getType()).isEqualTo("help");
+            assertThat(c.getSubQuestionValue()).isEqualTo("none");
+            assertThat(c.getSubQuestionName()[0]).isEqualTo("none");
+            assertThat(c.getValue()).isNull();
             assertThat(c).isInstanceOf(HelpCommand.class);
         }
         assertThat(interactiveHelp.readHelpCommands("help", "help")).isNotNull();
@@ -183,5 +187,5 @@ public class CommandHandlerTest extends CommandHandler {
     private CommandHandler exampleCommandHelp(String message){
         Scanner sc = writeToScanner(message);
         return new InteractiveHelp();
-    }*/
+    }
 }

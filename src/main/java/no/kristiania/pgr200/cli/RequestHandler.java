@@ -27,9 +27,8 @@ public class RequestHandler {
 
     public String execute(int port, String hostName) throws IOException {
         StringBuilder sb = new StringBuilder();
-        HttpClientRequest request = checkRequestMethod(mapToRequest(port, hostName));
-        HttpClientResponse httpClientResponse = request.execute();
-        Response response = new Response(httpClientResponse.getStatusCode(), httpClientResponse.getBody());
+        HttpClientResponse httpClientResponse  = checkRequestMethod(mapToRequest(port, hostName)).execute();
+        Response response = new Response(httpClientResponse);
         sb.append("StatusCode:\n"+response.getStatusCode()+"\n");
         sb.append("Body:\n"+response.getBody());
         return sb.toString();
@@ -41,9 +40,11 @@ public class RequestHandler {
         System.out.println("body: \n"+r.getBody());
         switch (r.getMethod()){
             case "GET":
-                httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod());
+                httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), "POST", "application/json", r.getBody());
+                break;
             case "POST":
                 httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod(), "application/json", r.getBody());
+                break;
         }
         return httpClientRequest;
     }

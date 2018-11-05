@@ -42,26 +42,26 @@ public class InteractiveClientTest {
 
     @Test
     public void testInsertCommands() throws IOException {
-        String result = exampleCommand("-i\r\nconferences\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        String result = exampleCommand("-i\r\nconference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat(result).isNotNull();
     }
 
 
     @Test
     public void testRetrieveCommands() throws IOException {
-        String result = exampleCommand("-r\r\nconferences\r\ny\r\ny\r\n");
+        String result = exampleCommand("-r\r\nconference\r\ny\r\ny\r\n");
         assertThat(result).isNotNull();
     }
 
     @Test
     public void testUpdateCommands() throws IOException {
-        String result = exampleCommand("-u\r\nconferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        String result = exampleCommand("-u\r\nconference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat(result).isNotNull();
     }
 
     @Test
     public void testDeleteCommands() throws IOException {
-        String result = exampleCommand("-d\r\nconferences\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        String result = exampleCommand("-d\r\nconference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat(result).isNotNull();
     }
 

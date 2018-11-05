@@ -15,11 +15,19 @@ public class ExampleData {
         return commands;
     }
 
+    public static Command getSingleStringINSERTCommand(){
+        return exampleCommand("name", "description", "type", "insert", "track", "none", new String[]{"none"}, "value");
+    }
+
     public static List<Command> getStringGETCommand(){
         List<Command> commands = new ArrayList<>();
         commands.add(exampleCommand("name", "description", "type", "retrieve", "track", "none", new String[]{"none"}, "value"));
         commands.add(exampleCommand("id", "description", "type", "retrieve", "track", "none", new String[]{"none"}, 1));
         return commands;
+    }
+
+    public static Command getSingleStringGETCommand(){
+        return exampleCommand("id", "description", "type", "retrieve", "track", "none", new String[]{"none"}, 1);
     }
 
 
