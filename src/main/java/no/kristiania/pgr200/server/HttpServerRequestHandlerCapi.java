@@ -36,7 +36,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
                 jsonQuery.setFieldMap();
                 createDataObjects(jsonQuery.getTable());
                 try {
-                    executeDbOperation(jsonQuery.getMode(), (T) this.dao, (K) this.table);
+                    executeDbOperation(jsonQuery.getMode(), (T) this.dao, this.table);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -60,31 +60,42 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
                 break;
             case "track":
                 dao =  new TrackDao();
+                table = (K) createTrackFromJson();
                 break;
             case "talk":
                 dao =  new TalkDao();
+                table = (K) createTalkFromJson();
+                break;
+            case "reset":
+                // reset db
                 break;
             default:
                 throw new InvalidParameterException();
         }
     }
 
-    private void executeDbOperation(String mode, T dao, K TableObject) throws SQLException {
+    private void executeDbOperation(String mode, T dao, K tableObject) throws SQLException {
         switch(mode.toLowerCase()){
             case "insert":
-                dao.create(TableObject);
-                response.setBody(gson.toJson(TableObject));
+                dao.create(tableObject);
+                response.setBody(gson.toJson(tableObject));
                 response.setStatusCode(200);
                 break;
             case "delete":
+                response.setBody(gson.toJson(dao.readOne(Long.parseLong(jsonQuery.getField("id")))));
+                response.setStatusCode(200);
                 break;
             case "update":
+                dao.create(tableObject);
+                response.setBody(gson.toJson(tableObject));
+                response.setStatusCode(200);
                 break;
             case "retrieve":
                 response.setBody(gson.toJson(dao.readOne(Long.parseLong(jsonQuery.getField("id")))));
                 response.setStatusCode(200);
                 break;
             case "reset":
+                // reset db
                 break;
             default:
         }
@@ -92,10 +103,10 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
 
     public Conference createConferenceFromJson(){
         Conference conference = new Conference();
-        conference.setTitle(jsonQuery.getFieldMap().get("title").toString());
-        conference.setDescription(jsonQuery.getFieldMap().get("description").toString());
-        conference.setDate_start(jsonQuery.getFieldMap().get("time-start").toString());
-        conference.setDate_end(jsonQuery.getFieldMap().get("time-end").toString());
+        conference.setTitle(jsonQuery.getFieldMap().get("title"));
+        conference.setDescription(jsonQuery.getFieldMap().get("description"));
+        conference.setDate_start(jsonQuery.getFieldMap().get("time-start"));
+        conference.setDate_end(jsonQuery.getFieldMap().get("time-end"));
         return conference;
     }
 
