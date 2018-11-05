@@ -7,9 +7,6 @@
 * Jason Nilsen - wiljas17
 
 
-
-
-
 Innleveringsfrist: 12. november kl 09:00. **Viktig:** WiseFlow *stenger* når fristen er ute - lever i tide.
 
 Tag koden med `innlevering` i GitHub og last opp en ZIP-fil til WiseFlow. Dersom du ikke fikk godkjent innlevering #1 eller #2 i første runde, last opp zip-fil av disse i tillegg.
@@ -95,21 +92,21 @@ I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av den
 
 - [ ] Kodekvalitet
   - [x] Koden er klonet fra GitHub classrom
-  - [ ] Produserer `mvn package` en executable jar? (tips: Bruk `maven-shade-plugin`)
-  - [ ] Bruker koden Java 8 og UTF-8
+  - [x] Produserer `mvn package` en executable jar? (tips: Bruk `maven-shade-plugin`)
+  - [x] Bruker koden Java 8 og UTF-8
   - [ ] Bygger prosjektet på [https://travis-ci.com](https://travis-ci.com)?
   - [ ] Har du god test-dekning? (tips: Sett opp jacoco-maven-plugin til å kreve at minst 65% av linjene har testdekning)
   - [ ] Er koden delt inn i flere Maven `<modules>`?
   - [ ] Bruker kommunikasjon mellom klient og server HTTP korrekt?
   - [ ] Kobler serveren seg opp mot PostgreSQL ved hjelp av konfigurasjon i fila `innlevering.properties` i *current working directory* med `dataSource.url`, `dataSource.username`, `dataSource.password`?
 - [ ] Funksjonalitet
-  - [ ] add: Legg til et foredrag i databasen med title, description og topic (valgfritt)
-  - [ ] list: List opp alle foredrag i basen med et valgfritt topic
+  - [x] add: Legg til et foredrag i databasen med title, description og topic (valgfritt)
+  - [x] list: List opp alle foredrag i basen med et valgfritt topic
   - [ ] show: Vis detaljer for et foredrag
   - [ ] update: Endre title, description eller topic for et foredrag
   - [ ] Valgfri tillegg: Kommandoer for å sette opp hvor mange dager og timer konferansen skal vare og hvor mange parallelle spor den skal inneholde.
 - [ ] Dokumentasjon i form av README.md
-  - [ ] Navn og Feide-ID på dere de som var på teamet
+  - [x] Navn og Feide-ID på dere de som var på teamet
   - [ ] Inkluderer dokumentasjonen hvordan man tester ut funksjonaliteten programmet manuelt? (Inkludert eventuell ekstra funksjonalitet dere har tatt med)
   - [ ] Inkluderer dokumentasjonen en evaluering av hvordan man jobbet sammen?
   - [ ] Inkluderer dokumentasjonen en screencast av en parprogrammeringsesjon?
@@ -120,7 +117,7 @@ I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av den
 
 ### Forberedelse
 
-- [ ] Finn endelig grupperpartner innen 1. november
+- [x] Finn endelig grupperpartner innen 1. november
 - [ ] Finn en gruppe for gjensidig evaluering innen 1. november
 
 ### Innlevering
