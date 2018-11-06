@@ -82,7 +82,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
                 response.setStatusCode(200);
                 break;
             case "delete":
-                response.setBody(gson.toJson(dao.readOne(Long.parseLong(jsonQuery.getField("id")))));
+                response.setBody(gson.toJson("Object " + jsonQuery.getField("id") + " deleted."));
                 response.setStatusCode(200);
                 break;
             case "update":
@@ -112,11 +112,19 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
 
     public Track createTrackFromJson(){
         Track track = new Track();
+        track.setTitle(jsonQuery.getFieldMap().get("title"));
+        track.setDescription(jsonQuery.getFieldMap().get("description"));
+        track.setTrack_conference_id(Integer.parseInt(jsonQuery.getFieldMap().get("track_conference_id")));
         return track;
     }
 
     public Talk createTalkFromJson(){
         Talk talk = new Talk();
+        talk.setTitle(jsonQuery.getFieldMap().get("title"));
+        talk.setDescription(jsonQuery.getFieldMap().get("description"));
+        talk.setTalk_location(jsonQuery.getFieldMap().get("location"));
+        talk.setTimeslot(jsonQuery.getFieldMap().get("timeslot"));
+        talk.setTalk_track_id(Integer.parseInt(jsonQuery.getFieldMap().get("talk_track_id")));
         return talk;
     }
 }
