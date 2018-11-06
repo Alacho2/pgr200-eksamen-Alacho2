@@ -90,7 +90,7 @@ public class HttpServerParserRequest {
                     }
                 }
             }
-            if(request.getHeader("Content-Type") == "text/plain") {
+            if(request.getHeader("Content-Type").equals("text/plain")) {
                 parseParameters(body.toString());
             } else {
                 request.setBody(body.toString());
