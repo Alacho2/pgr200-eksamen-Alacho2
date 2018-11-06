@@ -149,7 +149,7 @@ public class HttpServerCapiTest {
     public void test61shouldParseJsonConferenceUpdate() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
                 "{\"mode\":\"update\",\"table\":\"conference\",\"fields\":[{\"name\":\"title\",\"value\":\"myNewTitle\"},{\"name\":\"description\"," +
-                        "\"value\":\"myNewDescription\"},{\"name\":\"id\",\"value\":\"1\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
+                        "\"value\":\"myNewDescription\"},{\"name\":\"id\",\"value\":1},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).contains("\"date_start\":\"10-10-2010\",\"date_end\":\"10-10-2018\",\"title\":\"myNewTitle\",\"description\":\"myNewDescription\"");
         assertThat(response.getStatusCode()).isEqualTo(200);
@@ -159,7 +159,7 @@ public class HttpServerCapiTest {
     public void test62shouldParseJsonTrackUpdate() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
                 "{\"mode\":\"update\",\"table\":\"track\",\"fields\":[{\"name\":\"title\",\"value\":\"My New Track 5\"},{\"name\":\"description\"," +
-                        "\"value\":\"myNewDescription\"},{\"name\":\"id\",\"value\":\"1\"},{\"name\":\"track_conference_id\",\"value\":\"1\"}]}");
+                        "\"value\":\"myNewDescription\"},{\"name\":\"id\",\"value\":1},{\"name\":\"track_conference_id\",\"value\":\"1\"}]}");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).contains("\"track_conference_id\":1,\"title\":\"My New Track 5\",\"description\":\"myNewDescription\"");
         assertThat(response.getStatusCode()).isEqualTo(200);
@@ -168,8 +168,8 @@ public class HttpServerCapiTest {
     @Test
     public void test63shouldParseJsonTalkUpdate() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
-                "{\"mode\":\"update\",\"table\":\"talk\",\"fields\":[{\"name\":\"title\",\"value\":\"New talk title\"},{\"name\":\" newdescription\"," +
-                        "\"value\":\"myDescription\"},{\"name\":\"id\",\"value\":\"1\"},{\"name\":\"talk_location\",\"value\":\"Room 5\"},{\"name\":\"talk_track_id\",\"value\":\"1\"}," +
+                "{\"mode\":\"update\",\"table\":\"talk\",\"fields\":[{\"name\":\"title\",\"value\":\"New talk title\"},{\"name\":\" description\"," +
+                        "\"value\":\"myNewDescription\"},{\"name\":\"id\",\"value\":1},{\"name\":\"talk_location\",\"value\":\"Room 5\"},{\"name\":\"talk_track_id\",\"value\":\"1\"}," +
                         "{\"name\":\"timeslot\",\"value\":\"14:00\"}]}");
         HttpClientResponse response = request.execute();
 

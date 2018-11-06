@@ -13,6 +13,10 @@ public class Conference extends TableObject {
 
   public Conference(){}
 
+  /*public void setId(int id){
+    this.id = id;
+  }*/
+
   public String getDate_start() {
     return date_start;
   }

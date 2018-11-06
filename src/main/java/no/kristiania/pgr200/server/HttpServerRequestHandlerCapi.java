@@ -79,6 +79,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
         switch(mode.toLowerCase()){
             case "insert":
                 dao.create(tableObject);
+                System.out.println(tableObject.toString());
                 response.setBody(gson.toJson(tableObject));
                 response.setStatusCode(200);
                 break;
@@ -87,6 +88,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
                 response.setStatusCode(200);
                 break;
             case "update":
+                System.out.println(tableObject.toString());
                 dao.updateOneById(tableObject);
                 response.setBody(gson.toJson(tableObject));
                 response.setStatusCode(200);
@@ -106,31 +108,53 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
         }
     }
 
-    public Conference createConferenceFromJson(){
+    private Conference createConferenceFromJson(){
         Conference conference = new Conference();
-        conference.setTitle(jsonQuery.getFieldMap().get("title"));
-        conference.setDescription(jsonQuery.getFieldMap().get("description"));
-        conference.setDate_start(jsonQuery.getFieldMap().get("time-start"));
-        conference.setDate_end(jsonQuery.getFieldMap().get("time-end"));
+        if(jsonQuery.getMode().contains("update")) {
+            conference.setId(Integer.parseInt(jsonQuery.getField("id")));
+            conference.setTitle(jsonQuery.getFieldMap().get("title"));
+            conference.setDescription(jsonQuery.getFieldMap().get("description"));
+            conference.setDate_start(jsonQuery.getFieldMap().get("time-start"));
+            conference.setDate_end(jsonQuery.getFieldMap().get("time-end"));
+        } else if(jsonQuery.getMode().contains("insert")){
+            conference.setTitle(jsonQuery.getFieldMap().get("title"));
+            conference.setDescription(jsonQuery.getFieldMap().get("description"));
+            conference.setDate_start(jsonQuery.getFieldMap().get("time-start"));
+            conference.setDate_end(jsonQuery.getFieldMap().get("time-end"));
+        }
         return conference;
     }
 
-    public Track createTrackFromJson(){
+    private Track createTrackFromJson(){
         Track track = new Track();
-        track.setTitle(jsonQuery.getFieldMap().get("title"));
-        track.setDescription(jsonQuery.getFieldMap().get("description"));
-        if(jsonQuery.getMode().contains("insert") || jsonQuery.getMode().contains("update")) {
+        if(jsonQuery.getMode().contains("update")){
+            track.setId(Integer.parseInt(jsonQuery.getField("id")));
+            track.setTitle(jsonQuery.getFieldMap().get("title"));
+            track.setDescription(jsonQuery.getFieldMap().get("description"));
             track.setTrack_conference_id(Integer.parseInt(jsonQuery.getFieldMap().get("track_conference_id")));
+            return track;
+        } else if(jsonQuery.getMode().contains("insert")){
+            track.setTitle(jsonQuery.getFieldMap().get("title"));
+            track.setDescription(jsonQuery.getFieldMap().get("description"));
+            track.setTrack_conference_id(Integer.parseInt(jsonQuery.getFieldMap().get("track_conference_id")));
+            return track;
         }
         return track;
     }
 
-    public Talk createTalkFromJson(){
+    private Talk createTalkFromJson(){
         Talk talk = new Talk();
-        talk.setTitle(jsonQuery.getFieldMap().get("title"));
-        talk.setDescription(jsonQuery.getFieldMap().get("description"));
-        talk.setTalk_location(jsonQuery.getFieldMap().get("talk_location"));
-        if(jsonQuery.getMode().contains("insert") || jsonQuery.getMode().contains("update")) {
+        if(jsonQuery.getMode().contains("update")) {
+            talk.setId(Integer.parseInt(jsonQuery.getField("id")));
+            talk.setTitle(jsonQuery.getFieldMap().get("title"));
+            talk.setDescription(jsonQuery.getFieldMap().get("description"));
+            talk.setTalk_location(jsonQuery.getFieldMap().get("talk_location"));
+            talk.setTimeslot(jsonQuery.getFieldMap().get("timeslot"));
+            talk.setTalk_track_id(Integer.parseInt(jsonQuery.getFieldMap().get("talk_track_id")));
+        } else if(jsonQuery.getMode().contains("insert")){
+            talk.setTitle(jsonQuery.getFieldMap().get("title"));
+            talk.setDescription(jsonQuery.getFieldMap().get("description"));
+            talk.setTalk_location(jsonQuery.getFieldMap().get("talk_location"));
             talk.setTimeslot(jsonQuery.getFieldMap().get("timeslot"));
             talk.setTalk_track_id(Integer.parseInt(jsonQuery.getFieldMap().get("talk_track_id")));
         }
