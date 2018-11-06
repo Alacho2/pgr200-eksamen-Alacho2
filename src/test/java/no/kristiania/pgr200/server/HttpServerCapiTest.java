@@ -128,16 +128,6 @@ public class HttpServerCapiTest {
 
     @Test
     @Ignore
-    public void test90shouldParseJsonConferenceDelete() throws IOException{
-        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST","application/json",
-                "{\"mode\":\"delete\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":5}]}");
-        HttpClientResponse response = request.execute();
-
-        assertThat(response.getStatusCode()).isEqualTo(200);
-    }
-
-    @Test
-    @Ignore
     public void test100shouldParseJsonReset() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/reset", "POST", "application/json",
                 "{\"mode\":\"reset\"}");
@@ -176,5 +166,35 @@ public class HttpServerCapiTest {
         assertThat(response.getBody()).isNotEmpty();
         assertThat(response.getStatusCode()).isEqualTo(200);
 
+    }
+
+
+    @Test
+    public void test91shouldParseJsonConferenceDelete() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST","application/json",
+                "{\"mode\":\"delete\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    @Ignore
+    public void test92shouldParseJsonTrackDelete() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST","application/json",
+                "{\"mode\":\"delete\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    @Ignore
+    public void test93shouldParseJsonTalkDelete() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST","application/json",
+                "{\"mode\":\"delete\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
     }
 }

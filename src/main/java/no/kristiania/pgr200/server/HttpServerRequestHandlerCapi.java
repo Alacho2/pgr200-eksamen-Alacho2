@@ -84,6 +84,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
                 response.setStatusCode(200);
                 break;
             case "delete":
+                dao.deleteOneById(Long.parseLong(jsonQuery.getField("id")));
                 response.setBody(gson.toJson("Object " + jsonQuery.getField("id") + " deleted."));
                 response.setStatusCode(200);
                 break;
