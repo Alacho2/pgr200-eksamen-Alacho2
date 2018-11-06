@@ -79,17 +79,15 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
         switch(mode.toLowerCase()){
             case "insert":
                 dao.create(tableObject);
-                System.out.println(tableObject.toString());
                 response.setBody(gson.toJson(tableObject));
                 response.setStatusCode(200);
                 break;
             case "delete":
                 dao.deleteOneById(Long.parseLong(jsonQuery.getField("id")));
-                response.setBody(gson.toJson("Object " + jsonQuery.getField("id") + " deleted."));
+                response.setBody(gson.toJson("Element with id " + jsonQuery.getField("id") + " successfully deleted."));
                 response.setStatusCode(200);
                 break;
             case "update":
-                System.out.println(tableObject.toString());
                 dao.updateOneById(tableObject);
                 response.setBody(gson.toJson(tableObject));
                 response.setStatusCode(200);
