@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class Main {
   private static HttpServerListener server;
 
-  public static void main(String[] args) throws IOException, URISyntaxException {
+  public static void main(String[] args) throws IOException {
     new DbConfig();
     ParseCommands.parseAllCommands();
     startServer();
