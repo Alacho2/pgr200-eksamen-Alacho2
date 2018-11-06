@@ -3,6 +3,7 @@ package no.kristiania.pgr200.cli;
 import com.google.gson.*;
 import no.kristiania.pgr200.server.HttpClientResponse;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -45,17 +46,27 @@ public class Response {
         }
     }
 
-    public static String toPrettyJson(String jsonString) {
+    private String toPrettyJson(String jsonString) {
         StringBuilder sb = new StringBuilder();
-        JsonArray jsonArray = new Gson().fromJson(jsonString, JsonArray.class);
-        for(JsonElement j : jsonArray){
-            Set<Map.Entry<String, JsonElement>> jset = j.getAsJsonObject().entrySet();
-            for(Map.Entry entry : jset) {
-                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+        Object o = new Gson().fromJson(jsonString,JsonElement.class);
+        if(o instanceof JsonArray){
+            JsonArray jsonArray = (JsonArray) o;
+            for(JsonElement j : jsonArray){
+                jsonObjectToString(sb, j.getAsJsonObject().entrySet());
             }
-            sb.append("\n");
+        }else if(o instanceof JsonObject){
+            JsonObject jsonObject = (JsonObject) o;
+            jsonObjectToString(sb, jsonObject.entrySet());
         }
 
+        return sb.toString();
+    }
+
+    private String jsonObjectToString(StringBuilder sb, Set<Map.Entry<String, JsonElement>> jsonSet){
+        for(Map.Entry entry : jsonSet) {
+            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+        }
+        sb.append("\n");
         return sb.toString();
     }
 
