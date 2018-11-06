@@ -49,6 +49,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
             return false;
         }
         response.setStatusCode(200);
+        response.setContentType("application/json");
         return true;
     }
 
@@ -86,7 +87,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
                 response.setStatusCode(200);
                 break;
             case "update":
-                dao.create(tableObject);
+                dao.updateOneById(tableObject);
                 response.setBody(gson.toJson(tableObject));
                 response.setStatusCode(200);
                 break;
