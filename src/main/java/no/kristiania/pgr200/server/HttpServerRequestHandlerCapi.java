@@ -91,7 +91,11 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
                 response.setStatusCode(200);
                 break;
             case "retrieve":
-                response.setBody(gson.toJson(dao.readOne(Long.parseLong(jsonQuery.getField("id")))));
+                if(jsonQuery.getFieldMap().containsKey("id")) {
+                    response.setBody(gson.toJson(dao.readOne(Long.parseLong(jsonQuery.getField("id")))));
+                } else{
+                    response.setBody(gson.toJson(dao.readAll()));
+                }
                 response.setStatusCode(200);
                 break;
             case "reset":

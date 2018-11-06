@@ -51,7 +51,7 @@ public class HttpServerCapiTest {
                 "{\"mode\":\"insert\",\"table\":\"track\",\"fields\":[{\"name\":\"title\",\"value\":\"Track 5\"},{\"name\":\"description\"," +
                         "\"value\":\"myDescription\"},{\"name\":\"track_conference_id\",\"value\":\"1\"}]}");
         HttpClientResponse response = request.execute();
-        assertThat(response.getBody().contains("\"track_conference_id\":7,\"title\":\"Track 5\",\"description\":\"myDescription\""));
+        assertThat(response.getBody()).contains("\"track_conference_id\":1,\"title\":\"Track 5\",\"description\":\"myDescription\"");
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
@@ -62,10 +62,24 @@ public class HttpServerCapiTest {
                         "\"value\":\"myDescription\"},{\"name\":\"talk_location\",\"value\":\"Room 5\"},{\"name\":\"talk_track_id\",\"value\":\"1\"}," +
                         "{\"name\":\"timeslot\",\"value\":\"14:00\"}]}");
         HttpClientResponse response = request.execute();
+
+        assertThat(response.getBody()).isNotEmpty();
+        assertThat(response.getStatusCode()).isEqualTo(200);
+
     }
 
     @Test
     public void test4shouldParseCapiPathConferenceRetrieve() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
+                "{\"mode\":\"retrieve\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        HttpClientResponse response = request.execute();
+
+        assertThat(response.getBody()).contains("\"date_start\":\"2010-10-10\",\"date_end\":\"2018-10-10\",\"title\":\"myTitle\",\"description\":\"myDescription\"");
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    public void test4shouldParseCapiPathConferenceRetrieveAll() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
                 "{\"mode\":\"retrieve\",\"table\":\"conference\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
         HttpClientResponse response = request.execute();
