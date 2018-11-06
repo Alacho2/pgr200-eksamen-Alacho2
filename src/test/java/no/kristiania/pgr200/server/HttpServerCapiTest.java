@@ -59,7 +59,8 @@ public class HttpServerCapiTest {
     public void test3shouldParseJsonTalkInsert() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST", "application/json",
                 "{\"mode\":\"insert\",\"table\":\"talk\",\"fields\":[{\"name\":\"title\",\"value\":\"talk title\"},{\"name\":\"description\"," +
-                        "\"value\":\"myDescription\"},{\"name\":\"time-start\",\"value\":\"10-10-2010\"},{\"name\":\"time-end\",\"value\":\"10-10-2018\"}]}");
+                        "\"value\":\"myDescription\"},{\"name\":\"talk_location\",\"value\":\"Room 5\"},{\"name\":\"talk_track_id\",\"value\":\"1\"}," +
+                        "{\"name\":\"timeslot\",\"value\":\"14:00\"}]}");
         HttpClientResponse response = request.execute();
     }
 
@@ -84,17 +85,16 @@ public class HttpServerCapiTest {
     }
 
     @Test
-    @Ignore
     public void test6shouldParseCapiPathTalkRetrieve() throws IOException {
-        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "POST","application/json",
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi", "POST","application/json",
                 "{\"mode\":\"retrieve\",\"table\":\"talk\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
         HttpClientResponse response = request.execute();
 
+        assertThat(response.getBody()).contains("talk_track_id\":1,\"timeslot\":\"02:00:00 PM\",\"title\":\"talk title\",\"description\":\"myDescription\"");
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
     @Test
-    @Ignore
     public void test7shouldFailParseCapiPathTalkRetrieve() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "POST", "application/json",
                 "");
@@ -104,7 +104,6 @@ public class HttpServerCapiTest {
     }
 
     @Test
-    @Ignore
     public void test8shouldFailCapiInvalidTable() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "POST","application/json",
                 "{\"mode\":\"retrieve\",\"table\":\"failtable\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
