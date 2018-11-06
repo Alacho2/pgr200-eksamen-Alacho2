@@ -124,7 +124,7 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
         Talk talk = new Talk();
         talk.setTitle(jsonQuery.getFieldMap().get("title"));
         talk.setDescription(jsonQuery.getFieldMap().get("description"));
-        talk.setTalk_location(jsonQuery.getFieldMap().get("location"));
+        talk.setTalk_location(jsonQuery.getFieldMap().get("talk_location"));
         if(jsonQuery.getMode().contains("insert") || jsonQuery.getMode().contains("update")) {
             talk.setTimeslot(jsonQuery.getFieldMap().get("timeslot"));
             talk.setTalk_track_id(Integer.parseInt(jsonQuery.getFieldMap().get("talk_track_id")));
