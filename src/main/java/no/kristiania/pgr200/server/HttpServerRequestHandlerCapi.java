@@ -114,7 +114,9 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
         Track track = new Track();
         track.setTitle(jsonQuery.getFieldMap().get("title"));
         track.setDescription(jsonQuery.getFieldMap().get("description"));
-        track.setTrack_conference_id(Integer.parseInt(jsonQuery.getFieldMap().get("track_conference_id")));
+        if(jsonQuery.getMode().contains("insert") || jsonQuery.getMode().contains("update")) {
+            track.setTrack_conference_id(Integer.parseInt(jsonQuery.getFieldMap().get("track_conference_id")));
+        }
         return track;
     }
 
@@ -124,7 +126,9 @@ public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends 
         talk.setDescription(jsonQuery.getFieldMap().get("description"));
         talk.setTalk_location(jsonQuery.getFieldMap().get("location"));
         talk.setTimeslot(jsonQuery.getFieldMap().get("timeslot"));
-        talk.setTalk_track_id(Integer.parseInt(jsonQuery.getFieldMap().get("talk_track_id")));
+        if(jsonQuery.getMode().contains("insert") || jsonQuery.getMode().contains("update")) {
+            talk.setTalk_track_id(Integer.parseInt(jsonQuery.getFieldMap().get("talk_track_id")));
+        }
         return talk;
     }
 }
