@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class DecodeArgs {
     Scanner sc;
     StringBuilder sb;
+    String argMode, hostName;
+    int port;
 
     public DecodeArgs() {
         sc = new Scanner(System.in);
@@ -27,15 +29,18 @@ public class DecodeArgs {
     }
 
     public String decode(String[] args, int port, String hostName) throws IOException {
-        switch(args[0].toUpperCase()){
+        this.argMode = args[0].toUpperCase();
+        this.port = port;
+        this.hostName = hostName;
+        switch(this.argMode){
             case "START":
                 OutputHandler.printWelcome();
-                return new InteractiveClient(sc, port, hostName).start();
+                return handleResult(new InteractiveClient(this.sc, this.port, this.hostName).start());
             case "LIST":
-                if(args.length>1) return handleListCommand(args, port, hostName);
+                if(args.length>1) return handleResult(handleListCommand(args));
                 break;
             case "RESET":
-                return new RequestHandler("RESET", "RESET").execute(port, hostName);
+                return handleResult(new RequestHandler("RESET", "RESET").execute(this.port, this.hostName));
             case "RICKROLL":
                 if(Desktop.isDesktopSupported()){
                     try {
@@ -51,18 +56,35 @@ public class DecodeArgs {
         return sb.toString();
     }
 
-    private String handleListCommand(String[] args, int port, String hostName) throws IOException {
+    String handleResult(String result) throws IOException {
+        OutputHandler.printResult("RESULT", result); // The Database Response Printed out to the user
+        if(this.argMode.equals("START")){
+            if(!exitCheck()){
+                OutputHandler.printInfo("NOT EXITING");
+                return decode(new String[]{"START"}, this.port, this.hostName);
+            }
+        }
+        return "EXIT COMPLETE";
+    }
+
+    private boolean exitCheck() {
+        OutputHandler.printCriticalQuestion("Do you want to make another request?(Y/N)");
+        String result = sc.nextLine();
+        return result.toUpperCase().contains("N");
+    }
+
+    private String handleListCommand(String[] args) throws IOException {
         Number id = null;
         if(args.length>2){
             id = Integer.parseInt(args[2]);
         }
         switch (args[1].toUpperCase()) {
             case "CONFERENCE":
-                return new RequestHandler("CONFERENCES", "RETRIEVE", id).execute(port, hostName);
+                return new RequestHandler("CONFERENCES", "RETRIEVE", id).execute(this.port, this.hostName);
             case "TRACK":
-                return new RequestHandler("TRACKS", "RETRIEVE", id).execute(port, hostName);
+                return new RequestHandler("TRACKS", "RETRIEVE", id).execute(this.port, this.hostName);
             case "TALK":
-                return new RequestHandler("TALK", "RETRIEVE", id).execute(port, hostName);
+                return new RequestHandler("TALK", "RETRIEVE", id).execute(this.port, this.hostName);
         }
         return null;
     }

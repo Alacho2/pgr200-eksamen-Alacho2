@@ -3,7 +3,11 @@ package no.kristiania.pgr200.cli;
 import com.google.gson.*;
 import no.kristiania.pgr200.server.HttpClientResponse;
 
-import java.util.Objects;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+
 
 public class Response {
     private int statusCode;
@@ -42,12 +46,17 @@ public class Response {
     }
 
     public static String toPrettyJson(String jsonString) {
+        StringBuilder sb = new StringBuilder();
         JsonArray jsonArray = new Gson().fromJson(jsonString, JsonArray.class);
         for(JsonElement j : jsonArray){
-            System.out.println(j);
+            Set<Map.Entry<String, JsonElement>> jset = j.getAsJsonObject().entrySet();
+            for(Map.Entry entry : jset) {
+                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+            }
+            sb.append("\n");
         }
 
-        return "";
+        return sb.toString();
     }
 
     public String getContent_type() {
