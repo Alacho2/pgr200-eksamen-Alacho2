@@ -1,9 +1,6 @@
 package no.kristiania.pgr200.cli;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import no.kristiania.pgr200.server.HttpClientResponse;
 
 import java.util.Objects;
@@ -45,13 +42,12 @@ public class Response {
     }
 
     public static String toPrettyJson(String jsonString) {
-        JsonParser parser = new JsonParser();
-        JsonObject json = parser.parse(jsonString).getAsJsonObject();
+        JsonArray jsonArray = new Gson().fromJson(jsonString, JsonArray.class);
+        for(JsonElement j : jsonArray){
+            System.out.println(j);
+        }
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String prettyJson = gson.toJson(json);
-
-        return prettyJson;
+        return "";
     }
 
     public String getContent_type() {
