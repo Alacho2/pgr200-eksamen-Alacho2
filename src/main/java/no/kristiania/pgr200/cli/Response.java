@@ -11,7 +11,7 @@ public class Response {
     private String body, content_type;
 
     public Response(HttpClientResponse httpClientResponse) {
-        setContent_type(httpClientResponse.getHeader("Content-type"));
+        setContent_type(httpClientResponse.getHeader("Content-Type"));
         setStatusCode(httpClientResponse.getStatusCode());
         setBody(httpClientResponse.getBody());
     }
