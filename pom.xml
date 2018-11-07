@@ -9,6 +9,13 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <modules>
+    <module>common</module>
+    <module>client</module>
+    <module>db</module>
+    <module>server</module>
+  </modules>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -58,9 +65,11 @@
       <version>42.2.5</version>
     </dependency>
   </dependencies>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
     <finalName>pgr200-innlevering-starter-${project.version}</finalName>
     <plugins>
       <plugin>
