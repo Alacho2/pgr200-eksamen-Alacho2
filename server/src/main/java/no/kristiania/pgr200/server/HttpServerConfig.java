@@ -15,7 +15,7 @@ public class HttpServerConfig {
 
     static {
         String line;
-        String configFile = "server.config";
+        String configFile = "../server.config";
         try {
             BufferedReader br = new BufferedReader(new FileReader(configFile));
             while ((line = br.readLine()) != null)
