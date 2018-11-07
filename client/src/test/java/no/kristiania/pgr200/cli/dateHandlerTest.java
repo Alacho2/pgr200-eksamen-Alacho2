@@ -27,6 +27,15 @@ public class dateHandlerTest {
     }
 
     @Test
+    public void testInvalidTime(){
+        String invalidDate = "40402005";
+        assertThatThrownBy(() -> {
+            LocalDate.parse(invalidDate, DateHandler.TimeFormatter);
+        }).isInstanceOf(DateTimeParseException.class)
+                .hasMessageContaining("");
+    }
+
+    @Test
     public void testDateToEpoch(){
         String[] dates = {"25-06-2009", "06-06-2006", "25-10-2018", "16-02-2019"};
         assertThat(DateHandler.convertDateToEpoch(dates[0])).isEqualTo(1245888000000L);

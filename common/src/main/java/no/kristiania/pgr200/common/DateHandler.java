@@ -12,16 +12,17 @@ import java.util.TimeZone;
 
 public class DateHandler {
 
-  public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-  public static final DateTimeFormatter TimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+  private static final String DATE_PATTERN = "dd-MM-yyyy";
+  private static final String TIME_PATTERN = "HH:mm";
+  public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+  public static final DateTimeFormatter TimeFormatter = DateTimeFormatter.ofPattern(TIME_PATTERN);
 
   public DateHandler(){ }
 
   public static long convertDateToEpoch(String dateToConvert){
     //Passe inn en dato, få den konvertert til epoch long og returner longen
     long finalTime = 0;
-    String pattern = "dd-MM-yyyy";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
 
     simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC+1"));
     try {
@@ -34,11 +35,6 @@ public class DateHandler {
   }
 
   public static Time parseTime(String value){
-    return Time.valueOf(LocalTime.parse(value, DateTimeFormatter.ofPattern("HH:mm")));
-  }
-
-  public static long convertDateToEpoch(int year, int month, int day){
-    LocalDate localDate = LocalDate.of(year, month, day);
-    return localDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
+    return Time.valueOf(LocalTime.parse(value, DateTimeFormatter.ofPattern(TIME_PATTERN)));
   }
 }
