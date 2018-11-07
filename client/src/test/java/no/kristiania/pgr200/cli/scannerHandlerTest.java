@@ -2,12 +2,14 @@ package no.kristiania.pgr200.cli;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class scannerHandlerTest {
 
     @Before
-    public void insertAllCommands(){
+    public void insertAllCommands() throws FileNotFoundException {
         ParseCommands.parseAllCommands();
     }
 
