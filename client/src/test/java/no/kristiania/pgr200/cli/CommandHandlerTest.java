@@ -1,15 +1,19 @@
 package no.kristiania.pgr200.cli;
 
+import no.kristiania.pgr200.common.DateHandler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CommandHandlerTest extends CommandHandler {
 
@@ -17,81 +21,101 @@ public class CommandHandlerTest extends CommandHandler {
     public static void initCommands() throws FileNotFoundException {
         ParseCommands.parseAllCommands();
     }
-/**
+
     @Test
     public void testInsertConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandInsert("conference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
-        assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
-        assertThat((String)interactiveInsert.getCommandValue("time-start")).isEqualTo("10-09-2005");
-        assertThat((String)interactiveInsert.getCommandValue("time-end")).isEqualTo("11-09-2005");
+        List<Command> commands = exampleCommandInsert("conference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        commands.stream().filter(c->c.getTable().toUpperCase().equals("CONFERENCE")).forEach(c->{
+            assertThat(c.getName()).isNotNull();
+            assertThat(c.getDescription()).isNotNull();
+            assertThat(c.getTable().toUpperCase()).isEqualTo("CONFERENCE");
+            assertThat(c.getMode().toUpperCase()).isEqualTo("INSERT");
+            assertThat(c.getType()).isNotNull();
+            assertThat(c.getValue()).isNotNull();
+            assertThat(c.getSubQuestionName()).isNotNull();
+            assertThat(c.getSubQuestionValue()).isNotNull();
+        });
+
     }
 
     @Test
     public void testInsertTrackCommands(){
-        CommandHandler interactiveInsert = exampleCommandInsert("track\r\ntitle\r\ndescription\r\n1");
-        assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
-        assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
-        assertThat((long)interactiveInsert.getCommandValue("track_conference_id")).isEqualTo(1);
+        List<Command> commands = exampleCommandInsert("track\r\ntitle\r\ndescription\r\n1");
+        commands.stream().filter(c->c.getTable().toUpperCase().equals("TRACK")).forEach(c->{
+            assertThat(c.getName()).isNotNull();
+            assertThat(c.getDescription()).isNotNull();
+            assertThat(c.getTable().toUpperCase()).isEqualTo("TRACK");
+            assertThat(c.getMode().toUpperCase()).isEqualTo("INSERT");
+            assertThat(c.getType()).isNotNull();
+            assertThat(c.getValue()).isNotNull();
+            assertThat(c.getSubQuestionName()).isNotNull();
+            assertThat(c.getSubQuestionValue()).isNotNull();
+        });
     }
 
     @Test
     public void testInsertTalkCommands(){
-        CommandHandler interactiveInsert = exampleCommandInsert("talk\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
-        assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
-        assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
-        assertThat((String)interactiveInsert.getCommandValue("talk_location")).isEqualTo("location");
-        assertThat((String)interactiveInsert.getCommandValue("timeslot")).isEqualTo("10:10");
-        assertThat((long)interactiveInsert.getCommandValue("talk_track_id")).isEqualTo(1);
-    }
-*/
-    @Test
-    public void shouldInsertConference(){
-        CommandHandler result = exampleCommandInsert("conference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat(result.getAllCommands().size()>0);
-    }
-
-    @Test
-    public void shouldInsertTrack(){
-        CommandHandler result = exampleCommandInsert("track\r\ntitle\r\ndescription\r\n1");
-        assertThat(result.getAllCommands().size()>0);
-    }
-
-    @Test
-    public void shouldInsertTalk(){
-        CommandHandler result = exampleCommandInsert("talk\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
-        assertThat(result.getAllCommands().size()>0);
+        List<Command> commands = exampleCommandInsert("talk\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
+        commands.stream().filter(c->c.getTable().toUpperCase().equals("TALK")).forEach(c->{
+            assertThat(c.getName()).isNotNull();
+            assertThat(c.getDescription()).isNotNull();
+            assertThat(c.getTable().toUpperCase()).isEqualTo("TALK");
+            assertThat(c.getMode().toUpperCase()).isEqualTo("INSERT");
+            assertThat(c.getType()).isNotNull();
+            assertThat(c.getValue()).isNotNull();
+            assertThat(c.getSubQuestionName()).isNotNull();
+            assertThat(c.getSubQuestionValue()).isNotNull();
+        });
     }
 
     @Test
     public void testRetrieveConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandRetrieve("conference\r\ny\r\ny\r\n");
-        assertThat((String)interactiveInsert.getCommandValue("title")).isNull();
-        assertThat((String)interactiveInsert.getCommandValue("description")).isNull();
-        assertThat((String)interactiveInsert.getCommandValue("time-start")).isNull();
-        assertThat((String)interactiveInsert.getCommandValue("time-end")).isNull();
+        List<Command> commands = exampleCommandRetrieve("conference\r\ny\r\ny\r\n");
+        commands.stream().filter(c->c.getTable().toUpperCase().equals("CONFERENCE")).forEach(c->{
+            assertThat(c.getName()).isNotNull();
+            assertThat(c.getDescription()).isNotNull();
+            assertThat(c.getTable().toUpperCase()).isEqualTo("CONFERENCE");
+            assertThat(c.getMode().toUpperCase()).isEqualTo("RETRIEVE");
+            assertThat(c.getType()).isNotNull();
+            assertThat(c.getSubQuestionName()).isNotNull();
+            assertThat(c.getSubQuestionValue()).isNotNull();
+        });
     }
 
-    /*
+
     @Test
     public void testUpdateConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandUpdate("conference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat((long)interactiveInsert.getCommandValue("id")).isEqualTo(1);
-        assertThat((String)interactiveInsert.getCommandValue("title")).isEqualTo("title");
-        assertThat((String)interactiveInsert.getCommandValue("description")).isEqualTo("description");
-        assertThat((String)interactiveInsert.getCommandValue("time-start")).isEqualTo("10-09-2005");
-        assertThat((String)interactiveInsert.getCommandValue("time-end")).isEqualTo("11-09-2005");
+        List<Command> commands = exampleCommandUpdate("conference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
+        commands.stream().filter(c->c.getTable().toUpperCase().equals("CONFERENCE")).forEach(c->{
+            assertThat(c.getName()).isNotNull();
+            assertThat(c.getDescription()).isNotNull();
+            assertThat(c.getTable().toUpperCase()).isEqualTo("CONFERENCE");
+            assertThat(c.getMode().toUpperCase()).isEqualTo("UPDATE");
+            assertThat(c.getType()).isNotNull();
+            assertThat(c.getValue()).isNotNull();
+            assertThat(c.getSubQuestionName()).isNotNull();
+            assertThat(c.getSubQuestionValue()).isNotNull();
+        });
     }
 
     @Test
     public void testDeleteConferenceCommands(){
-        CommandHandler interactiveInsert = exampleCommandDelete("conference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        assertThat((long)interactiveInsert.getCommandValue("id")).isEqualTo(1);
-    }*/
+        List<Command> commands = exampleCommandDelete("conference\r\n1");
+        commands.stream().filter(c->c.getTable().toUpperCase().equals("CONFERENCE")).forEach(c->{
+            assertThat(c.getName()).isNotNull();
+            assertThat(c.getDescription()).isNotNull();
+            assertThat(c.getTable().toUpperCase()).isEqualTo("CONFERENCE");
+            assertThat(c.getMode().toUpperCase()).isEqualTo("DELETE");
+            assertThat(c.getType()).isNotNull();
+            assertThat(c.getValue()).isNotNull();
+            assertThat(c.getSubQuestionName()).isNotNull();
+            assertThat(c.getSubQuestionValue()).isNotNull();
+        });
+    }
 
     @Test
     public void testHelpCommands(){
-        CommandHandler interactiveHelp = exampleCommandHelp("");
+        CommandHandler interactiveHelp = exampleCommandHelp();
         List<Command> commands = interactiveHelp.readAllCommandsByTable("help", "help");
         assertThat(commands.size()>0);
         for(Command c :  commands){
@@ -108,29 +132,24 @@ public class CommandHandlerTest extends CommandHandler {
         assertThat(interactiveHelp.readHelpCommands("help", "help")).isNotNull();
     }
 
+
     private Scanner writeToScanner(String message){
-        InputStream in = new ByteArrayInputStream(message.getBytes());
-        return new Scanner(in);
+        return new Scanner( new ByteArrayInputStream(message.getBytes()));
     }
 
-    private CommandHandler exampleCommandInsert(String message){
-        Scanner sc = writeToScanner(message);
-        return new InteractiveInsert(sc);
+    private List<Command> exampleCommandInsert(String message){
+        return new InteractiveInsert(writeToScanner(message)).start("INSERT");
     }
-    private CommandHandler exampleCommandRetrieve(String message){
-        Scanner sc = writeToScanner(message);
-        return new InteractiveRetrieve(sc);
+    private List<Command> exampleCommandRetrieve(String message){
+        return new InteractiveRetrieve(writeToScanner(message)).start("RETRIEVE");
     }
-    private CommandHandler exampleCommandUpdate(String message){
-        Scanner sc = writeToScanner(message);
-        return new InteractiveUpdate(sc);
+    private List<Command> exampleCommandUpdate(String message){
+        return new InteractiveUpdate(writeToScanner(message)).start("UPDATE");
     }
-    private CommandHandler exampleCommandDelete(String message){
-        Scanner sc = writeToScanner(message);
-        return new InteractiveDelete(sc);
+    private List<Command>  exampleCommandDelete(String message){
+        return new InteractiveDelete(writeToScanner(message)).start("DELETE");
     }
-    private CommandHandler exampleCommandHelp(String message){
-        Scanner sc = writeToScanner(message);
+    private CommandHandler exampleCommandHelp(){
         return new InteractiveHelp();
     }
 }

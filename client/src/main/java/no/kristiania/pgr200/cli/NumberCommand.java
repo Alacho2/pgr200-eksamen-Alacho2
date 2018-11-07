@@ -5,8 +5,6 @@ public class NumberCommand extends Command<Number> {
         super(name, description, type, mode, table,subQuestionValue, subQuestionName);
     }
 
-    public NumberCommand() {
-    }
 
     @Override
     public Number getValue() {

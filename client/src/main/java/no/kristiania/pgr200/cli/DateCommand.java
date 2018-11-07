@@ -10,9 +10,6 @@ public class DateCommand extends Command<String> {
         super(name, description, type, mode, table, subQuestionValue, subQuestionName);
     }
 
-    public DateCommand() {
-    }
-
     @Override
     public String getValue() {
         return super.getValue();

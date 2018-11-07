@@ -8,9 +8,6 @@ public class BasicCommand<T> extends Command<T> {
         super(name, mode, table);
     }
 
-    public BasicCommand() {
-    }
-
 
     @Override
     public T getValue() {

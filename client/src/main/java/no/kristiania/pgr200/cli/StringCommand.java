@@ -5,8 +5,6 @@ public class StringCommand extends Command<String> {
         super(name, description, type, mode, table,subQuestionValue, subQuestionName);
     }
 
-    public StringCommand() {
-    }
 
     @Override
     public String getValue() {

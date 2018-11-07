@@ -7,10 +7,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class InteractiveUpdate extends CommandHandler {
-    public InteractiveUpdate() {
-        start("update");
-    }
-
     public InteractiveUpdate(Scanner sc) {
         super(sc);
     }

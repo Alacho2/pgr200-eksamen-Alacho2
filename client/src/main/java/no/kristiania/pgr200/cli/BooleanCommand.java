@@ -6,8 +6,6 @@ public class BooleanCommand extends Command<String> {
         super(name, description, type, mode, table,subQuestionValue, subQuestionName);
     }
 
-    public BooleanCommand() {
-    }
 
     @Override
     public String getValue() {
@@ -16,10 +14,10 @@ public class BooleanCommand extends Command<String> {
 
     @Override
     public Command setValue(String value) {
-        String result = "";
-        if(value.toUpperCase().contains("Y")||value.toUpperCase().contains("T")){
+        String result = handleValue(value);
+        if(result.toUpperCase().contains("Y")||result.toUpperCase().contains("T")){
             result = "TRUE";
-        }else if(value.toUpperCase().contains("N")||value.toUpperCase().contains("F")){
+        }else if(result.toUpperCase().contains("N")||result.toUpperCase().contains("F")){
             result = "FALSE";
         }
         return super.setValue(result);

@@ -118,9 +118,9 @@ public class Request<T extends Command> {
                 return "PUT";
             case "DELETE":
                 return "DELETE";
-
+            default:
+                return "POST";
         }
-        return null;
     }
 
     /**

@@ -11,9 +11,6 @@ public class TimeCommand extends Command<String> {
         super(name, description, type, mode, table, subQuestionValue, subQuestionName);
     }
 
-    public TimeCommand() {
-    }
-
     @Override
     public String getValue() {
         return super.getValue();

@@ -7,11 +7,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class InteractiveRetrieve<T> extends CommandHandler {
-
-    public InteractiveRetrieve() {
-        start("retrieve");
-    }
-
     public InteractiveRetrieve(Scanner sc) {
         super(sc);
     }

@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InteractiveClientTest {
 
@@ -63,6 +64,7 @@ public class InteractiveClientTest {
         String result = exampleCommand("-d\r\nconference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
         assertThat(result).isNotNull();
     }
+
 
 
     private Scanner writeToScanner(String message){

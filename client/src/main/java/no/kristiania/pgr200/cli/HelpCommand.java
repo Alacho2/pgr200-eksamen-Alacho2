@@ -5,8 +5,6 @@ public class HelpCommand extends Command<String> {
         super(name, description, type, mode, table,subQuestionValue, subQuestionName);
     }
 
-    public HelpCommand() {
-    }
 
     @Override
     public String getValue() {

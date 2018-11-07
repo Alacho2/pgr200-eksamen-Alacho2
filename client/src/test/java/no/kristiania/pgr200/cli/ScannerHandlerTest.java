@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class scannerHandlerTest {
+public class ScannerHandlerTest {
 
     @Before
     public void insertAllCommands() throws FileNotFoundException {

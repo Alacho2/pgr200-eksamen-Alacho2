@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class InteractiveClient {
     Scanner sc;
-    int port = -1;
-    String hostName = "";
+    int port;
+    String hostName;
 
 
     public InteractiveClient(int port, String hostName){

@@ -47,6 +47,18 @@ public class RequestHandlerTest {
         assertThat(r.getMethod()).isEqualTo("GET");
         assertThat(r.getMode()).isEqualTo("retrieve");
         assertThat(r.getPort()).isEqualTo(0);
+    }
 
+    @Test
+    public void shouldParseBasicCommand(){
+        RequestHandler requestHandler = new RequestHandler("RESET","RESET");
+        Request r = requestHandler.mapToRequest(0, "localhost");
+        System.out.println(r.toString());
+        assertThat(r.getHostName()).isEqualTo("localhost");
+        assertThat(r.getTable()).isEqualTo("RESET");
+        assertThat(r.getMethod()).isEqualTo("POST");
+        assertThat(r.getMode()).isEqualTo("RESET");
+        assertThat(r.getPath()).isEqualTo("/capi/RESET");
+        assertThat(r.getPort()).isEqualTo(0);
     }
 }
