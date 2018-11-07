@@ -16,11 +16,11 @@ public class Request<T extends Command> {
         setBody(body);
         setId((Number) getCommandValue("id"));
         for(T t : this.body){
-            setMethod(t.getMode().toUpperCase().equals("RETRIEVE") ? "GET" : "POST");
+            setMethod(t.getMode());
             setMode(t.getMode());
             setTable(t.getTable());
         }
-        setPath();
+        createPath();
     }
 
     public Request(String hostName, int port, T body) {
@@ -29,11 +29,11 @@ public class Request<T extends Command> {
         setBody(body);
         setId((Number) getCommandValue("id"));
         for(T t : this.body){
-            setMethod(t.getMode().toUpperCase().equals("RETRIEVE") ? "GET" : "POST");
+            setMethod(t.getMode());
             setMode(t.getMode());
             setTable(t.getTable());
         }
-        setPath();
+        createPath();
     }
 
     public String getHostName() {
@@ -57,17 +57,11 @@ public class Request<T extends Command> {
     }
 
     private void setMethod(String method) {
-        this.method = method;
+        this.method = mapToHttpMethod(method);
     }
 
     public String getPath() {
         return path;
-    }
-
-    public void setPath(){
-        String path = "/capi/"+getTable();
-        //if(getId() != null) path += "/"+id;
-        this.path = path;
     }
 
     public String getMode() {
@@ -106,6 +100,27 @@ public class Request<T extends Command> {
         List<T> list = new ArrayList<>();
         list.add(body);
         this.body = list;
+    }
+
+    private void createPath(){
+        String path = "/capi/"+getTable();
+        if(getId() != null && !getMethod().equals("POST")) path += "/"+id;
+        this.path = path;
+    }
+
+    private String mapToHttpMethod(String method){
+        switch (method.toUpperCase()){
+            case "RETRIEVE":
+                return "GET";
+            case "INSERT":
+                return "POST";
+            case "UPDATE":
+                return "PUT";
+            case "DELETE":
+                return "DELETE";
+
+        }
+        return null;
     }
 
     /**

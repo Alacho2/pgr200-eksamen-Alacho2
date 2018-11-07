@@ -1,16 +1,16 @@
 package no.kristiania.pgr200.db;
 
-public abstract class TableObject {
+public abstract class Entity {
   String title, description;
   int id;
 
-  TableObject(String title, String description, int id) {
+  Entity(String title, String description, int id) {
     this.title = title;
     this.description = description;
     this.id = id;
   }
 
-  TableObject() {
+  Entity() {
   }
 
   public String getTitle() {

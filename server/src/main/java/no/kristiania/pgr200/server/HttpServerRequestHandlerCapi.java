@@ -9,7 +9,7 @@ import java.security.InvalidParameterException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends TableObject> implements HttpServerRequestHandler {
+public class HttpServerRequestHandlerCapi<T extends DataAccessObject, K extends Entity> implements HttpServerRequestHandler {
 
     private String  tableName, operationName;
     private AbstractDao dao;

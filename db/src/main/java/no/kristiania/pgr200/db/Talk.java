@@ -1,12 +1,11 @@
 package no.kristiania.pgr200.db;
 
-
 import no.kristiania.pgr200.common.DateHandler;
 
 import java.sql.Time;
 import java.util.Objects;
 
-public class Talk extends TableObject {
+public class Talk extends Entity {
 
   private String talk_location;
   private int talk_track_id;

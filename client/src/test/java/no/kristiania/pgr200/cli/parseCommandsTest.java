@@ -3,6 +3,7 @@ package no.kristiania.pgr200.cli;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class parseCommandsTest {
 
     @BeforeClass
-    public static void initCommands(){
+    public static void initCommands() throws FileNotFoundException {
+        //ParseCommands.commandFilePath = "client/src/test/resources/commands.json";
         ParseCommands.parseAllCommands();
     }
 

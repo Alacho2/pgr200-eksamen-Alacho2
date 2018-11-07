@@ -2,13 +2,14 @@ package no.kristiania.pgr200.cli;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class RequestBodyHandler<T extends Command> {
+public class RequestBodyHandler<K,T extends Command> {
     List<T> body;
-    List<RequestBodyField> fields;
+    HashMap<String, K> fields;
     String table, mode;
     boolean isID;
 
@@ -22,15 +23,15 @@ public class RequestBodyHandler<T extends Command> {
     }
 
     public String getRequestBody(){
-        return getJson(new RequestBodyObject(mode,table, fields));
+        return getJson(fields);
     }
 
 
     private void addAllFields(){
-        fields = new ArrayList<>();
+        fields = new HashMap<>();
         for(T command : body){
             checkForElement(command);
-            if(command.getTable().toUpperCase().equals(this.table.toUpperCase())) addNewField(command.getName(), command.getValue());
+            if(command.getTable().toUpperCase().equals(this.table.toUpperCase())) addNewField(command.getName(), (K) command.getValue());
         }
     }
 
@@ -47,18 +48,18 @@ public class RequestBodyHandler<T extends Command> {
     }
 
 
-    private <V> void addNewField(String name, V value){
+    private void addNewField(String name, K value){
         if(name == null || value == null) return;
         if(isRetrieve() && !isID) return; // Do not want to append to field array when there is no id, want all entries by default
-        fields.add(new RequestBodyField(name, value));
+        fields.put(name, value);
     }
 
 
 
 
 
-    private String getJson(RequestBodyObject rbc) {
+    private String getJson(HashMap<String,K> list) {
         Gson gson = new GsonBuilder().create();
-        return gson.toJson(rbc);
+        return gson.toJson(list);
     }
 }

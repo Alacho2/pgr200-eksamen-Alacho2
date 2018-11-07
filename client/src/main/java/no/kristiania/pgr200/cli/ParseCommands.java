@@ -2,16 +2,14 @@ package no.kristiania.pgr200.cli;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParseCommands {
 
     private static List<Command> commands;
+    public static String commandFilePath = "commands.json"; //default path for commands.json
 
     /**
      * @return List<Command> with commands that matches the param table and mode value
@@ -85,18 +83,16 @@ public class ParseCommands {
     /**
      * Reads all the commands from file (JSON)
      */
-    public static void parseAllCommands(){
+    public static void parseAllCommands() throws FileNotFoundException{
         List<Command> allCommands = new ArrayList<>();
         Gson gson = new Gson();
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("commands.json"));
+            br = new BufferedReader(new InputStreamReader(ParseCommands.class.getResourceAsStream("/commands.json")));
             Command[] allReadCommands = gson.fromJson(br, Command[].class);
             for(Command c : allReadCommands){
                 addNewCommand(allCommands, c.getName(), c.getDescription(), c.getType(), c.getMode(), c.getTable(), c.getSubQuestionValue(), c.getSubQuestionName());
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } finally {
             if (br != null) {
                 try {

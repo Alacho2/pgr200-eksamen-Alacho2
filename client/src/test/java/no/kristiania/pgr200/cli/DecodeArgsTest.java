@@ -41,9 +41,9 @@ public class DecodeArgsTest {
 
     @Test
     public void testInsertCommands() throws IOException {
-        DecodeArgs da1 = exampleCommand("-i\r\nconference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005");
-        DecodeArgs da2 = exampleCommand("-i\r\ntrack\r\ntitle\r\ndescription\r\n1");
-        DecodeArgs da3 = exampleCommand("-i\r\ntalk\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10");
+        DecodeArgs da1 = exampleCommand("-i\r\nconference\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005\r\nn");
+        DecodeArgs da2 = exampleCommand("-i\r\ntrack\r\ntitle\r\ndescription\r\n1\r\nn");
+        DecodeArgs da3 = exampleCommand("-i\r\ntalk\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10\r\nn");
         assertThat(da1.decode(new String[]{"START"}, port, host)).isNotNull();
         assertThat(da2.decode(new String[]{"START"}, port, host)).isNotNull();
         assertThat(da3.decode(new String[]{"START"}, port, host)).isNotNull();
@@ -52,61 +52,61 @@ public class DecodeArgsTest {
 
     @Test
     public void testRetrieveConferenceCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-r\r\nconference\r\ny\r\ny");
+        DecodeArgs da = exampleCommand("-r\r\nconference\r\ny\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testRetrieveTrackCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-r\r\ntrack\r\ny\r\ny");
+        DecodeArgs da = exampleCommand("-r\r\ntrack\r\ny\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testRetrieveTalkCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-r\r\ntalk\r\ny\r\ny");
+        DecodeArgs da = exampleCommand("-r\r\ntalk\r\ny\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testUpdateConferenceCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-u\r\nconference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005\r\ny");
+        DecodeArgs da = exampleCommand("-u\r\nconference\r\n1\r\ntitle\r\ndescription\r\n10-09-2005\r\n11-09-2005\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testUpdateTrackCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-u\r\ntrack\r\n1\r\ntitle\r\ndescription\r\n1\r\ny");
+        DecodeArgs da = exampleCommand("-u\r\ntrack\r\n1\r\ntitle\r\ndescription\r\n1\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testUpdateTalkCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-u\r\ntalk\r\n1\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10\r\ny");
+        DecodeArgs da = exampleCommand("-u\r\ntalk\r\n1\r\ntitle\r\ndescription\r\nlocation\r\n1\r\n10:10\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testDeleteConferenceCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-d\r\nconference\r\n1\r\ny");
+        DecodeArgs da = exampleCommand("-d\r\nconference\r\n1\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testDeleteTrackCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-d\r\ntrack\r\n1\r\ny");
+        DecodeArgs da = exampleCommand("-d\r\ntrack\r\n1\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testDeleteTalkCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-d\r\ntalk\r\n1\r\ny");
+        DecodeArgs da = exampleCommand("-d\r\ntalk\r\n1\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
     @Test
     public void testDeleteWithHelpTalkCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-d\r\n-h\r\ntalk\r\n1\r\ny");
+        DecodeArgs da = exampleCommand("-d\r\n-h\r\ntalk\r\n1\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
@@ -117,8 +117,7 @@ public class DecodeArgsTest {
     }
 
     private DecodeArgs exampleCommand(String message){
-        Scanner sc = writeToScanner(message);
-        return new DecodeArgs(sc);
+        return new DecodeArgs(writeToScanner(message));
     }
 
 }

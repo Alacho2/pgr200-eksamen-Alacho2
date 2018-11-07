@@ -4,6 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CommandHandlerTest extends CommandHandler {
 
     @BeforeClass
-    public static void initCommands(){
+    public static void initCommands() throws FileNotFoundException {
         ParseCommands.parseAllCommands();
     }
 /**

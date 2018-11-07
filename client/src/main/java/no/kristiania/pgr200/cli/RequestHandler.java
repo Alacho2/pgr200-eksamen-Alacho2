@@ -27,22 +27,20 @@ public class RequestHandler {
     }
 
     public String execute(int port, String hostName) throws IOException {
-        StringBuilder sb = new StringBuilder();
         HttpClientResponse httpClientResponse = checkRequestMethod(mapToRequest(port, hostName)).execute();
         return new Response(httpClientResponse).getBody();
     }
 
     private HttpClientRequest checkRequestMethod(Request r) {
         HttpClientRequest httpClientRequest = null;
+        System.out.println("method: \n" + r.getMethod());
         System.out.println("path: \n" + r.getPath());
         System.out.println("body: \n" + r.getBody());
-        switch (r.getMethod()) {
-            case "GET":
-                httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), "POST", "application/json", r.getBody());
-                break;
-            case "POST":
-                httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod(), "application/json", r.getBody());
-                break;
+        if(r.getMethod().equals("GET") || r.getMethod().equals("DELETE")) {
+            httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod());
+        }
+        else{
+            httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod(), "application/json", r.getBody());
         }
         return httpClientRequest;
     }

@@ -1,12 +1,15 @@
 package no.kristiania.pgr200.cli;
 
 import no.kristiania.pgr200.common.ConsoleColors;
+import org.fusesource.jansi.Ansi;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 public class OutputHandler {
 
     public static void printQuestion(String message){
         if(message == null) return;
-        String formattedText = "\n"+ ConsoleColors.YELLOW+message+"\n"+ConsoleColors.BLUE+">>"+ConsoleColors.RESET;
+        String formattedText = "\n"+ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(message+"\n").fg(Ansi.Color.BLUE).a(">>").fg(Ansi.Color.DEFAULT);
         System.out.println(formattedText);
         log(formattedText);
     }
