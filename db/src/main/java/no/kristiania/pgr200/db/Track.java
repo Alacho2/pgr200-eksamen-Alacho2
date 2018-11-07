@@ -2,7 +2,7 @@ package no.kristiania.pgr200.db;
 
 import java.util.Objects;
 
-public class Track extends TableObject {
+public class Track extends Entity {
     private int track_conference_id;
 
     public Track(String title, String description, int id, int track_conference_id) {

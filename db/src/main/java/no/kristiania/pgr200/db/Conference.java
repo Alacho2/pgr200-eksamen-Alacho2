@@ -2,7 +2,7 @@ package no.kristiania.pgr200.db;
 
 import java.util.Objects;
 
-public class Conference extends TableObject {
+public class Conference extends Entity {
   private String date_start, date_end;
 
   public Conference(int id, String title, String description, String date_start, String date_end) {
@@ -12,10 +12,6 @@ public class Conference extends TableObject {
   }
 
   public Conference(){}
-
-  /*public void setId(int id){
-    this.id = id;
-  }*/
 
   public String getDate_start() {
     return date_start;
