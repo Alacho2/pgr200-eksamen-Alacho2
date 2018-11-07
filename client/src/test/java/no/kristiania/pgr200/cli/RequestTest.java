@@ -10,8 +10,7 @@ public class RequestTest {
     @Test
     public void shouldReturnConferencePathWithID(){
         Request r = new Request<>("localhost", 0, ExampleData.getStringGETCommand());
-        //assertThat(r.getPath()).isEqualTo("/capi/track/1");
-        assertThat(r.getPath()).isEqualTo("/capi/track"); // removed it, maybe we add it back later
+        assertThat(r.getPath()).isEqualTo("/capi/track/1");
         assertThat(r.getId()).isNotNull();
 
         assertThat(r).isInstanceOf(Request.class);
@@ -35,10 +34,9 @@ public class RequestTest {
         assertThat(r.getPort()).isEqualTo(0);
         assertThat(r.getId()).isNotNull();
         assertThat(r.getId()).isEqualTo(1);
-        //assertThat(r.getPath()).isEqualTo("/capi/track/1");
-        assertThat(r.getPath()).isEqualTo("/capi/track");
+        assertThat(r.getPath()).isEqualTo("/capi/track/1");
         assertThat(r.getBody()).isNotNull();
-        assertThat(r.getBody()).isEqualTo("{\"mode\":\"retrieve\",\"table\":\"track\",\"fields\":[{\"name\":\"name\",\"value\":\"value\"},{\"name\":\"id\",\"value\":1}]}");
+        assertThat(r.getBody()).isEqualTo("{\"id\":1}");
         assertThat(r).isInstanceOf(Request.class);
     }
 
@@ -52,10 +50,9 @@ public class RequestTest {
         assertThat(r.getPort()).isEqualTo(0);
         assertThat(r.getId()).isNotNull();
         assertThat(r.getId()).isEqualTo(1);
-        //assertThat(r.getPath()).isEqualTo("/capi/track/1");
-        assertThat(r.getPath()).isEqualTo("/capi/track");
+        assertThat(r.getPath()).isEqualTo("/capi/track/1");
         assertThat(r.getBody()).isNotNull();
-        assertThat(r.getBody()).isEqualTo("{\"mode\":\"retrieve\",\"table\":\"track\",\"fields\":[{\"name\":\"id\",\"value\":1}]}");
+        assertThat(r.getBody()).isEqualTo("{\"id\":1}");
         assertThat(r).isInstanceOf(Request.class);
     }
 
@@ -70,7 +67,7 @@ public class RequestTest {
         assertThat(r.getId()).isNull();
         assertThat(r.getPath()).isEqualTo("/capi/track");
         assertThat(r.getBody()).isNotNull();
-        assertThat(r.getBody()).isEqualTo("{\"mode\":\"insert\",\"table\":\"track\",\"fields\":[{\"name\":\"name\",\"value\":\"value\"}]}");
+        assertThat(r.getBody()).isEqualTo("{\"name\":\"value\"}");
         assertThat(r).isInstanceOf(Request.class);
     }
 
@@ -85,7 +82,7 @@ public class RequestTest {
         assertThat(r.getId()).isNull();
         assertThat(r.getPath()).isEqualTo("/capi/track");
         assertThat(r.getBody()).isNotNull();
-        assertThat(r.getBody()).isEqualTo("{\"mode\":\"insert\",\"table\":\"track\",\"fields\":[{\"name\":\"name\",\"value\":\"value\"}]}");
+        assertThat(r.getBody()).isEqualTo("{\"name\":\"value\"}");
         assertThat(r).isInstanceOf(Request.class);
     }
 }

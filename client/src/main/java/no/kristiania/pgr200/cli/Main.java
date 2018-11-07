@@ -13,7 +13,7 @@ public class Main {
   private static HttpServerListener server;
 
   public static void main(String[] args) throws IOException {
-      AnsiConsole.systemInstall();
+      //AnsiConsole.systemInstall();
     try{
         ParseCommands.parseAllCommands();
         startServer();

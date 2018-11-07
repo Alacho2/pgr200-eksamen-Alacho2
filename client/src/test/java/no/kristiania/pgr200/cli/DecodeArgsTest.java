@@ -100,7 +100,7 @@ public class DecodeArgsTest {
 
     @Test
     public void testDeleteTalkCommands() throws IOException {
-        DecodeArgs da = exampleCommand("-d\r\ntalk\r\n1\r\ny");
+        DecodeArgs da = exampleCommand("-d\r\ntalk\r\n1\r\nn");
         assertThat(da.decode(new String[]{"START"},  port, host)).isNotNull();
     }
 
