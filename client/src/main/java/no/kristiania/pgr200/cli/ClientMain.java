@@ -7,17 +7,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class Main {
-  private static HttpServerListener server;
+public class ClientMain {
 
   public static void main(String[] args) throws IOException {
       //AnsiConsole.systemInstall();
     try{
         ParseCommands.parseAllCommands();
-        startServer();
+        int port = 9010;
+        String hostName = "localhost";
 
         if(args.length > 0){
-          String result = new DecodeArgs().decode(args, server.getPort(), "localhost");
+          String result = new DecodeArgs().decode(args, port, hostName);
           OutputHandler.printResult("RESULT", result); // The Database Response Printed out to the user
         } else {
           OutputHandler.printErrorLine("You must enter use the parameters START or LIST!");
@@ -27,18 +27,5 @@ public class Main {
       e.printStackTrace();
     }
 
-  }
-
-
-  public static void startServer() throws IOException {
-    server = new HttpServerListener(
-            Arrays.asList(new HttpServerRequestHandlerCapi(),
-                    new HttpServerRequestHandlerBadHttpMethod(),
-                    new HttpServerRequestHandlerEcho(),
-                    new HttpServerRequestHandlerURL()),
-            new HttpServerParserRequest(),
-            new HttpServerWriterResponse()
-    );
-    server.start(0);
   }
 }

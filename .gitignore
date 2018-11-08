@@ -1,4 +1,7 @@
-/target/
+client/target/*
+server/target/*
+common/target/*
+db/target/*
 /.classpath
 /.project
 /.settings
