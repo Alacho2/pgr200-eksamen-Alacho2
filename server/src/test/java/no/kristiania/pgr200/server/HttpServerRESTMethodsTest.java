@@ -24,9 +24,9 @@ public class HttpServerRESTMethodsTest {
     @BeforeClass
     public static void startServer() throws IOException {
         server = new HttpServerListener(
-                Arrays.asList(new HttpServerRequestHandlerBadHttpMethod(),
+                Arrays.asList(new HttpServerRequestHandlerCapiNew(),
+                        new HttpServerRequestHandlerBadHttpMethod(),
                         new HttpServerRequestHandlerEcho(),
-                        new HttpServerRequestHandlerCapi(),
                         new HttpServerRequestHandlerURL()),
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()
@@ -35,33 +35,33 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void InsertRequestShouldInsert() throws IOException{
+    public void test10InsertRequestShouldInsert() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST", "application/json",
-                "{\"title\":\"My conference\",\"description\":\"About my conference\",\"time-start\":\"09-10-2018\",\"time-end\":\"11-10-2018\"}");
+                "{\"title\":\"My conference\",\"description\":\"About my conference\",\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\"}");
         HttpClientResponse response = request.execute();
-        assertThat(response.getBody()).isEqualTo("{\"title\":\"My conference\",\"description\":\"About my conference\",\"time-start\":\"09-10-2018\",\"time-end\":\"11-10-2018\"}");
+        assertThat(response.getBody()).isEqualTo("{\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\",\"title\":\"My conference\",\"description\":\"About my conference\",\"id\":1}");
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
     @Test
-    public void PutRequestShouldUpdate() throws IOException{
+    public void test11PutRequestShouldUpdate() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "PUT", "application/json",
-                "{\"title\":\"My New conference\",\"description\":\"New about my conference\",\"time-start\":\"09-10-2018\",\"time-end\":\"11-10-2018\"}");
+                "{\"title\":\"My New conference\",\"description\":\"New about my conference\",\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\"}");
         HttpClientResponse response = request.execute();
-        assertThat(response.getBody()).isEqualTo("{\"title\":\"My New conference\",\"description\":\"New about my conference\",\"time-start\":\"09-10-2018\",\"time-end\":\"11-10-2018\"}");
+        assertThat(response.getBody()).isEqualTo("{\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\",\"title\":\"My New conference\",\"description\":\"New about my conference\",\"id\":1}");
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
     @Test
-    public void RetrieveRequestShouldRetrieveSingleRow() throws IOException{
+    public void test12RetrieveRequestShouldRetrieveSingleRow() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "GET");
         HttpClientResponse response = request.execute();
-        assertThat(response.getBody()).isEqualTo("{\"title\":\"My New conference\",\"description\":\"New about my conference\",\"time-start\":\"09-10-2018\",\"time-end\":\"11-10-2018\"}");
+        assertThat(response.getBody()).isEqualTo("{\"date_start\":\"2018-10-09\",\"date_end\":\"2018-10-11\",\"title\":\"My New conference\",\"description\":\"New about my conference\",\"id\":1}");
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
     @Test
-    public void RetrieveAllRequestShouldRetrieveAll() throws IOException{
+    public void test13RetrieveAllRequestShouldRetrieveAll() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "GET");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).isNotEmpty();
@@ -69,7 +69,7 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void DeleteRequestShouldDelete() throws IOException{
+    public void test14DeleteRequestShouldDelete() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "DELETE");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).contains("\"Element with id 1 successfully deleted.\"");
