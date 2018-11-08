@@ -20,8 +20,8 @@ public class HttpServerTest {
     public static void startServer() throws IOException {
         server = new HttpServerListener(
                 Arrays.asList(new HttpServerRequestHandlerCapi(),
-                        new HttpServerRequestHandlerEcho(),
                         new HttpServerRequestHandlerBadHttpMethod(),
+                        new HttpServerRequestHandlerEcho(),
                         new HttpServerRequestHandlerURL()),
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()
