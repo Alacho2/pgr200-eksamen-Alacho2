@@ -9,7 +9,6 @@ import java.util.List;
 public class ParseCommands {
 
     private static List<Command> commands;
-    public static String commandFilePath = "commands.json"; //default path for commands.json
 
     /**
      * @return List<Command> with commands that matches the param table and mode value

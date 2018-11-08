@@ -74,4 +74,13 @@ public class Response {
     public void setContent_type(String content_type) {
         this.content_type = content_type;
     }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "statusCode=" + statusCode +
+                ", body='" + body + '\'' +
+                ", content_type='" + content_type + '\'' +
+                '}';
+    }
 }

@@ -28,6 +28,7 @@ public class RequestHandler {
 
     public String execute(int port, String hostName) throws IOException {
         HttpClientResponse httpClientResponse = checkRequestMethod(mapToRequest(port, hostName)).execute();
+        System.out.println("RESPONSE: "+new Response(httpClientResponse).toString());
         return new Response(httpClientResponse).getBody();
     }
 

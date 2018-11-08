@@ -5,17 +5,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class Request<T extends Command> {
-    String hostName, table, method, path, mode;
-    int port;
-    Number id;
-    List<T> body;
+    private String hostName, table, method, path, mode;
+    private int port;
+    private Number id;
+    private List<T> body;
 
     public Request(String hostName, int port, List<T> body) {
         setHostName(hostName);
         setPort(port);
         setBody(body);
-        setId((Number) getCommandValue("id"));
         for(T t : this.body){
+            if(t.getValue() !=null && t.getName().toUpperCase().equals("ID")) {
+                setId(Long.parseLong(t.getValue().toString()));
+            }
             setMethod(t.getMode());
             setMode(t.getMode());
             setTable(t.getTable());
@@ -27,8 +29,8 @@ public class Request<T extends Command> {
         setHostName(hostName);
         setPort(port);
         setBody(body);
-        setId((Number) getCommandValue("id"));
         for(T t : this.body){
+            if(t.getName().toUpperCase().equals("ID")) setId(Long.parseLong(t.getValue().toString()));
             setMethod(t.getMode());
             setMode(t.getMode());
             setTable(t.getTable());
@@ -121,17 +123,6 @@ public class Request<T extends Command> {
             default:
                 return "POST";
         }
-    }
-
-    /**
-     * @param name
-     * @return The command value of the command that has a name matching the parameter input, if no match return null.
-     */
-    private Object getCommandValue(String name){
-        for(T t : body){
-            if(t.getName().toUpperCase().equals(name.toUpperCase())) return t.getValue();
-        }
-        return null;
     }
 
     @Override

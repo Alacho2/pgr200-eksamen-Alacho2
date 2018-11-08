@@ -32,6 +32,11 @@ public class DecodeArgs {
                 return handleResult(new InteractiveClient(this.sc, this.port, this.hostName).start());
             case "LIST":
                 if(args.length>1) return handleResult(handleListCommand(args));
+                else{
+                    sb.append("When using the parameter 'LIST' then you will need to specify table and optionally an ID\n");
+                    sb.append("FORMAT: LIST [TABLE] [ID]");
+                    sb.append("Ex: LIST CONFERENCE 1");
+                }
                 break;
             case "RESET":
                 return handleResult(new RequestHandler("RESET", "RESET").execute(this.port, this.hostName));
@@ -55,7 +60,7 @@ public class DecodeArgs {
         if(this.argMode.equals("START")){
             if(!exitCheck()){
                 OutputHandler.printInfo("NOT EXITING");
-                return decode(new String[]{"START"}, this.port, this.hostName);
+                decode(new String[]{"START"}, this.port, this.hostName);
             }
         }
         return "EXIT COMPLETE";
