@@ -19,6 +19,7 @@ public class HttpServerRequestHandlerCapi implements HttpServerRequestHandler {
         for (String pattern : patterns) {
             if (requestMatches(request.getPath(), pattern, params)) {
                 if(routeRequest(request, response)) {
+                    response.setContentType("application/json");
                     return true;
                 }
                 return false;
