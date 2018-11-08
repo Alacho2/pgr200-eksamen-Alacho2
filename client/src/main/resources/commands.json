@@ -22,8 +22,8 @@
     ]
   },
   {
-    "name":"time-start",
-    "description":"Insert a start-time (dd-mm-yyyy)",
+    "name":"date_start",
+    "description":"Insert a start date (dd-mm-yyyy)",
     "type":"Date",
     "mode":"insert",
     "table":"conference",
@@ -33,8 +33,8 @@
     ]
   },
   {
-    "name":"time-end",
-    "description":"Insert a end-time (dd-mm-yyyy)",
+    "name":"date_end",
+    "description":"Insert a end date (dd-mm-yyyy)",
     "type":"Date",
     "mode":"insert",
     "table":"conference",
@@ -99,8 +99,8 @@
     ]
   },
   {
-    "name":"time-start",
-    "description":"Insert a new start-time (dd-mm-yyyy) if you want to change it",
+    "name":"date_start",
+    "description":"Insert a new start date (dd-mm-yyyy) if you want to change it",
     "type":"Date",
     "mode":"update",
     "table":"conference",
@@ -110,8 +110,8 @@
     ]
   },
   {
-    "name":"time-end",
-    "description":"Insert a new end-time (dd-mm-yyyy) if you want to change it",
+    "name":"date_end",
+    "description":"Insert a new end date (dd-mm-yyyy) if you want to change it",
     "type":"Date",
     "mode":"update",
     "table":"conference",
