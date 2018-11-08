@@ -28,7 +28,7 @@ public class ParseCommands {
     public static boolean checkForTable(String table) throws IllegalArgumentException{
         boolean found = false;
         for(Command c : commands){
-            if(c.getTable().equals(table)) {
+            if(c.getTable().toUpperCase().equals(table.toUpperCase())) {
                 found = true;
                 break;
             }
