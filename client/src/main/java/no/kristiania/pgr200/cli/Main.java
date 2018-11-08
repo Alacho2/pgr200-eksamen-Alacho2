@@ -1,12 +1,10 @@
 package no.kristiania.pgr200.cli;
 
-import no.kristiania.pgr200.db.*;
 import no.kristiania.pgr200.server.*;
-import org.fusesource.jansi.AnsiConsole;
+import no.kristiania.pgr200.server.requesthandlers.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Arrays;
 
 public class Main {
@@ -34,9 +32,9 @@ public class Main {
 
   public static void startServer() throws IOException {
     server = new HttpServerListener(
-            Arrays.asList(new HttpServerRequestHandlerBadHttpMethod(),
+            Arrays.asList(new HttpServerRequestHandlerCapi(),
+                    new HttpServerRequestHandlerBadHttpMethod(),
                     new HttpServerRequestHandlerEcho(),
-                    new HttpServerRequestHandlerCapi(),
                     new HttpServerRequestHandlerURL()),
             new HttpServerParserRequest(),
             new HttpServerWriterResponse()

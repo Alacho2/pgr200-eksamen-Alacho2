@@ -2,9 +2,10 @@ package no.kristiania.pgr200.server;
 
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
+import no.kristiania.pgr200.server.controllers.*;
+import no.kristiania.pgr200.server.requesthandlers.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -24,7 +25,7 @@ public class HttpServerRESTMethodsTest {
     @BeforeClass
     public static void startServer() throws IOException {
         server = new HttpServerListener(
-                Arrays.asList(new HttpServerRequestHandlerCapiNew(),
+                Arrays.asList(new HttpServerRequestHandlerCapi(),
                         new HttpServerRequestHandlerBadHttpMethod(),
                         new HttpServerRequestHandlerEcho(),
                         new HttpServerRequestHandlerURL()),
@@ -32,6 +33,30 @@ public class HttpServerRESTMethodsTest {
                 new HttpServerWriterResponse()
         );
         server.start(0);
+    }
+
+    @Test
+    public void shouldReturnTalkController(){
+        AbstractController controller = new HttpServerRouter().route("capi/talk");
+        assertThat(controller).isInstanceOf(TalkController.class);
+    }
+
+    @Test
+    public void shouldReturnTrackController(){
+        AbstractController controller = new HttpServerRouter().route("capi/track");
+        assertThat(controller).isInstanceOf(TrackController.class);
+    }
+
+    @Test
+    public void shouldReturnConferenceController(){
+        AbstractController controller = new HttpServerRouter().route("capi/conference");
+        assertThat(controller).isInstanceOf(ConferenceController.class);
+    }
+
+    @Test
+    public void shouldReturnNullController(){
+        AbstractController controller = new HttpServerRouter().route("capi/conf");
+        assertThat(controller).isNull();
     }
 
     @Test

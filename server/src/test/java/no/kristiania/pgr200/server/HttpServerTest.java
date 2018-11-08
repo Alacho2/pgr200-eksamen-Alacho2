@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
+import no.kristiania.pgr200.server.requesthandlers.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,9 +19,9 @@ public class HttpServerTest {
     @BeforeClass
     public static void startServer() throws IOException {
         server = new HttpServerListener(
-                Arrays.asList(new HttpServerRequestHandlerBadHttpMethod(),
+                Arrays.asList(new HttpServerRequestHandlerCapi(),
                         new HttpServerRequestHandlerEcho(),
-                        new HttpServerRequestHandlerCapi(),
+                        new HttpServerRequestHandlerBadHttpMethod(),
                         new HttpServerRequestHandlerURL()),
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()

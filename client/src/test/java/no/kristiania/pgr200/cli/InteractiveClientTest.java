@@ -1,6 +1,9 @@
 package no.kristiania.pgr200.cli;
 
 import no.kristiania.pgr200.server.*;
+import no.kristiania.pgr200.server.requesthandlers.HttpServerRequestHandlerBadHttpMethod;
+import no.kristiania.pgr200.server.requesthandlers.HttpServerRequestHandlerEcho;
+import no.kristiania.pgr200.server.requesthandlers.HttpServerRequestHandlerURL;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
