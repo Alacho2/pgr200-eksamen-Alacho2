@@ -74,9 +74,9 @@ public class DecodeArgs {
         }
         switch (args[1].toUpperCase()) {
             case "CONFERENCE":
-                return new RequestHandler("CONFERENCES", "RETRIEVE", id).execute(this.port, this.hostName);
+                return new RequestHandler("CONFERENCE", "RETRIEVE", id).execute(this.port, this.hostName);
             case "TRACK":
-                return new RequestHandler("TRACKS", "RETRIEVE", id).execute(this.port, this.hostName);
+                return new RequestHandler("TRACK", "RETRIEVE", id).execute(this.port, this.hostName);
             case "TALK":
                 return new RequestHandler("TALK", "RETRIEVE", id).execute(this.port, this.hostName);
         }
