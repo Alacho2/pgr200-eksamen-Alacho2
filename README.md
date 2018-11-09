@@ -1,17 +1,44 @@
 [![Build Status](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2.svg?token=Jcye5ttDhAMRpUM3Ca28&branch=master)](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2)
 # PGR200 Hovedinnlevering
 
-### Group
+#### Group
 * Alexander Bredesen - breale17
 * Håvard Nordlie Mathisen - mathav14
 * Jason Nilsen - wiljas17
 
 
+## Evaluation
+Når vi startet på selve eksamensoppgaven så hadde vi flere forskjellige deler som måtte settes
+sammen, både client, database og server. Siden vi visste at den koden vi skrev da skulle passe sammen
+under eksamensinnleveringen så hadde vi laget delene enkle å endre, så vi kunne bare sette de sammen 
+bare ved å gjøre noen små konfigurasjoner. 
+
+#### Cooperation
+Vi støtte på noen feil også i prosessen ved for eksempel hvordan http path og body egentlig skulle parses, vi hadde i starten noen ulike 
+syn rundt dette, men vi kom fram til en felles enighet/standar. 
+
+Andre problemer vi også har møtt på har vi løst og har vi hatt problemer med å løse noe så har vi alltid
+kunne spurt andre på gruppa. Siden vi har jobbet my i felles på skolen og hatt mye kontakt via kommunikasjonskilder
+så har vi kunne jobbet som en veldig god og fungerende gruppe som har både tilegnet og lært bort mye til hverandre.
+
+Andre ting vi som gruppe har blit flinkere på under denne eksamenen er dette med å forstå kode andre skriver og kunne komme
+med innspill på hvordan man kan gjøre kode bedre og hvordan det å parprogrammere kan bedre kvaliteten på koden.
+
+#### Conclusion
+Så våres evaluering av oppgaven ender på at vi er fornøyde med åssen vi har jobbet som en gruppe og 
+hvordan våres ferdigheter har kunne løfte gruppen fram til en oppgave som vi er fornøyde med. I og med at vi har 
+løst oppgaven på det vi mener er en god måte og med mye funksjonalitet som vi mener hever nivået på vår
+innlevering så mener vi at vi fortjener karakter A for denne oppgaven.
+
+
+
+## Oppgave
+
 Innleveringsfrist: 12. november kl 09:00. **Viktig:** WiseFlow *stenger* når fristen er ute - lever i tide.
 
 Tag koden med `innlevering` i GitHub og last opp en ZIP-fil til WiseFlow. Dersom du ikke fikk godkjent innlevering #1 eller #2 i første runde, last opp zip-fil av disse i tillegg.
 
-## Oppgave
+
 
 Du har funnet en konferanse du er interessert i å gå på, men du har ikke råd til billetten. Men frykt ikke: etter at du tok kontakt med de som organiserer konferansen fikk du høre at du kunne få gratisbillett dersom du hjelper til å lage noe programvare for konferansen.
 
