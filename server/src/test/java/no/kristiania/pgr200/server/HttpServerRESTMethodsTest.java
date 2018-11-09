@@ -1,7 +1,9 @@
 package no.kristiania.pgr200.server;
 
+import com.google.gson.Gson;
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
+import no.kristiania.pgr200.db.Talk;
 import no.kristiania.pgr200.db.TestDataSource;
 import no.kristiania.pgr200.server.controllers.*;
 import no.kristiania.pgr200.server.requesthandlers.*;
@@ -74,7 +76,7 @@ public class HttpServerRESTMethodsTest {
 
 
     @Test
-    public void test10InsertRequestShouldInsertSecondConference() throws IOException{
+    public void test11InsertRequestShouldInsertSecondConference() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST", "application/json",
                 "{\"title\":\"My 2nd conference\",\"description\":\"About my conference\",\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\"}");
         HttpClientResponse response = request.execute();
@@ -83,7 +85,7 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void test10InsertRequestShouldInsertTrack() throws IOException{
+    public void test12InsertRequestShouldInsertTrack() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/track", "POST", "application/json",
                 "{\"title\":\"My track\",\"description\":\"About my track\",\"track_conference_id\":1}");
         HttpClientResponse response = request.execute();
@@ -91,9 +93,17 @@ public class HttpServerRESTMethodsTest {
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
+    @Test
+    public void test13InsertRequestShouldInsertTalk() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "POST", "application/json",
+                "{\"title\":\"My talk\",\"description\":\"About my talk\",\"talk_track_id\":1, \"location\":\"the room\", \"timeslot\":\"10:10:00 PM\"}");
+        HttpClientResponse response = request.execute();
+        assertThat(response.getBody()).isEqualTo("{\"talk_track_id\":1,\"timeslot\":\"10:10:00 PM\",\"title\":\"My talk\",\"description\":\"About my talk\",\"id\":1}");
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
 
     @Test
-    public void test11PutRequestShouldUpdateConference() throws IOException{
+    public void test14PutRequestShouldUpdateConference() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "PUT", "application/json",
                 "{\"title\":\"My New conference\",\"description\":\"New about my conference\",\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\"}");
         HttpClientResponse response = request.execute();
@@ -102,7 +112,7 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void test11PutRequestShouldUpdateTrack() throws IOException{
+    public void test15PutRequestShouldUpdateTrack() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/track/1", "PUT", "application/json",
                 "{\"title\":\"My updated track\",\"description\":\"About my updated track\",\"track_conference_id\":1}");
         HttpClientResponse response = request.execute();
@@ -111,7 +121,16 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void test12RetrieveRequestShouldRetrieveSingleRowConference() throws IOException{
+    public void test16InsertRequestShouldUpdateTalk() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk/1", "PUT", "application/json",
+                "{\"title\":\"My updated talk\",\"description\":\"About my updated talk\",\"talk_track_id\":1, \"location\":\"the room\", \"timeslot\":\"10:30:00 PM\"}");
+        HttpClientResponse response = request.execute();
+        assertThat(response.getBody()).isEqualTo("{\"talk_track_id\":1,\"timeslot\":\"10:30:00 PM\",\"title\":\"My updated talk\",\"description\":\"About my updated talk\",\"id\":1}");
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    public void test16RetrieveRequestShouldRetrieveSingleRowConference() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "GET");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).isEqualTo("{\"date_start\":\"2018-10-09\",\"date_end\":\"2018-10-11\",\"title\":\"My New conference\",\"description\":\"New about my conference\",\"id\":1}");
@@ -119,7 +138,7 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void test12RetrieveRequestShouldRetrieveSingleRowTrack() throws IOException{
+    public void test17RetrieveRequestShouldRetrieveSingleRowTrack() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/track/1", "GET");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).isEqualTo("{\"track_conference_id\":1,\"title\":\"My updated track\",\"description\":\"About my updated track\",\"id\":1}");
@@ -127,7 +146,7 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void test13RetrieveAllRequestShouldRetrieveAllConference() throws IOException{
+    public void test18RetrieveAllRequestShouldRetrieveAllConference() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "GET");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).isNotEmpty();
@@ -135,7 +154,7 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void test13RetrieveAllRequestShouldRetrieveAllTrack() throws IOException{
+    public void test19RetrieveAllRequestShouldRetrieveAllTrack() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/track", "GET");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).isNotEmpty();
@@ -143,17 +162,32 @@ public class HttpServerRESTMethodsTest {
     }
 
     @Test
-    public void test14DeleteRequestShouldDeleteTrack() throws IOException{
+    public void test19RetrieveAllRequestShouldRetrieveAllTalk() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk", "GET");
+        HttpClientResponse response = request.execute();
+        assertThat(response.getBody()).isNotEmpty();
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    public void test19DeleteRequestShouldDeleteTalk() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk/1", "DELETE");
+        HttpClientResponse response = request.execute();
+        assertThat(response.getBody()).contains("\"Element with id 1 successfully deleted.\"");
+    }
+
+
+    @Test
+    public void test20DeleteRequestShouldDeleteTrack() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/track/1", "DELETE");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).contains("\"Element with id 1 successfully deleted.\"");
     }
 
     @Test
-    public void test14DeleteRequestShouldDeleteConference() throws IOException{
+    public void test21DeleteRequestShouldDeleteConference() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "DELETE");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).contains("\"Element with id 1 successfully deleted.\"");
     }
-
 }
