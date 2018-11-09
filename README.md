@@ -121,9 +121,9 @@ I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av den
   - [x] Koden er klonet fra GitHub classrom
   - [x] Produserer `mvn package` en executable jar? (tips: Bruk `maven-shade-plugin`)
   - [x] Bruker koden Java 8 og UTF-8
-  - [ ] Bygger prosjektet på [https://travis-ci.com](https://travis-ci.com)?
-  - [ ] Har du god test-dekning? (tips: Sett opp jacoco-maven-plugin til å kreve at minst 65% av linjene har testdekning)
-  - [ ] Er koden delt inn i flere Maven `<modules>`?
+  - [x] Bygger prosjektet på [https://travis-ci.com](https://travis-ci.com)?
+  - [x] Har du god test-dekning? (tips: Sett opp jacoco-maven-plugin til å kreve at minst 65% av linjene har testdekning)
+  - [x] Er koden delt inn i flere Maven `<modules>`?
   - [ ] Bruker kommunikasjon mellom klient og server HTTP korrekt?
   - [ ] Kobler serveren seg opp mot PostgreSQL ved hjelp av konfigurasjon i fila `innlevering.properties` i *current working directory* med `dataSource.url`, `dataSource.username`, `dataSource.password`?
 - [ ] Funksjonalitet
@@ -135,7 +135,7 @@ I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av den
 - [ ] Dokumentasjon i form av README.md
   - [x] Navn og Feide-ID på dere de som var på teamet
   - [ ] Inkluderer dokumentasjonen hvordan man tester ut funksjonaliteten programmet manuelt? (Inkludert eventuell ekstra funksjonalitet dere har tatt med)
-  - [ ] Inkluderer dokumentasjonen en evaluering av hvordan man jobbet sammen?
+  - [x] Inkluderer dokumentasjonen en evaluering av hvordan man jobbet sammen?
   - [ ] Inkluderer dokumentasjonen en screencast av en parprogrammeringsesjon?
   - [ ] Inkluderer dokumentasjonen en evaluering *fra* en annen gruppe og en evaluering *til* en annen gruppe?
   - [ ] Inkluderer dokumentasjonen en UML diagram med datamodellen?
