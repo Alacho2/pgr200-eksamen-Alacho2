@@ -1,5 +1,4 @@
 package no.kristiania.pgr200.cli;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +21,7 @@ public class RequestHandlerTest {
         assertThat(r).isInstanceOf(Request.class);
     }
 
-    @Test @Ignore
+    @Test
     public void shouldParseGETCommands(){
         RequestHandler requestHandler = new RequestHandler(ExampleData.getStringGETCommand());
         Request r = requestHandler.mapToRequest(0, "localhost");
