@@ -89,12 +89,13 @@ public class HttpServerParserRequest {
                         System.out.println("Error parsing body.");
                     }
                 }
+                if(request.getHeader("Content-Type").equals("text/plain")) {
+                    parseParameters(body.toString());
+                } else {
+                    request.setBody(body.toString());
+                }
             }
-            if(request.getHeader("Content-Type").equals("text/plain")) {
-                parseParameters(body.toString());
-            } else {
-                request.setBody(body.toString());
-            }
+
         } catch(NullPointerException npe){
             System.out.println("Null pointer exception in parseBody.");
         }

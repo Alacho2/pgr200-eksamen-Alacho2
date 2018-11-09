@@ -2,16 +2,12 @@ package no.kristiania.pgr200.server;
 
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
-import no.kristiania.pgr200.db.DbConfig;
 import no.kristiania.pgr200.server.controllers.*;
 import no.kristiania.pgr200.server.requesthandlers.*;
-import org.flywaydb.core.Flyway;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.postgresql.ds.PGPoolingDataSource;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -36,13 +32,6 @@ public class HttpServerRESTMethodsTest {
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()
         );
-        PGPoolingDataSource dataSource = new PGPoolingDataSource();
-        dataSource.setUrl(DbConfig.URL);
-        dataSource.setUser(DbConfig.USER);
-        dataSource.setPassword(DbConfig.PASSWORD);
-
-        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
-        flyway.clean();
         server.start(0);
     }
 
