@@ -1,11 +1,8 @@
-client/target/*
-server/target/*
-common/target/*
-db/target/*
 /.classpath
 /.project
 /.settings
 /.idea
+target/
 
 # Compiled class file
 *.class
