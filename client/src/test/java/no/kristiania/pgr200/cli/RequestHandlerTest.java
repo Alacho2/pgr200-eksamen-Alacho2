@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RequestHandlerTest {
 
-    @Test @Ignore
+    @Test
     public void shouldParsePOSTCommands(){
         RequestHandler requestHandler = new RequestHandler(ExampleData.getStringINSERTCommand());
         Request r = requestHandler.mapToRequest(0, "localhost");
@@ -22,7 +22,7 @@ public class RequestHandlerTest {
         assertThat(r).isInstanceOf(Request.class);
     }
 
-    @Test @Ignore
+    @Test
     public void shouldParseGETCommands(){
         RequestHandler requestHandler = new RequestHandler(ExampleData.getStringGETCommand());
         Request r = requestHandler.mapToRequest(0, "localhost");
@@ -32,7 +32,7 @@ public class RequestHandlerTest {
         assertThat(r.getMode()).isEqualTo("retrieve");
         assertThat(r.getPort()).isEqualTo(0);
         assertThat(r.getId()).isNotNull();
-        assertThat(r.getId()).isEqualTo(1);
+        assertThat((long)r.getId()).isEqualTo(1);
         assertThat(r.getPath()).isEqualTo("/capi/track/1");
         assertThat(r.getBody()).isNotNull();
         assertThat(r.getBody()).isEqualTo("{\"id\":1}");
