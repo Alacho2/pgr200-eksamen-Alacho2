@@ -2,13 +2,16 @@ package no.kristiania.pgr200.server;
 
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
+import no.kristiania.pgr200.db.DbConfig;
 import no.kristiania.pgr200.server.controllers.*;
 import no.kristiania.pgr200.server.requesthandlers.*;
+import org.flywaydb.core.Flyway;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.postgresql.ds.PGPoolingDataSource;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -33,34 +36,41 @@ public class HttpServerRESTMethodsTest {
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()
         );
+        PGPoolingDataSource dataSource = new PGPoolingDataSource();
+        dataSource.setUrl(DbConfig.URL);
+        dataSource.setUser(DbConfig.USER);
+        dataSource.setPassword(DbConfig.PASSWORD);
+
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.clean();
         server.start(0);
     }
 
-    @Test @Ignore
+    @Test
     public void shouldReturnTalkController(){
         AbstractController controller = new HttpServerRouter().route("capi/talk");
         assertThat(controller).isInstanceOf(TalkController.class);
     }
 
-    @Test @Ignore
+    @Test
     public void shouldReturnTrackController(){
         AbstractController controller = new HttpServerRouter().route("capi/track");
         assertThat(controller).isInstanceOf(TrackController.class);
     }
 
-    @Test @Ignore
+    @Test
     public void shouldReturnConferenceController(){
         AbstractController controller = new HttpServerRouter().route("capi/conference");
         assertThat(controller).isInstanceOf(ConferenceController.class);
     }
 
-    @Test @Ignore
+    @Test
     public void shouldReturnNullController(){
         AbstractController controller = new HttpServerRouter().route("capi/conf");
         assertThat(controller).isNull();
     }
 
-    @Test @Ignore
+    @Test
     public void test10InsertRequestShouldInsert() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "POST", "application/json",
                 "{\"title\":\"My conference\",\"description\":\"About my conference\",\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\"}");
@@ -69,7 +79,7 @@ public class HttpServerRESTMethodsTest {
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
-    @Test @Ignore
+    @Test
     public void test11PutRequestShouldUpdate() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "PUT", "application/json",
                 "{\"title\":\"My New conference\",\"description\":\"New about my conference\",\"date_start\":\"09-10-2018\",\"date_end\":\"11-10-2018\"}");
@@ -78,7 +88,7 @@ public class HttpServerRESTMethodsTest {
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
-    @Test @Ignore
+    @Test
     public void test12RetrieveRequestShouldRetrieveSingleRow() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "GET");
         HttpClientResponse response = request.execute();
@@ -86,7 +96,7 @@ public class HttpServerRESTMethodsTest {
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
-    @Test @Ignore
+    @Test
     public void test13RetrieveAllRequestShouldRetrieveAll() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference", "GET");
         HttpClientResponse response = request.execute();
@@ -94,7 +104,7 @@ public class HttpServerRESTMethodsTest {
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
-    @Test @Ignore
+    @Test
     public void test14DeleteRequestShouldDelete() throws IOException{
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/conference/1", "DELETE");
         HttpClientResponse response = request.execute();

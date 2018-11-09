@@ -34,8 +34,6 @@ public class HttpServerTest {
     public void shouldReturnResource() throws IOException {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/", "GET");
         HttpClientResponse response = request.execute();
-        System.out.println("Response body: " + response.getBody());
-
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
