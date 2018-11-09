@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import no.kristiania.pgr200.common.DateHandler;
 
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class RequestBodyHandler<K,T extends Command> {
         fields = new HashMap<>();
         for(T command : body){
             checkForElement(command);
-            if(command.getTable().toUpperCase().equals(this.table.toUpperCase())) addNewField(command.getName(), (K) command.getValue());
+            if(command.getTable().toUpperCase().equals(this.table.toUpperCase())) addNewField(command.getName(), (K) command.getValue(), command.getType());
         }
     }
 
@@ -48,18 +49,20 @@ public class RequestBodyHandler<K,T extends Command> {
     }
 
 
-    private void addNewField(String name, K value){
+    private void addNewField(String name, K value, String type){
         if(name == null || value == null) return;
         if(isRetrieve() && !isID) return; // Do not want to append to field array when there is no id, want all entries by default
-        fields.put(name, value);
+        fields.put(name, handleDateTime(type,value));
     }
-
-
-
 
 
     private String getJson(HashMap<String,K> list) {
         Gson gson = new GsonBuilder().create();
         return gson.toJson(list);
+    }
+
+    private K handleDateTime(String type, K value){
+        if(type.toUpperCase().equals("TIME")) return (K) DateHandler.parseTime((String)value);
+        return value;
     }
 }
