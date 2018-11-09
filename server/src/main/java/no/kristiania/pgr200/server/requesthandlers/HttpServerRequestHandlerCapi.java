@@ -5,6 +5,7 @@ import no.kristiania.pgr200.server.HttpServerResponse;
 import no.kristiania.pgr200.server.HttpServerRouter;
 import no.kristiania.pgr200.server.controllers.AbstractController;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.*;
 
@@ -12,6 +13,10 @@ public class HttpServerRequestHandlerCapi implements HttpServerRequestHandler {
 
     Map<String, Integer> params = new HashMap<>();
     List<String> patterns = Arrays.asList("capi/conference/:id", "capi/conference", "capi/track/:id", "capi/track", "capi/talk/:id", "capi/talk");
+    DataSource dataSource;
+    public HttpServerRequestHandlerCapi(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
@@ -50,7 +55,7 @@ public class HttpServerRequestHandlerCapi implements HttpServerRequestHandler {
     }
 
     private boolean routeRequest(HttpServerRequest request, HttpServerResponse response) {
-        AbstractController controller = new HttpServerRouter().route(request.getURL());
+        AbstractController controller = new HttpServerRouter().route(request.getURL(), this.dataSource);
         if(controller != null) {
             controller.handleRequest(request, response, params);
             return true;

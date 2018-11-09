@@ -4,22 +4,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
+import no.kristiania.pgr200.db.TestDataSource;
 import no.kristiania.pgr200.server.requesthandlers.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Arrays;
 
 public class HttpServerTest {
 
+    private static TestDataSource testDatasource = new TestDataSource();
+    private static DataSource dataSource;
     private static HttpServerListener server;
     int port = 0;
 
     @BeforeClass
     public static void startServer() throws IOException {
+        dataSource = testDatasource.createDataSource();
         server = new HttpServerListener(
-                Arrays.asList(new HttpServerRequestHandlerCapi(),
+                Arrays.asList(new HttpServerRequestHandlerCapi(dataSource),
                         new HttpServerRequestHandlerBadHttpMethod(),
                         new HttpServerRequestHandlerEcho(),
                         new HttpServerRequestHandlerURL()),

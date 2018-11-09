@@ -6,6 +6,7 @@ import no.kristiania.pgr200.db.TalkDao;
 import no.kristiania.pgr200.server.HttpServerRequest;
 import no.kristiania.pgr200.server.HttpServerResponse;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -14,8 +15,8 @@ public class TalkController extends AbstractController {
     TalkDao dao;
     Gson gson = new Gson();
 
-    public TalkController() {
-        dao = new TalkDao();
+    public TalkController(DataSource dataSource) {
+        dao = new TalkDao(dataSource);
     }
 
     @Override

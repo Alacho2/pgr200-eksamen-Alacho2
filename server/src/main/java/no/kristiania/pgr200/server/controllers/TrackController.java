@@ -6,6 +6,8 @@ import no.kristiania.pgr200.db.TrackDao;
 import no.kristiania.pgr200.server.HttpServerRequest;
 import no.kristiania.pgr200.server.HttpServerResponse;
 
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -14,8 +16,8 @@ public class TrackController extends AbstractController {
     TrackDao dao;
     Gson gson = new Gson();
 
-    public TrackController() {
-        dao = new TrackDao();
+    public TrackController(DataSource dataSource) {
+        dao = new TrackDao(dataSource);
     }
 
     @Override

@@ -6,6 +6,7 @@ import no.kristiania.pgr200.db.ConferenceDao;
 import no.kristiania.pgr200.server.HttpServerRequest;
 import no.kristiania.pgr200.server.HttpServerResponse;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -14,8 +15,8 @@ public class ConferenceController extends AbstractController {
     private ConferenceDao dao;
     private Gson gson = new Gson();
 
-    public ConferenceController() {
-        dao = new ConferenceDao();
+    public ConferenceController(DataSource dataSource) {
+        dao = new ConferenceDao(dataSource);
     }
 
     @Override

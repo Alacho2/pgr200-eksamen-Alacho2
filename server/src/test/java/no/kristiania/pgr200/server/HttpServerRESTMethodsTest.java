@@ -2,6 +2,8 @@ package no.kristiania.pgr200.server;
 
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
+import no.kristiania.pgr200.db.DbConfig;
+import no.kristiania.pgr200.db.TestDataSource;
 import no.kristiania.pgr200.server.controllers.*;
 import no.kristiania.pgr200.server.requesthandlers.*;
 import org.junit.BeforeClass;
@@ -9,6 +11,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -18,14 +21,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HttpServerRESTMethodsTest {
 
-
+    private static TestDataSource testDatasource = new TestDataSource();
+    private static DataSource dataSource;
     private static HttpServerListener server;
     int port = 0;
 
     @BeforeClass
     public static void startServer() throws IOException {
+        dataSource = testDatasource.createDataSource();
         server = new HttpServerListener(
-                Arrays.asList(new HttpServerRequestHandlerCapi(),
+                Arrays.asList(new HttpServerRequestHandlerCapi(dataSource),
                         new HttpServerRequestHandlerBadHttpMethod(),
                         new HttpServerRequestHandlerEcho(),
                         new HttpServerRequestHandlerURL()),
@@ -37,25 +42,25 @@ public class HttpServerRESTMethodsTest {
 
     @Test
     public void shouldReturnTalkController(){
-        AbstractController controller = new HttpServerRouter().route("capi/talk");
+        AbstractController controller = new HttpServerRouter().route("capi/talk", dataSource);
         assertThat(controller).isInstanceOf(TalkController.class);
     }
 
     @Test
     public void shouldReturnTrackController(){
-        AbstractController controller = new HttpServerRouter().route("capi/track");
+        AbstractController controller = new HttpServerRouter().route("capi/track", dataSource);
         assertThat(controller).isInstanceOf(TrackController.class);
     }
 
     @Test
     public void shouldReturnConferenceController(){
-        AbstractController controller = new HttpServerRouter().route("capi/conference");
+        AbstractController controller = new HttpServerRouter().route("capi/conference", dataSource);
         assertThat(controller).isInstanceOf(ConferenceController.class);
     }
 
     @Test
     public void shouldReturnNullController(){
-        AbstractController controller = new HttpServerRouter().route("capi/conf");
+        AbstractController controller = new HttpServerRouter().route("capi/conf", dataSource);
         assertThat(controller).isNull();
     }
 
