@@ -1,6 +1,7 @@
 package no.kristiania.pgr200.server.controllers;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import no.kristiania.pgr200.db.Talk;
 import no.kristiania.pgr200.db.TalkDao;
 import no.kristiania.pgr200.server.HttpServerRequest;

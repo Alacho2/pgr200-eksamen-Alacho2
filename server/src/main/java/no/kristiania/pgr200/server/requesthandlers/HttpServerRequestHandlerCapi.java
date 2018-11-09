@@ -34,6 +34,7 @@ public class HttpServerRequestHandlerCapi implements HttpServerRequestHandler {
     }
 
     private boolean requestMatches(String path, String pattern, Map<String, Integer> params) {
+        params.clear();
         String actualParts[] = path.split("/");
         String patternParts[] = pattern.split("/");
         if (actualParts.length != patternParts.length) {
