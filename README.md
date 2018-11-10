@@ -2,10 +2,13 @@
 # PGR200 Hovedinnlevering
 
 #### Group
-* Alexander Bredesen - breale17
-* Håvard Nordlie Mathisen - mathav14
-* Jason Nilsen - wiljas17
+- Alexander Bredesen - breale17
+- Håvard Nordlie Mathisen - mathav14
+- Jason Nilsen - wiljas17
 
+##### Links
+- ![MOTTATT-TILBAKEMELDING](MOTTATT-TILBAKEMELDING.md)
+- ![TILBAKEMELDING](TILBAKEMELDING.md)
 
 # Start
 Describe how to run the program
