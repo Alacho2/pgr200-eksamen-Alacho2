@@ -1,0 +1,29 @@
+@startuml
+
+abstract class AbstractController
+AbstractController --|> ConferenceController
+AbstractController --|> TalkController
+AbstractController --|> TrackController
+
+interface HttpServerWriter
+HttpServerWriter --|> HttpServerWriterResponse
+
+interface HttpServerRequestHandler
+HttpServerRequestHandler --|> HttpServerRequestHandlerBadHttpMethod
+HttpServerRequestHandler --|> HttpServerRequestHandlerCapi
+HttpServerRequestHandlerCapi --|> HttpServerRouter
+HttpServerRouter --|> AbstractController
+HttpServerRequestHandler --|> HttpServerRequestHandlerEcho
+HttpServerRequestHandler --|> HttpServerRequestHandlerURL
+
+Main --|> HttpServerConfig
+Main --|> HttpServerListener
+HttpServerListener --|> HttpServerConnectionHandler
+HttpServerConnectionHandler --|> HttpServerParserRequest
+HttpServerParserRequest --|> HttpServerRequest
+HttpServerRequest --|> HttpServerConnectionHandler
+HttpServerConnectionHandler --|> HttpServerResponse
+HttpServerConnectionHandler --|> HttpServerRequestHandler
+HttpServerConnectionHandler --|> HttpServerWriter
+
+@enduml

@@ -1,5 +1,6 @@
 package no.kristiania.pgr200.server;
 
+import no.kristiania.pgr200.common.PropertyReader;
 import no.kristiania.pgr200.db.LocalDataSource;
 import no.kristiania.pgr200.server.requesthandlers.HttpServerRequestHandlerBadHttpMethod;
 import no.kristiania.pgr200.server.requesthandlers.HttpServerRequestHandlerCapi;
@@ -12,8 +13,16 @@ import java.util.Arrays;
 
 public class Main {
 
+    private static int PORT;
+    private static String HOST_NAME;
+    private static String WEB_ROOT;
+    private static String DEFAULT_FILE;
+    private static String SERVER_NAME;
+    private static String FILE_NOT_FOUND;
+    private static String METHOD_NOT_SUPPORTED;
+
     public static void main(String[] args) throws IOException {
-        new HttpServerConfig();
+       new HttpServerConfig();
         int port = 9010;
         DataSource dataSource = new LocalDataSource().createDataSource();
         System.out.println("Server listening on port " + port);
@@ -25,10 +34,12 @@ public class Main {
                 new HttpServerParserRequest(),
                 new HttpServerWriterResponse()
         );
+
         try {
             listener.start(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
