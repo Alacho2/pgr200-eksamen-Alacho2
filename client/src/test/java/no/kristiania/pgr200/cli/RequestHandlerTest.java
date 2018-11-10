@@ -1,5 +1,6 @@
 package no.kristiania.pgr200.cli;
-import org.junit.Ignore;
+import no.kristiania.pgr200.io.Request;
+import no.kristiania.pgr200.io.RequestHandler;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

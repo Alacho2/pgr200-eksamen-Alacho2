@@ -1,5 +1,7 @@
-package no.kristiania.pgr200.cli;
+package no.kristiania.pgr200.io;
 
+import no.kristiania.pgr200.cli.BasicCommand;
+import no.kristiania.pgr200.cli.Command;
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
 
@@ -47,7 +49,7 @@ public class RequestHandler {
     }
 
 
-    Request mapToRequest(int port, String hostName) {
+    public Request mapToRequest(int port, String hostName) {
         return new Request(hostName, port, commands);
     }
 

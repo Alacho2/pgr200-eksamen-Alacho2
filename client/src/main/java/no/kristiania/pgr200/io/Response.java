@@ -1,4 +1,4 @@
-package no.kristiania.pgr200.cli;
+package no.kristiania.pgr200.io;
 
 import com.google.gson.*;
 import no.kristiania.pgr200.common.HttpClientResponse;

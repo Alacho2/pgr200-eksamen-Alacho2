@@ -1,4 +1,6 @@
-package no.kristiania.pgr200.cli;
+package no.kristiania.pgr200.io;
+
+import no.kristiania.pgr200.cli.Command;
 
 import java.util.ArrayList;
 import java.util.List;

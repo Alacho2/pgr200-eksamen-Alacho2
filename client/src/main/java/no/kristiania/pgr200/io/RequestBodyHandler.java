@@ -1,9 +1,10 @@
-package no.kristiania.pgr200.cli;
+package no.kristiania.pgr200.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import no.kristiania.pgr200.cli.Command;
 import no.kristiania.pgr200.common.DateHandler;
 
 import java.util.*;

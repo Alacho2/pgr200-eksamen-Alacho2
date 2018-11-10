@@ -1,5 +1,7 @@
 package no.kristiania.pgr200.cli;
 
+import no.kristiania.pgr200.io.RequestHandler;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;

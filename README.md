@@ -99,6 +99,10 @@ faktorene så mener jeg at vi fortjener en A på denne innleveringen.
 
 #### Haavard Eval
 
+## Diagrams
+### Client 
+![ClientUML](doc/clientUML.png)
+
 
 
 ## Oppgave
