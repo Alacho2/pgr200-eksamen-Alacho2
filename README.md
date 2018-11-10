@@ -67,6 +67,34 @@ Ekstra features
 * (-b) for back -> fungerer ikke under kritiske operasjoner i programmet
 ```
 
+## Extra functionality
+##### Interactive client
+Vi laget en klient som kan være interaktiv med brukeren og håndere ulike type input, vi har også
+mye feilhåndtering som er viktig når en bruker kan gi sin input til programmet, i forhold til
+testing av dette så simulerer vi bruker input og sjekker at dette blir håndtert på rett måte
+i forhold til hvordan vi ønsker programmet skal kjøre.
+
+##### Generics
+Vi bruker Generics i programmet på grunn av at det letter noe av mengde kode vi trenger for å utføre 
+noen oppgaver, eksempler på generics er:
+
+```java
+    public T getValue() {
+        return value;
+    }
+
+    public Command setValue(T value) throws IllegalArgumentException {
+        this.value = handleValue(value);
+        return this;
+    }
+``` 
+
+
+##### Testing exceptions
+
+
+
+
 ## Evaluation
 Når vi startet på selve eksamensoppgaven så hadde vi flere forskjellige deler som måtte settes
 sammen, både client, database og server. Siden vi visste at den koden vi skrev da skulle passe sammen
@@ -102,6 +130,12 @@ faktorene så mener jeg at vi fortjener en A på denne innleveringen.
 ## Diagrams
 ### Client 
 ![ClientUML](doc/clientUML.png)
+
+
+
+
+
+
 
 
 
