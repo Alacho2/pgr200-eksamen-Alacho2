@@ -78,7 +78,7 @@ i forhold til hvordan vi ønsker programmet skal kjøre.
 Vi bruker Generics i programmet på grunn av at det letter noe av mengde kode vi trenger for å utføre 
 noen oppgaver, eksempler på generics er:
 
-```java
+``` java
     public T getValue() {
         return value;
     }
@@ -101,7 +101,7 @@ noen oppgaver, eksempler på generics er:
 Vi ønsker å teste at for eksempel noen av våres input blir korrekt håndtert og exceptions blir
 kastet korrekt. Eksempler på kode vi har som tester dette er:
 
-````java
+``` java
     @Test
     public void testHelpCommandThrowsIllegalArgumentException(){
         HelpCommand command = exampleHelpCommand();
@@ -120,7 +120,7 @@ kastet korrekt. Eksempler på kode vi har som tester dette er:
             }).isInstanceOf(DateTimeParseException.class)
             .hasMessageContaining("");
         }
-````
+```
 
 
 
