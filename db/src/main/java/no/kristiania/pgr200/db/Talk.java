@@ -29,10 +29,6 @@ public class Talk extends Entity {
     this.talk_location = talk_location;
   }
 
-  public void setTimeslot(Time timeslot) {
-    this.timeslot = timeslot;
-  }
-
   public int getTalk_track_id() {
     return talk_track_id;
   }
@@ -60,11 +56,6 @@ public class Talk extends Entity {
             Objects.equals(description, talk.description) &&
             Objects.equals(talk_location, talk.talk_location) &&
             Objects.equals(timeslot, talk.timeslot);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(title, description, talk_location, id, talk_track_id, timeslot);
   }
 
   @Override

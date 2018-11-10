@@ -57,11 +57,6 @@ public class Track extends Entity {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(title, description, id, track_conference_id);
-    }
-
-    @Override
     public String toString() {
         return "Track{" +
                 "title='" + title + '\'' +

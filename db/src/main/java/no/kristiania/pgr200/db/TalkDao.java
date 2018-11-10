@@ -5,6 +5,7 @@ import no.kristiania.pgr200.db.DataAccessObject;
 import no.kristiania.pgr200.db.LocalDataSource;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +16,7 @@ public class TalkDao extends AbstractDao implements DataAccessObject<Talk> {
     super(dataSource);
   }
 
-  public TalkDao() {
+  public TalkDao() throws IOException {
     super(new LocalDataSource().createDataSource());
   }
 

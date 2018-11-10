@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new HttpServerConfig();
         int port = 9010;
         DataSource dataSource = new LocalDataSource().createDataSource();

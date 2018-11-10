@@ -5,6 +5,7 @@ import no.kristiania.pgr200.db.DataAccessObject;
 import no.kristiania.pgr200.db.LocalDataSource;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +16,7 @@ public class TrackDao extends AbstractDao implements DataAccessObject<Track> {
         super(dataSource);
     }
 
-    public TrackDao() {
+    public TrackDao() throws IOException {
         super(new LocalDataSource().createDataSource());
     }
 

@@ -3,6 +3,7 @@ package no.kristiania.pgr200.db;
 import no.kristiania.pgr200.common.DateHandler;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class ConferenceDao extends AbstractDao implements DataAccessObject<Confe
     super(dataSource);
   }
 
-  public ConferenceDao() {
+  public ConferenceDao() throws IOException {
     super(new LocalDataSource().createDataSource());
   }
 

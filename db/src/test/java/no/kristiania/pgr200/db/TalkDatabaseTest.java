@@ -1,6 +1,7 @@
 package no.kristiania.pgr200.db;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,10 +22,12 @@ public class TalkDatabaseTest {
   private ConferenceDao conferenceDao;
   private Track track;
   private Conference conference;
+  private Conference conferenceEquals;
 
   @Before
   public void makeTalk(){
     this.conference = SampleData.sampleConference();
+    this.conferenceEquals = SampleData.sampleConference();
     this.track = SampleData.sampleTrack();
     this.talk = SampleData.sampleTalk();
     this.dataSource = testDatasource.createDataSource();
@@ -67,7 +70,6 @@ public class TalkDatabaseTest {
     conferenceDao.create(conference);
     trackDao.create(track);
     talkDao.create(talk);
-
     assertThat(talkDao.readOne(talk.getId()))
             .isEqualToComparingOnlyGivenFields(talk);
   }
@@ -85,7 +87,8 @@ public class TalkDatabaseTest {
     assertThat(trackDao.readOne(track.getId()).getId()).isEqualTo(talkDao.readOne(talk.getId()).getTalk_track_id());
   }
 
-  //TODO(Alexander): Skrive update teste for talk
+
+
   @Test
   public void shouldUpdateTalkInTable() throws SQLException {
     conferenceDao.create(conference);
@@ -103,11 +106,23 @@ public class TalkDatabaseTest {
     trackDao.create(track);
     talkDao.create(talk);
 
+    System.out.println(talk.toString());
+
     assertThat(conferenceDao.readAll()).contains(conference);
     assertThat(trackDao.readAll()).contains(track);
     assertThat(talkDao.readAll()).contains(talk);
     talkDao.deleteOneById(talk.getId());
     assertThat(talkDao.readAll()).doesNotContain(talk);
+  }
 
+  @Test
+  public void shouldReturnCorrectToString(){
+    assertThat(talk.toString())
+            .isEqualTo("Talk{title='"+talk.getTitle()+"', description='"+talk.getDescription()+"', talk_location='"+talk.getTalk_location()+"', id="+talk.getId()+", talk_track_id=1, timeslot="+talk.getTimeslot()+"}");
+  }
+
+  @Test
+  public void shouldReturnCorrectHashCode(){
+    Assert.assertFalse(conference.hashCode() == conferenceEquals.hashCode());
   }
 }

@@ -1,6 +1,5 @@
 package no.kristiania.pgr200.server;
 
-import no.kristiania.pgr200.db.DbConfig;
 import no.kristiania.pgr200.server.controllers.*;
 
 import javax.sql.DataSource;

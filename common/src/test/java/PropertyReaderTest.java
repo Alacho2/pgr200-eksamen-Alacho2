@@ -25,14 +25,14 @@ public class PropertyReaderTest {
   }
 
   @Test
-  public void shouldReturnPropertyHello() {
-    assertThat(pr.getProperty("Hello")).isEqualTo("Alexander");
+  public void shouldReturnPropertyUser() {
+    assertThat(pr.getProperty("USER")).isEqualTo("conferenceroot");
   }
 
   @Test
   public void shouldSetProperty() {
-    assertThat(pr.getProperty("Hello")).isEqualTo("Alexander");
-    pr.setProperty("Hello", "new value");
-    assertThat(pr.getProperty("Hello")).isNotEqualTo("Alexander");
+    assertThat(pr.getProperty("URL")).isEqualTo("jdbc:postgresql://localhost/conference");
+    pr.setProperty("URL", "new value");
+    assertThat(pr.getProperty("URL")).isNotEqualTo("jdbc:postgresql://localhost/conference");
   }
 }

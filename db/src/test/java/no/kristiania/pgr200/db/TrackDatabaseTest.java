@@ -88,10 +88,18 @@ public class TrackDatabaseTest {
     conferenceDao.create(conference);
     trackDao.create(track);
 
+    System.out.println(track.toString());
+
     assertThat(conferenceDao.readAll()).contains(conference);
     assertThat(trackDao.readAll()).contains(track);
     conferenceDao.deleteOneById(conference.getId());
     trackDao.deleteOneById(track.getId());
     assertThat(trackDao.readAll()).doesNotContain(track);
+  }
+
+  @Test
+  public void shouldReturnCorrectToString(){
+    assertThat(track.toString())
+      .isEqualTo("Track{title='"+track.getTitle()+"', description='"+track.getDescription()+"', id=1, track_conference_id=1}");
   }
 }

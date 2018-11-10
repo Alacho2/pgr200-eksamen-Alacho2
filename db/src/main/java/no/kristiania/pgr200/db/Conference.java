@@ -50,8 +50,4 @@ public class Conference extends Entity {
             Objects.equals(description, that.description);
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(title, description, id);
-  }
 }
