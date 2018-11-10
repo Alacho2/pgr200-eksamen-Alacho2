@@ -16,15 +16,15 @@ Describe how to run the program
 
   !!! Remember to run the server so the client can connect to it !!!
     
-> RUN THE SERVER
->> java -jar [SERVER_JAR_FILE]
+ RUN THE SERVER
+> java -jar [SERVER_JAR_FILE]
 
-> RUN THE CLIENT 
->> java -jar [JAR_FILE] RESET // Resets the database
->> java -jar [JAR_FILE] START // InteractiveClient
->> java -jar [JAR_FILE] RESET // Will reset the database
->> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the row's
->> java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
+ RUN THE CLIENT 
+> java -jar [JAR_FILE] RESET // Resets the database
+> java -jar [JAR_FILE] START // InteractiveClient
+> java -jar [JAR_FILE] RESET // Will reset the database
+> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the row's
+> java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
 
   -----------------------------------------------------------------
 
