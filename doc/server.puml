@@ -1,29 +1,108 @@
 @startuml
 
-abstract class AbstractController
-AbstractController --|> ConferenceController
-AbstractController --|> TalkController
-AbstractController --|> TrackController
+abstract class AbstractController{
+    handleRequest()
+    dbInsert()
+    dbUpdate()
+    dbDelete()
+    dbRetrieve
+}
 
-interface HttpServerWriter
-HttpServerWriter --|> HttpServerWriterResponse
+class ConferenceController extends AbstractController
 
-interface HttpServerRequestHandler
-HttpServerRequestHandler --|> HttpServerRequestHandlerBadHttpMethod
-HttpServerRequestHandler --|> HttpServerRequestHandlerCapi
-HttpServerRequestHandlerCapi --|> HttpServerRouter
-HttpServerRouter --|> AbstractController
-HttpServerRequestHandler --|> HttpServerRequestHandlerEcho
-HttpServerRequestHandler --|> HttpServerRequestHandlerURL
+class TrackController extends AbstractController
 
-Main --|> HttpServerConfig
-Main --|> HttpServerListener
-HttpServerListener --|> HttpServerConnectionHandler
-HttpServerConnectionHandler --|> HttpServerParserRequest
-HttpServerParserRequest --|> HttpServerRequest
-HttpServerRequest --|> HttpServerConnectionHandler
-HttpServerConnectionHandler --|> HttpServerResponse
-HttpServerConnectionHandler --|> HttpServerRequestHandler
-HttpServerConnectionHandler --|> HttpServerWriter
+class TalkController extends AbstractController
+
+class HttpServerConfig
+
+class HttpServerRequest{
+    getHttpMethod()
+    setHttpMethod()
+    getHttpVersion()
+    setHttpVersion()
+    getURL()
+    setURL()
+    getStatusCode()
+    setStatusCode()
+    getHeader()
+    setHeader()
+    setPath()
+    getPath()
+    getBody()
+    setBody()
+    getAllParameters()
+    getParameter()
+    setParameter()
+}
+
+class HttpServerResponse{
+    getStatusCode()
+    setStatusCode()
+    getAdditionalHeaders()
+    setAdditionalHeaders()
+    getBody()
+    setBody()
+    setHttpVersion()
+    setContentType()
+    getContentType()
+}
+
+interface HttpServerWriter{
+    write()
+}
+class HttpServerWriterResponse extends HttpServerWriter{
+}
+
+class Main{
+    main()
+}
+class HttpServerRouter{
+    route()
+}
+
+class HttpServerConnectionHandler{
+    run()
+}
+
+class HttpServerListener{
+    start()
+    serverThread()
+    stop()
+    getPort()
+}
+
+interface HttpServerRequestHandler{
+    handleRequest()
+}
+
+class HttpServerRequestHandlerBadHttpMethod extends HttpServerRequestHandler
+
+class HttpServerRequestHandlerCapi extends HttpServerRequestHandler{
+    requestMatches()
+    routeRequest()
+}
+
+class HttpServerRequestHandlerEcho extends HttpServerRequestHandler
+
+class HttpServerRequestHandlerURL extends HttpServerRequestHandler{
+    getFileContentType()
+}
+
+Main -- HttpServerConfig
+Main -- HttpServerListener
+HttpServerRequestHandlerCapi -- HttpServerRouter
+HttpServerRouter -- AbstractController
+HttpServerListener -- HttpServerConnectionHandler
+HttpServerConnectionHandler -- HttpServerParserRequest
+HttpServerParserRequest -- HttpServerRequest
+HttpServerRequest -- HttpServerConnectionHandler
+HttpServerConnectionHandler -- HttpServerResponse
+HttpServerConnectionHandler -- HttpServerRequestHandler
+HttpServerConnectionHandler -- HttpServerWriter
+
+
+
+
 
 @enduml

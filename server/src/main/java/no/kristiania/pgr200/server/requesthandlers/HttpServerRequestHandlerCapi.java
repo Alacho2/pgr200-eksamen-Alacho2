@@ -19,7 +19,7 @@ public class HttpServerRequestHandlerCapi implements HttpServerRequestHandler {
     }
 
     @Override
-    public boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
+    public boolean handleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
 
         for (String pattern : patterns) {
             if (requestMatches(request.getPath(), pattern, params)) {

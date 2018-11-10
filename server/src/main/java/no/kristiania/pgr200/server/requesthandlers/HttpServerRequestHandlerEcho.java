@@ -6,7 +6,7 @@ import no.kristiania.pgr200.server.HttpServerResponse;
 public class HttpServerRequestHandlerEcho implements HttpServerRequestHandler {
 
     @Override
-    public boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) {
+    public boolean handleRequest(HttpServerRequest request, HttpServerResponse response) {
         if (!request.getPath().equals("echo"))
             return false;
 

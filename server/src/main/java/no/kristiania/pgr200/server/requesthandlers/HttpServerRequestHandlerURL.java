@@ -10,7 +10,7 @@ import java.nio.file.Files;
 public class HttpServerRequestHandlerURL implements HttpServerRequestHandler{
 
     @Override
-    public boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
+    public boolean handleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
 
         String resourceName;
 

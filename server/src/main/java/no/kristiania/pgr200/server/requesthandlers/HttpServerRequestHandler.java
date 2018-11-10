@@ -7,6 +7,6 @@ import java.io.IOException;
 
 public interface HttpServerRequestHandler {
 
-    boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException;
+    boolean handleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException;
 
 }

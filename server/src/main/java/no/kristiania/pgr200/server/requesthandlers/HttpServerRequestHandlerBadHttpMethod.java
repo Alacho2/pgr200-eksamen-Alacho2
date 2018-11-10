@@ -9,7 +9,7 @@ import java.io.IOException;
 public class HttpServerRequestHandlerBadHttpMethod implements HttpServerRequestHandler{
 
     @Override
-    public boolean HandleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
+    public boolean handleRequest(HttpServerRequest request, HttpServerResponse response) throws IOException {
         if(HttpServerConfig.SUPPORTED_METHODS.contains(request.getHttpMethod())){
             return false;
         } else{

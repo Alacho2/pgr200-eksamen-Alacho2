@@ -31,7 +31,7 @@ public class HttpServerConnectionHandler extends Thread {
             response = new HttpServerResponse(404, request.getHttpVersion());
 
             for (HttpServerRequestHandler handler: requestHandlers) {
-                if (handler.HandleRequest(request, response))
+                if (handler.handleRequest(request, response))
                     break;
             }
         }
