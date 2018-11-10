@@ -1,4 +1,5 @@
-package no.kristiania.pgr200.cli;
+package no.kristiania.pgr200.io;
+import no.kristiania.pgr200.cli.ExampleData;
 import no.kristiania.pgr200.io.Response;
 import org.junit.Test;
 

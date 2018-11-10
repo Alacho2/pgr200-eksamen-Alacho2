@@ -87,11 +87,40 @@ noen oppgaver, eksempler på generics er:
         this.value = handleValue(value);
         return this;
     }
+    
+    protected <T> void updateOneById(String sql, T[] values) throws SQLException {
+        PreparedStatement statement = makePreparedStatement(sql);
+        for (int i = 0; i < values.length; i++) {
+            statement.setObject(i + 1, values[i]);
+        }
+        statement.executeUpdate();
+      }
 ``` 
 
-
 ##### Testing exceptions
+Vi ønsker å teste at for eksempel noen av våres input blir korrekt håndtert og exceptions blir
+kastet korrekt. Eksempler på kode vi har som tester dette er:
 
+````java
+    @Test
+    public void testHelpCommandThrowsIllegalArgumentException(){
+        HelpCommand command = exampleHelpCommand();
+        assertThatThrownBy(() -> {
+            command.setValue(null);
+            command.setValue("");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Invalid Input");
+    }
+    
+        @Test
+        public void testInvalidDate(){
+            String invalidDate = "40402005";
+            assertThatThrownBy(() -> {
+                LocalDate.parse(invalidDate, DateHandler.dateTimeFormatter);
+            }).isInstanceOf(DateTimeParseException.class)
+            .hasMessageContaining("");
+        }
+````
 
 
 
