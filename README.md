@@ -13,13 +13,18 @@ Describe how to run the program
 ```bash
 > mvn test
 > mvn package
-> passe på at commands.json og db.properties ligger i target mappen
 
-> java -jar [JAR_FILE] RESET // Resets the database
-> java -jar [JAR_FILE] START // InteractiveClient
-> java -jar [JAR_FILE] RESET // Will reset the database
-> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the row's
-> java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
+  !!! Remember to run the server so the client can connect to it !!!
+    
+> RUN THE SERVER
+>> java -jar [SERVER_JAR_FILE]
+
+> RUN THE CLIENT 
+>> java -jar [JAR_FILE] RESET // Resets the database
+>> java -jar [JAR_FILE] START // InteractiveClient
+>> java -jar [JAR_FILE] RESET // Will reset the database
+>> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the row's
+>> java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
 
   -----------------------------------------------------------------
 
@@ -32,6 +37,8 @@ Describe how to run the program
 
 #### Cheat list :+1:
 ```
+VÆR SIKKER PÅ AT SERVER KJØRER FØR DU KJØRER CLIENT!
+
 Kjører du programmet i interactive mode (ved parameter START) så vil du bli spurt om input.
 Første steg her blir å velge mode, dette kan for eksempel være:
 * (-h) for hjelp
@@ -77,11 +84,20 @@ så har vi kunne jobbet som en veldig god og fungerende gruppe som har både til
 Andre ting vi som gruppe har blit flinkere på under denne eksamenen er dette med å forstå kode andre skriver og kunne komme
 med innspill på hvordan man kan gjøre kode bedre og hvordan det å parprogrammere kan bedre kvaliteten på koden.
 
-#### Conclusion
-Så våres evaluering av oppgaven ender på at vi er fornøyde med åssen vi har jobbet som en gruppe og 
-hvordan våres ferdigheter har kunne løfte gruppen fram til en oppgave som vi er fornøyde med. I og med at vi har 
-løst oppgaven på det vi mener er en god måte og med mye funksjonalitet som vi mener hever nivået på vår
-innlevering så mener vi at vi fortjener karakter A for denne oppgaven.
+## Conclusion Eval
+
+#### Alexander Eval
+Jeg er veldig fornøyd med hvordan vi har jobbet som en gruppe og hvordan vi har klart
+å løse denne store oppgaven. Vi har alltid kunne spurt hverandre om hjelp og lært hverandre
+nye ting gjennom hele prosjektet. Vi har endt opp med et klient-server-database program som
+jeg mener har blitt gjort på en god måte og vi har lagt ned mye tid som har gitt oss mulighet
+til å gå inn i pensum og laget mange gode funksjoner til programmet og jeg mener vi også
+har gått lengre enn pensum og levert et kompleks og godt program. På grunn av alle dise 
+faktorene så mener jeg at vi fortjener en A på denne innleveringen.
+
+#### Jason Eval
+
+#### Haavard Eval
 
 
 
