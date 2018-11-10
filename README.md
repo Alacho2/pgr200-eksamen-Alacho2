@@ -7,6 +7,59 @@
 * Jason Nilsen - wiljas17
 
 
+# Start
+Describe how to run the program
+
+```bash
+> mvn test
+> mvn package
+> passe på at commands.json og db.properties ligger i target mappen
+
+> java -jar [JAR_FILE] RESET // Resets the database
+> java -jar [JAR_FILE] START // InteractiveClient
+> java -jar [JAR_FILE] RESET // Will reset the database
+> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the row's
+> java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
+
+  -----------------------------------------------------------------
+
+    THESE MODES WILL RUN THE MODE START AFTER THEY ARE EXCECUTED
+    AND GO INTO THE INTERACTIVE MODE
+
+> java -jar [JAR_FILE] UPDATE CLIENT [HOST_NAME] [PORT] // UPDATE CLIENT
+> java -jar [JAR_FILE] UPDATE DATABASE [URL] [USERNAME] [PASSWORD] // UPDATE DATABASE
+```
+
+#### Cheat list :+1:
+```
+Kjører du programmet i interactive mode (ved parameter START) så vil du bli spurt om input.
+Første steg her blir å velge mode, dette kan for eksempel være:
+* (-h) for hjelp
+* (-t) for tables
+* (-i) for insert
+* (-r) for retrieve
+* (-u) for update
+* (-d) for delete
+
+Velger du -i | -r | -u | -d vil du bli spurt om hvilket table du vil gjøre operasjonen på.
+* CONFERENCES
+* TRACKS
+* TALKS
+
+Når du har valgt table vil programmet spørre om input basert på hvilken mode og hvilket table.
+
+
+VIKTIG!!
+Skal du inserte noe i databasen så må du først inserte en conference deretter en track som har en
+conference_track_id som matcher den conferencen som du ønsker og deretter kan du inserte en talk som
+har en talk_track_id som matcher hvilke track.
+
+
+Ekstra features
+* (-e) for exit 
+* (-b) for back -> fungerer ikke under kritiske operasjoner i programmet
+```
+
 ## Evaluation
 Når vi startet på selve eksamensoppgaven så hadde vi flere forskjellige deler som måtte settes
 sammen, både client, database og server. Siden vi visste at den koden vi skrev da skulle passe sammen
