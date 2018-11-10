@@ -1,9 +1,7 @@
 package no.kristiania.pgr200.server;
 
-import com.google.gson.Gson;
 import no.kristiania.pgr200.common.HttpClientRequest;
 import no.kristiania.pgr200.common.HttpClientResponse;
-import no.kristiania.pgr200.db.Talk;
 import no.kristiania.pgr200.db.TestDataSource;
 import no.kristiania.pgr200.server.controllers.*;
 import no.kristiania.pgr200.server.requesthandlers.*;
@@ -142,6 +140,14 @@ public class HttpServerRESTMethodsTest {
         HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/track/1", "GET");
         HttpClientResponse response = request.execute();
         assertThat(response.getBody()).isEqualTo("{\"track_conference_id\":1,\"title\":\"My updated track\",\"description\":\"About my updated track\",\"id\":1}");
+        assertThat(response.getStatusCode()).isEqualTo(200);
+    }
+
+    @Test
+    public void test17RetrieveRequestShouldRetrieveSingleRowTalk() throws IOException{
+        HttpClientRequest request = new HttpClientRequest("localhost", server.getPort(), "/capi/talk/1", "GET");
+        HttpClientResponse response = request.execute();
+        assertThat(response.getBody()).isEqualTo("{\"talk_track_id\":1,\"timeslot\":\"10:30:00 PM\",\"title\":\"My updated talk\",\"description\":\"About my updated talk\",\"id\":1}");
         assertThat(response.getStatusCode()).isEqualTo(200);
     }
 
