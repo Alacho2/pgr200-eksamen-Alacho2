@@ -21,13 +21,13 @@ Describe how to run the program
   !!! Remember to run the server so the client can connect to it !!!
     
  RUN THE SERVER
-> java -jar [SERVER_JAR_FILE]
-> java -jar [SERVER_JAR_FILE] RESET // rests the database (if you want)
+> java -jar server/target/[SERVER_JAR_FILE]
+> java -jar server/target/[SERVER_JAR_FILE] RESET // rests the database (if you want)
 
  RUN THE CLIENT 
-> java -jar [JAR_FILE] START // InteractiveClient
-> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the rows
-> java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
+> java -jar client/target/[JAR_FILE] START // InteractiveClient
+> java -jar client/target/[JAR_FILE] LIST [TABLE_NAME]  // Lists all the rows
+> java -jar client/target/[JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
 
   -----------------------------------------------------------------
 
