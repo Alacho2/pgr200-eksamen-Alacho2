@@ -16,7 +16,6 @@ public class PropertyReaderTest {
   @Before
   public void getTestsReady() throws IOException {
     pr  = new PropertyReader("/innlevering.properties");
-
   }
 
   @Test
@@ -24,11 +23,6 @@ public class PropertyReaderTest {
     assertThatThrownBy(() -> {
       new PropertyReader(null);
     }).isInstanceOf(IllegalArgumentException.class).hasMessage("Path is not valid.");
-  }
-
-  @Test
-  public void shouldReturnPropertyUser() {
-    assertThat(pr.getProperty("USER")).isEqualTo("conferenceroot");
   }
 
   @Test

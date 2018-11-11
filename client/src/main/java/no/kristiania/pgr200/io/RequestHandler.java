@@ -30,15 +30,11 @@ public class RequestHandler {
 
     public String execute(int port, String hostName) throws IOException {
         HttpClientResponse httpClientResponse = checkRequestMethod(mapToRequest(port, hostName)).execute();
-        System.out.println("RESPONSE: "+new Response(httpClientResponse).toString());
         return new Response(httpClientResponse).getBody();
     }
 
     private HttpClientRequest checkRequestMethod(Request r) {
         HttpClientRequest httpClientRequest = null;
-        System.out.println("method: \n" + r.getMethod());
-        System.out.println("path: \n" + r.getPath());
-        System.out.println("body: \n" + r.getBody());
         if(r.getMethod().equals("GET") || r.getMethod().equals("DELETE")) {
             httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod());
         }
