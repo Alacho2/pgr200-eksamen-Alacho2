@@ -55,7 +55,6 @@ public class HttpClientRequest {
             }
             return new HttpClientResponse(socket);
         }
-
     }
 }
 

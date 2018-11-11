@@ -20,6 +20,12 @@ public class HttpClientResponse {
         return body;
     }
 
+    public HttpClientResponse(int statusCode, String body) {
+        this.statusCode = statusCode;
+        this.body = body;
+
+    }
+
     public HttpClientResponse(Socket socket) throws IOException {
         input = socket.getInputStream();
 

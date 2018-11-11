@@ -79,6 +79,13 @@ mye feilhåndtering som er viktig når en bruker kan gi sin input til programmet
 testing av dette så simulerer vi bruker input og sjekker at dette blir håndtert på rett måte
 i forhold til hvordan vi ønsker programmet skal kjøre.
 
+##### Web server
+The server also functions as a simple web server.  Connect to the server with your browser at localhost:port,
+and it will load the default index.html and associated .css file.  If you add more resources to the local directory,
+the server should server those as well.  The server still retains the original "echo" functionality
+from the first innlevering as well, so /echo?body=hello+world or /echo?status=404 will still
+work.
+
 ##### Generics
 Vi bruker Generics i programmet på grunn av at det letter noe av mengde kode vi trenger for å utføre 
 noen oppgaver, eksempler på generics er:
@@ -264,18 +271,6 @@ Som en del av semesterarbeidet skal dere levere en video på 3-8 minutter. Derso
 Dere skal også gi tilbakemelding på en annen gruppes besvarelse. Tilbakemeldingen skal skrives i en egen fil (tilsvarende format som en README-fil) og inkluderes både i deres prosjekt og den andre gruppens prosjekt. Tilbakemeldingen dere har mottatt skal ligge i en fil som heter `MOTTATT-TILBAKEMELDING.md` og tilbakemeldingen dere har gitt skal hete `GITT-TILBAKEMELDING.md`.
 
 I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av denne koden? 2. Hva forsto jeg ikke av denne koden? 3. Hva tror jeg forfatterne av koden kunne ha nyttig av å lære?
-
-### Arkitektur
-
-![Architecture Overview](doc/conference-server.png)
-
-### Programflyt
-
-![Programflyt](doc/conference-server-flow.png)
-
-### Forslag til datamodell
-
-![Datamodell](doc/conference-data-model.png)
 
 ## Sjekkliste for innleveringen
 

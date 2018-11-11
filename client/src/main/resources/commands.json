@@ -67,7 +67,7 @@
   },
   {
     "name":"id",
-    "description":"please enter id of the object you want to update",
+    "description":"Please enter id of the object you want to update",
     "type":"number",
     "mode":"update",
     "table":"conference",
@@ -78,7 +78,7 @@
   },
   {
     "name":"title",
-    "description":"please enter a new title if you want to change it",
+    "description":"Please enter a new title if you want to change it",
     "type":"String",
     "mode":"update",
     "table":"conference",
@@ -89,7 +89,7 @@
   },
   {
     "name":"description",
-    "description":"please enter a new description if you want to change it",
+    "description":"Please enter a new description if you want to change it",
     "type":"String",
     "mode":"update",
     "table":"conference",
@@ -122,7 +122,7 @@
   },
   {
     "name":"id",
-    "description":"please enter the id of the object you want to delete",
+    "description":"Please enter the id of the object you want to delete",
     "type":"number",
     "mode":"delete",
     "table":"conference",
@@ -133,7 +133,7 @@
   },
   {
     "name":"title",
-    "description":"please enter title",
+    "description":"Please enter title",
     "type":"String",
     "mode":"insert",
     "table":"talk",
@@ -144,7 +144,7 @@
   },
   {
     "name":"description",
-    "description":"please enter description",
+    "description":"Please enter description",
     "type":"String",
     "mode":"insert",
     "table":"talk",
@@ -210,7 +210,7 @@
   },
   {
     "name":"id",
-    "description":"please enter id of the object you want to update",
+    "description":"Please enter id of the object you want to update",
     "type":"number",
     "mode":"update",
     "table":"talk",
@@ -221,7 +221,7 @@
   },
   {
     "name":"title",
-    "description":"please enter a new title if you want to change it",
+    "description":"Please enter a new title if you want to change it",
     "type":"String",
     "mode":"update",
     "table":"talk",
@@ -232,7 +232,7 @@
   },
   {
     "name":"description",
-    "description":"please enter a new description if you want to change it",
+    "description":"Please enter a new description if you want to change it",
     "type":"String",
     "mode":"update",
     "table":"talk",
@@ -276,7 +276,7 @@
   },
   {
     "name":"id",
-    "description":"please enter the id of the object you want to delete",
+    "description":"Please enter the id of the object you want to delete",
     "type":"number",
     "mode":"delete",
     "table":"talk",
@@ -342,7 +342,7 @@
   },
   {
     "name":"id",
-    "description":"please enter id of the object you want to update",
+    "description":"Please enter id of the object you want to update",
     "type":"number",
     "mode":"update",
     "table":"track",
@@ -353,7 +353,7 @@
   },
   {
     "name":"title",
-    "description":"please enter a new title if you want to change it",
+    "description":"Please enter a new title if you want to change it",
     "type":"String",
     "mode":"update",
     "table":"track",
@@ -364,7 +364,7 @@
   },
   {
     "name":"description",
-    "description":"please enter a new description if you want to change it",
+    "description":"Please enter a new description if you want to change it",
     "type":"String",
     "mode":"update",
     "table":"track",
@@ -386,7 +386,7 @@
   },
   {
     "name":"id",
-    "description":"please enter the id of the object you want to delete",
+    "description":"Please enter the id of the object you want to delete",
     "type":"number",
     "mode":"delete",
     "table":"track",
@@ -408,7 +408,7 @@
   },
   {
     "name":"table",
-    "description":"specify which table you want to modify/use",
+    "description":"Specify which table you want to modify/use",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -419,7 +419,7 @@
   },
   {
     "name":"(-t)tables",
-    "description":"display all the tables",
+    "description":"Display all the tables",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -430,7 +430,7 @@
   },
   {
     "name":"(-h) help",
-    "description":"displays the commands with description and type",
+    "description":"Displays the commands with description and type",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -441,7 +441,7 @@
   },
   {
     "name":"(-i) insert",
-    "description":"insert a new object in the database",
+    "description":"Insert a new object in the database",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -452,7 +452,7 @@
   },
   {
     "name":"(-r) retrieve",
-    "description":"get a object from the database",
+    "description":"Get a object from the database",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -463,7 +463,7 @@
   },
   {
     "name":"(-u) update",
-    "description":"updates a object from the database",
+    "description":"Updates a object from the database",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -474,7 +474,7 @@
   },
   {
     "name":"(-d) delete",
-    "description":"deletes a object from the database",
+    "description":"Deletes a object from the database",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -485,7 +485,7 @@
   },
   {
     "name":"(-b) back",
-    "description":"takes you back to start",
+    "description":"Takes you back to start",
     "type":"help",
     "mode":"help",
     "table":"help",
@@ -496,7 +496,7 @@
   },
   {
     "name":"(-e) exit",
-    "description":"exits the program",
+    "description":"Exits the program",
     "type":"help",
     "mode":"help",
     "table":"help",
