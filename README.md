@@ -7,9 +7,9 @@
 - Jason Nilsen - wiljas17
 
 ##### Links
-- ![MOTTATT-TILBAKEMELDING](MOTTATT-TILBAKEMELDING.md)
-- ![TILBAKEMELDING](TILBAKEMELDING.md)
-- ![VIDEO](https://www.youtube.com/watch?v=KgCM49XvPJI&feature=youtu.be)
+- ![MOTTATT TILBAKEMELDING](doc/MOTTATT-TILBAKEMELDING.md) - Ikke fått per 11.11.2018, 14:30
+- ![TILBAKEMELDING](doc/TILBAKEMELDING.md)
+- https://www.youtube.com/watch?v=KgCM49XvPJI&feature=youtu.be
 
 # Start
 Describe how to run the program
@@ -174,14 +174,23 @@ to instantly see when new code breaks old functionality is invaluable.  There ar
 this application that I feel would have been much easier if I understood generics, reflection,
 and annotations better, so I'll definitely be focusing on those in the future.
 
-I'm not fond of the "what grade do you think you deserve" idea, but I'll give it a shot.  I 
+I'm not fond of the "what grade do you think you deserve" idea, but I'll give it a shot. I 
 think this project deserves a solid A.  We went far above the assignment, and adding a ton of 
 additional functionality.  Instead of just taking command line args, we built an entire interactive
 terminal client.  Instead of just parsing api requests, the server also works as a full web server
 capable of serving html and css.  We have 80%+ coverage on unit testing, and we've built at least
 a primitive RESTful api.
 
-#### Haavard Eval
+#### Håvard Eval
+I det store og hele føler jeg vi har jobbet godt med denne eksamen. Vi startet veldig tidlig med 
+prosjektet og har hele veien jobbet godt med det. Alle tre har vært en god påvirkelig kilde til
+hverandres kode og lært hverandre masse nytt. Både av programmeringsferdigheter verktøy til programmering.
+I tillegg har vi gått langt over det original designet til hva programmet skal kunne med webserver, 
+sending av json objekter mellom clienten og serveren, generics i databasen og generelt det overordende
+er en god implementasjon av oppgaven.
+
+Når det kommer til karakter, så vil jeg ikke si noe annet enn at jeg er enig i det to andre sier. Skulle 
+jeg tvunget meg selv til det, ville jeg sagt A.
 
 ## Diagrams
 ### Client 
@@ -193,13 +202,6 @@ a primitive RESTful api.
 ![dbschema](doc/dbschema.png)
 ##### Class
 ![databaseUML](doc/databaseUML.png)
-
-
-
-
-
-
-
 
 
 ## Oppgave
