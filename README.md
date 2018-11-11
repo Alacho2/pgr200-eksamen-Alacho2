@@ -21,9 +21,9 @@ Describe how to run the program
     
  RUN THE SERVER
 > java -jar [SERVER_JAR_FILE]
+> java -jar [SERVER_JAR_FILE] RESET // rests the database (if you want)
 
  RUN THE CLIENT 
-> java -jar [JAR_FILE] RESET // Resets the database
 > java -jar [JAR_FILE] START // InteractiveClient
 > java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the rows
 > java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
