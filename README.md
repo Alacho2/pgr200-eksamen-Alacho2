@@ -7,7 +7,7 @@
 - Jason Nilsen - wiljas17
 
 ##### Links
-- ![MOTTATT TILBAKEMELDING](doc/MOTTATT-TILBAKEMELDING.md) - Ikke fått per 11.11.2018, 14:30
+- ![MOTTATT TILBAKEMELDING](doc/MOTTATT-TILBAKEMELDING.md)
 - ![TILBAKEMELDING](doc/TILBAKEMELDING.md)
 - https://www.youtube.com/watch?v=KgCM49XvPJI&feature=youtu.be
 
