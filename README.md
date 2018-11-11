@@ -177,12 +177,14 @@ a primitive RESTful api.
 
 ## Diagrams
 ### Client 
-![ClientUML](doc/clientUML.png)
+![clientUML](doc/clientUML.png)
 ### Server 
-![ClientUML](doc/serverUML.png)
+![serverUML](doc/serverUML.png)
 ### Database
 ##### Entity
-![ClientUML](doc/dbschema.png)
+![dbschema](doc/dbschema.png)
+##### Class
+![databaseUML](doc/databaseUML.png)
 
 
 
