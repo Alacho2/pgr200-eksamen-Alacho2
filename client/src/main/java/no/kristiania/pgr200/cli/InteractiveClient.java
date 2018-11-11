@@ -26,7 +26,7 @@ public class InteractiveClient {
     }
 
     String start() throws IOException {
-        OutputHandler.printQuestion("Pleas enter the mode you want to enter...");
+        OutputHandler.printQuestion("Please enter the mode you want to enter...");
         Object mode = ScannerHandler.scanInput(sc.nextLine());
         if(mode instanceof String) {
             return new RequestHandler(parseCommands((String) mode)).execute(port, hostName);

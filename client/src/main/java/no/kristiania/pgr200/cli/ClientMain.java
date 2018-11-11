@@ -3,9 +3,12 @@ package no.kristiania.pgr200.cli;
 import no.kristiania.pgr200.common.PropertyReader;
 import no.kristiania.pgr200.server.*;
 import no.kristiania.pgr200.server.requesthandlers.*;
+import org.fusesource.jansi.AnsiConsole;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.Socket;
 import java.util.Arrays;
 
 public class ClientMain {
@@ -13,7 +16,7 @@ public class ClientMain {
     private static String HOST_NAME;
 
   public static void main(String[] args) throws IOException {
-      //AnsiConsole.systemInstall();
+      AnsiConsole.systemInstall();
     try{
         ParseCommands.parseAllCommands();
         String[] checkedArgument = readProperties(args);
@@ -22,7 +25,7 @@ public class ClientMain {
           String result = new DecodeArgs().decode(checkedArgument, PORT, HOST_NAME);
           OutputHandler.printResult("RESULT", result); // The Database Response Printed out to the user
         } else {
-          OutputHandler.printErrorLine("You must enter use the parameters START or LIST [TABLENAME] PLUSS IF YOU WANT ONLY ONE: [ID]!");
+          OutputHandler.printErrorLine("You must enter use the parameters START or LIST [TABLENAME] PLUS IF YOU WANT ONLY ONE: [ID]!");
           OutputHandler.printInfo("To update properties enter: ");
           OutputHandler.printInfo("UPDATE CLIENT [HOST_NAME] [PORT]");
           OutputHandler.printInfo("UPDATE DATABASE [URL] [USERNAME] [PASSWORD]");
