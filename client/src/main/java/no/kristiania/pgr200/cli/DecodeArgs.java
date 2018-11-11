@@ -40,8 +40,6 @@ public class DecodeArgs {
                     sb.append("Ex: LIST CONFERENCE 1");
                 }
                 break;
-            case "RESET":
-                return handleResult(new RequestHandler("RESET", "RESET").execute(this.port, this.hostName));
             case "RICKROLL":
                 if(Desktop.isDesktopSupported()){
                     try {
