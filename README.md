@@ -25,8 +25,7 @@ Describe how to run the program
  RUN THE CLIENT 
 > java -jar [JAR_FILE] RESET // Resets the database
 > java -jar [JAR_FILE] START // InteractiveClient
-> java -jar [JAR_FILE] RESET // Will reset the database
-> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the row's
+> java -jar [JAR_FILE] LIST [TABLE_NAME]  // Lists all the rows
 > java -jar [JAR_FILE] LIST [TABLE_NAME] [ID]  // Lists one row
 
   -----------------------------------------------------------------
@@ -156,6 +155,20 @@ har gått lengre enn pensum og levert et kompleks og godt program. På grunn av 
 faktorene så mener jeg at vi fortjener en A på denne innleveringen.
 
 #### Jason Eval
+I enjoyed the project a great deal, and learned enormously from it.  Http servers are more
+complicated than they look.  With this project, I have finally broken the my bad habit of
+writing tests after I write code, rather than before.  Also, this is the first time I've 
+used unit testing on such a large project, and it has saved us on many occasions.  Being able
+to instantly see when new code breaks old functionality is invaluable.  There are parts of 
+this application that I feel would have been much easier if I understood generics, reflection,
+and annotations better, so I'll definitely be focusing on those in the future.
+
+I'm not fond of the "what grade do you think you deserve" idea, but I'll give it a shot.  I 
+think this project deserves a solid A.  We went far above the assignment, and adding a ton of 
+additional functionality.  Instead of just taking command line args, we built an entire interactive
+terminal client.  Instead of just parsing api requests, the server also works as a full web server
+capable of serving html and css.  We have 80%+ coverage on unit testing, and we've built at least
+a primitive RESTful api.
 
 #### Haavard Eval
 
@@ -263,13 +276,13 @@ I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av den
   - [x] Bygger prosjektet på [https://travis-ci.com](https://travis-ci.com)?
   - [x] Har du god test-dekning? (tips: Sett opp jacoco-maven-plugin til å kreve at minst 65% av linjene har testdekning)
   - [x] Er koden delt inn i flere Maven `<modules>`?
-  - [ ] Bruker kommunikasjon mellom klient og server HTTP korrekt?
-  - [ ] Kobler serveren seg opp mot PostgreSQL ved hjelp av konfigurasjon i fila `innlevering.properties` i *current working directory* med `dataSource.url`, `dataSource.username`, `dataSource.password`?
+  - [x] Bruker kommunikasjon mellom klient og server HTTP korrekt?
+  - [x] Kobler serveren seg opp mot PostgreSQL ved hjelp av konfigurasjon i fila `innlevering.properties` i *current working directory* med `dataSource.url`, `dataSource.username`, `dataSource.password`?
 - [ ] Funksjonalitet
   - [x] add: Legg til et foredrag i databasen med title, description og topic (valgfritt)
   - [x] list: List opp alle foredrag i basen med et valgfritt topic
-  - [ ] show: Vis detaljer for et foredrag
-  - [ ] update: Endre title, description eller topic for et foredrag
+  - [x] show: Vis detaljer for et foredrag
+  - [x] update: Endre title, description eller topic for et foredrag
   - [ ] Valgfri tillegg: Kommandoer for å sette opp hvor mange dager og timer konferansen skal vare og hvor mange parallelle spor den skal inneholde.
 - [ ] Dokumentasjon i form av README.md
   - [x] Navn og Feide-ID på dere de som var på teamet
