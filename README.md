@@ -277,7 +277,7 @@ I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av den
 
 ## Sjekkliste for innleveringen
 
-- [ ] Kodekvalitet
+- [x] Kodekvalitet
   - [x] Koden er klonet fra GitHub classrom
   - [x] Produserer `mvn package` en executable jar? (tips: Bruk `maven-shade-plugin`)
   - [x] Bruker koden Java 8 og UTF-8
@@ -286,69 +286,31 @@ I tilbakemeldingen er det lurt å stille spørsmålene: 1. Hva lærte jeg av den
   - [x] Er koden delt inn i flere Maven `<modules>`?
   - [x] Bruker kommunikasjon mellom klient og server HTTP korrekt?
   - [x] Kobler serveren seg opp mot PostgreSQL ved hjelp av konfigurasjon i fila `innlevering.properties` i *current working directory* med `dataSource.url`, `dataSource.username`, `dataSource.password`?
-- [ ] Funksjonalitet
+- [x] Funksjonalitet
   - [x] add: Legg til et foredrag i databasen med title, description og topic (valgfritt)
   - [x] list: List opp alle foredrag i basen med et valgfritt topic
   - [x] show: Vis detaljer for et foredrag
   - [x] update: Endre title, description eller topic for et foredrag
   - [ ] Valgfri tillegg: Kommandoer for å sette opp hvor mange dager og timer konferansen skal vare og hvor mange parallelle spor den skal inneholde.
-- [ ] Dokumentasjon i form av README.md
+- [x] Dokumentasjon i form av README.md
   - [x] Navn og Feide-ID på dere de som var på teamet
-  - [ ] Inkluderer dokumentasjonen hvordan man tester ut funksjonaliteten programmet manuelt? (Inkludert eventuell ekstra funksjonalitet dere har tatt med)
+  - [x] Inkluderer dokumentasjonen hvordan man tester ut funksjonaliteten programmet manuelt? (Inkludert eventuell ekstra funksjonalitet dere har tatt med)
   - [x] Inkluderer dokumentasjonen en evaluering av hvordan man jobbet sammen?
-  - [ ] Inkluderer dokumentasjonen en screencast av en parprogrammeringsesjon?
-  - [ ] Inkluderer dokumentasjonen en evaluering *fra* en annen gruppe og en evaluering *til* en annen gruppe?
-  - [ ] Inkluderer dokumentasjonen en UML diagram med datamodellen?
-  - [ ] Inkluderer dokumentasjonen en link til screencast av programmeringsesjon?
-  - [ ] Inkluderer dokumentasjonen en egenevaluering med hvilken karakter gruppen mener de fortjener?
+  - [x] Inkluderer dokumentasjonen en screencast av en parprogrammeringsesjon?
+  - [x] Inkluderer dokumentasjonen en evaluering *fra* en annen gruppe og en evaluering *til* en annen gruppe?
+  - [x] Inkluderer dokumentasjonen en UML diagram med datamodellen?
+  - [x] Inkluderer dokumentasjonen en link til screencast av programmeringsesjon?
+  - [x] Inkluderer dokumentasjonen en egenevaluering med hvilken karakter gruppen mener de fortjener?
 
 ### Forberedelse
 
 - [x] Finn endelig grupperpartner innen 1. november
-- [ ] Finn en gruppe for gjensidig evaluering innen 1. november
+- [x] Finn en gruppe for gjensidig evaluering innen 1. november
 
 ### Innlevering
 
-- [ ] Gi veilederne `hakonschutt` og `mudasar187` tilgang til repository
-- [ ] Tag koden med `innlevering` i GitHub
-- [ ] Ta en zip-eksport fra GitHub
-- [ ] Last opp zip-fil i WiseFlow
+- [x] Gi veilederne `hakonschutt` og `mudasar187` tilgang til repository
+- [x] Tag koden med `innlevering` i GitHub
+- [x] Ta en zip-eksport fra GitHub
+- [x] Last opp zip-fil i WiseFlow
 - [ ] Dersom innlevering #1 eller innlevering #2 ikke ble godkjent *i WiseFlow*, last opp zip-fil med hver av disse innleveringene
-
-## Retningslinjer for vurdering
-
-### Minimum krav for bestått
-
-- Kompilerende kode som er sjekket inn i GitHub
-- Tester som gjør noe ikke totalt ufornuftig (eksempel på ufornuftlig `assertTrue(true)` eller `assertEquals(4, 2+2)`)
-- Kjørbart program som legger inn data i databasen
-
-### Minimum krav for C
-
-- Skriv og les programmet fra databasen i Java i henhold til deres egen dokumentasjon
-- Les og skriv data over socket
-- Kode lagret på GitHub, kompilerer og utfører en oppgave uten å krasje
-
-### Minimum krav for B
-
-De fleste av følgende må være oppfyllt:
-
-- Et rimelig nivå med enhetstester som kjører på Travis CI
-- Kode uten større skrivefeil, feil innrykk, slukte exceptions eller advarsler fra Eclipse
-- Readme som beskriver 4-10 steg for å demonstrere programmet
-- God kode: Enkel, konsis, uttrykksfull, velformattert kode uten vestlige feil eller mangler
-- Ingen alvorlige feil, SQL injection hull, krasj ved uventet input
-
-### Krav for A
-
-Løsningen må oppfylle alle krav til B og ha 2-3 områder som hever den ytterligere:
-
-- Velskrevet (men ikke nødvendigvis omfattende) dokumentasjon
-- At videoen får fram kvalitetene i designet
-- Uttrykksfulle enhetstester som er effektive på å fange feil og som kjører på Travis CI
-- En velbegrunnet datamodell med 4-8 klasser
-- En lettfattelig og utvidbar http-server
-- Spennende generisk kode som egentlig er unødvendig kompleks for å løse problemet
-- Enkel kode som løser problemet presist og konsist (i konflikt med forrige)
-
-Grupper på 3 må ha flere av disse enn grupper på 2 for å få en A.
