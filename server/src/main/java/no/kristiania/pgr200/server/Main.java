@@ -22,10 +22,14 @@ public class Main {
     private static String METHOD_NOT_SUPPORTED;
 
     public static void main(String[] args) throws IOException {
-       new HttpServerConfig();
+        if(args[0] != null && args[0].toLowerCase().equals("reset")){
+            DataSource dataSource = new LocalDataSource().resetDataSource();
+            System.out.println("Database has been reset.");
+            System.exit(0);
+        }
+        new HttpServerConfig();
         int port = 9010;
         DataSource dataSource = new LocalDataSource().createDataSource();
-        System.out.println(System.getProperty("user.dir"));
         System.out.println("Server listening on port " + port);
         HttpServerListener listener = new HttpServerListener(
             Arrays.asList(new HttpServerRequestHandlerCapi(dataSource),
