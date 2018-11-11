@@ -88,8 +88,6 @@ public class TrackDatabaseTest {
     conferenceDao.create(conference);
     trackDao.create(track);
 
-    System.out.println(track.toString());
-
     assertThat(conferenceDao.readAll()).contains(conference);
     assertThat(trackDao.readAll()).contains(track);
     conferenceDao.deleteOneById(conference.getId());

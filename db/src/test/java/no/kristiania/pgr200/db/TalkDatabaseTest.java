@@ -106,8 +106,6 @@ public class TalkDatabaseTest {
     trackDao.create(track);
     talkDao.create(talk);
 
-    System.out.println(talk.toString());
-
     assertThat(conferenceDao.readAll()).contains(conference);
     assertThat(trackDao.readAll()).contains(track);
     assertThat(talkDao.readAll()).contains(talk);

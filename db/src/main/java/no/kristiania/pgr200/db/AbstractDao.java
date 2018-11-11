@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractDao {
+public abstract class AbstractDao {
 
   protected final DataSource dataSource;
 
