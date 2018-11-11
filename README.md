@@ -9,6 +9,7 @@
 ##### Links
 - ![MOTTATT-TILBAKEMELDING](MOTTATT-TILBAKEMELDING.md)
 - ![TILBAKEMELDING](TILBAKEMELDING.md)
+- ![VIDEO](https://www.youtube.com/watch?v=KgCM49XvPJI&feature=youtu.be)
 
 # Start
 Describe how to run the program
