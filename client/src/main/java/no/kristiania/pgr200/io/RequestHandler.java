@@ -36,6 +36,7 @@ public class RequestHandler {
     private HttpClientRequest checkRequestMethod(Request r) {
         HttpClientRequest httpClientRequest = null;
         if(r.getMethod().equals("GET") || r.getMethod().equals("DELETE")) {
+            System.out.println(r.getPath());
             httpClientRequest = new HttpClientRequest(r.getHostName(), r.getPort(), r.getPath(), r.getMethod());
         }
         else{
