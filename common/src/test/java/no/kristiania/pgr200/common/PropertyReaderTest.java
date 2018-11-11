@@ -1,3 +1,5 @@
+package no.kristiania.pgr200.common;
+
 import no.kristiania.pgr200.common.PropertyReader;
 import org.junit.Before;
 import org.junit.Test;

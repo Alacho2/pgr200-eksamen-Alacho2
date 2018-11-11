@@ -1,4 +1,4 @@
-package no.kristiania.pgr200.cli;
+package no.kristiania.pgr200.common;
 import no.kristiania.pgr200.common.DateHandler;
 import org.junit.Test;
 
