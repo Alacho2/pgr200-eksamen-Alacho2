@@ -9,7 +9,7 @@ public class OutputHandler {
 
     public static void printQuestion(String message){
         if(message == null) return;
-        String formattedText = "\n"+ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(message+"\n").fg(Ansi.Color.BLUE).a(">>").fg(Ansi.Color.DEFAULT);
+        String formattedText = "\n"+ConsoleColors.YELLOW+message+"\n"+ConsoleColors.BLUE+">>"+ConsoleColors.RESET;
         System.out.println(formattedText);
         log(formattedText);
     }
