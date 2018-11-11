@@ -28,6 +28,18 @@ public class LocalDataSource {
     return dataSource;
   }
 
+  public DataSource resetDataSource() {
+    PGPoolingDataSource dataSource = new PGPoolingDataSource();
+    dataSource.setUrl(propertyreader.getProperty("URL"));
+    dataSource.setUser(propertyreader.getProperty("USER"));
+    dataSource.setPassword(propertyreader.getProperty("PASSWORD"));
+
+    Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+    flyway.clean();
+    flyway.migrate();
+    return dataSource;
+  }
+
   public static void main(String[] args) throws IOException {
     DataSource localDataSource = new LocalDataSource().createDataSource();
   }
