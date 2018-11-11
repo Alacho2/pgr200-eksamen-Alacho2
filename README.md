@@ -41,6 +41,9 @@ Describe how to run the program
 ```
 VÆR SIKKER PÅ AT SERVER KJØRER FØR DU KJØRER CLIENT!
 
+Kommandoer vil altid bli skrevet med "-" først så vi kan se forskjell på for eksempel
+ordet "i" vs kommandoen "-i"
+
 Kjører du programmet i interactive mode (ved parameter START) så vil du bli spurt om input.
 Første steg her blir å velge mode, dette kan for eksempel være:
 * (-h) for hjelp
