@@ -25,6 +25,7 @@ public class Main {
        new HttpServerConfig();
         int port = 9010;
         DataSource dataSource = new LocalDataSource().createDataSource();
+        System.out.println(System.getProperty("user.dir"));
         System.out.println("Server listening on port " + port);
         HttpServerListener listener = new HttpServerListener(
             Arrays.asList(new HttpServerRequestHandlerCapi(dataSource),
