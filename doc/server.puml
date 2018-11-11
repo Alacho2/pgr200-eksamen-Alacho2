@@ -17,35 +17,10 @@ class TalkController extends AbstractController
 class HttpServerConfig
 
 class HttpServerRequest{
-    getHttpMethod()
-    setHttpMethod()
-    getHttpVersion()
-    setHttpVersion()
-    getURL()
-    setURL()
-    getStatusCode()
-    setStatusCode()
-    getHeader()
-    setHeader()
-    setPath()
-    getPath()
-    getBody()
-    setBody()
-    getAllParameters()
-    getParameter()
-    setParameter()
 }
 
 class HttpServerResponse{
-    getStatusCode()
-    setStatusCode()
-    getAdditionalHeaders()
-    setAdditionalHeaders()
-    getBody()
-    setBody()
-    setHttpVersion()
-    setContentType()
-    getContentType()
+
 }
 
 interface HttpServerWriter{
