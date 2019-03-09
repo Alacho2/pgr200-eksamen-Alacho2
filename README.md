@@ -1,12 +1,11 @@
 [![Build Status](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2.svg?token=Jcye5ttDhAMRpUM3Ca28&branch=master)](https://travis-ci.com/Westerdals/pgr200-eksamen-Alacho2)
 # PGR200 Hovedinnlevering
+Final Grade: A
 
 #### Group
 - Alexander Bredesen - breale17
 - Håvard Nordlie Mathisen - mathav14
 - Jason Nilsen - wiljas17
-
-Final Grade: A
 
 ##### Links
 - ![MOTTATT TILBAKEMELDING](doc/MOTTATT-TILBAKEMELDING.md)
