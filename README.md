@@ -6,6 +6,8 @@
 - Håvard Nordlie Mathisen - mathav14
 - Jason Nilsen - wiljas17
 
+Final Grade: A
+
 ##### Links
 - ![MOTTATT TILBAKEMELDING](doc/MOTTATT-TILBAKEMELDING.md)
 - ![TILBAKEMELDING](doc/TILBAKEMELDING.md)
